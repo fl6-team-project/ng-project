@@ -1,0 +1,33 @@
+<div class="col s3">
+        <ul id="slide-out" class="side-nav fixed">
+        <li><div class="userView">
+            <div class="background">
+                <img src="images/office.jpg">
+            </div>
+            <a ui-sref="profile" ui-sref-active="active">
+                <img class="circle" ng-src="{{profile.user.avatar}}">
+            </a>
+            <a ui-sref="profile" ui-sref-active="active">
+                <span class="white-text name">{{profile.user.firstName}} {{profile.user.lastName}}</span>
+            </a>
+            <a ng-href="mailto:{{profile.user.email}}">
+                <span class="white-text email">{{profile.user.email}}</span>
+            </a>
+        </div></li>
+        <li><a ui-sref="home" ui-sref-active="active" class="waves-effect" >Main page</a></li>
+        <li><a  ui-sref="lectures" ui-sref-active="active" class="waves-effect">Lectures</a></li>
+        <li><a  ui-sref="teachers" ui-sref-active="active" class="waves-effect">Teachers List</a></li>
+        <li><a  ui-sref="students" ui-sref-active="active" class="waves-effect">Students List</a></li>
+        <li><a  ui-sref="project" ui-sref-active="active" class="waves-effect">Group Project</a></li>
+    </ul>
+    <a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
+</div>
+
+<script>
+    $('.button-collapse').sideNav({
+        menuWidth: 300,
+        edge: 'left',
+        closeOnClick: true,
+        draggable: true
+    });
+</script>
