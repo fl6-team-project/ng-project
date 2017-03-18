@@ -1,3 +1,4 @@
-/data
+/mongodb/data/journal
+/mongodb/data/diagnostic.data
 /node_modules
 .idea

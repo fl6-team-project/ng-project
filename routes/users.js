@@ -2,10 +2,11 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require('mongoose');
+var uri = "mongodb://localhost:27017/testDB";
 var userSchema = new mongoose.Schema({"id": Number, "firstName": String, "lastName": String,
     "email": String, "gender": String, "age": Number, "avatar": String, "aboutMe": String}, {collection: 'users'});
-mongoose.connect("mongodb://localhost:27017/testDB");
-var db = mongoose.connection;
+mongoose.createConnection(uri);
+// var db = mongoose.connection;
 var Users = mongoose.model('User', userSchema);
 
 /* GET users listing. */
