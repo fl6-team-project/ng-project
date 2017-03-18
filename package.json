@@ -4,7 +4,7 @@
   "description": "angular",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,16 @@
     "jquery": "^3.1.1",
     "material-design-icons": "^3.0.1",
     "materialize-css": "^0.98.0"
+  },
+  "dependencies": {
+    "express": "^4.15.2",
+    "mongodb": "^2.2.24",
+    "mongoose": "^4.9.0",
+    "body-parser": "~1.16.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.0",
+    "ejs": "~2.5.5",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.2"
   }
 }
