@@ -5,7 +5,7 @@ require("./style.scss");
 function studentsListController($http) {
     let self = this;
 
-    $http.get('./users.json').then(function (res) {
+    $http.get('/api/users').then(function (res) {
         self.users = res.data;
     });
 }
