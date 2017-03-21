@@ -5,8 +5,7 @@ var Teacher = require("../models/Teacher").Teacher;
 var Lecture = require("../models/Lecture").Lecture;
 
 var mongoose = require('mongoose');
-var uri = 'mongodb://localhost:27017/testDB';
-// you can use mongodb://<dbuser>:<dbpassword>@ds135830.mlab.com:35830/epamportal
+var uri = 'mongodb://admin:admin@ds135830.mlab.com:35830/epamportal';
 mongoose.connect(uri);
 var db = mongoose.connection;
 
