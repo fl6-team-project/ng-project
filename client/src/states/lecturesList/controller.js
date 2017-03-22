@@ -3,7 +3,7 @@ require("./style.scss");
 function lecturesListController($http) {
   let self = this;
 
-  $http.get('./lectures.json').then(function(res) {
+  $http.get('/api/lectures').then(function(res) {
     self.lectures = res.data;
   });
 

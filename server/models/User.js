@@ -3,15 +3,18 @@ var mongoose = require("mongoose");
 var UserSchema = new mongoose.Schema({
     firstName: {
         type: String,
-        index: true
+        index: true,
+        required: true
     },
     lastName: {
         type: String,
-        index: true
+        index: true,
+        required: true
     },
     email: {
         type: String,
-        index: true
+        index: true,
+        required: true
     },
     gender: {
         type: String,
@@ -29,7 +32,10 @@ var UserSchema = new mongoose.Schema({
         type: String,
         index: true
     },
-    active: Boolean
+    active: {
+        type: Boolean,
+        default: true
+    }
     // owner_id: {
     //     type: mongoose.Schema.Types.ObjectId,
     //     index: true
