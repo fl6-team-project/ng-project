@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" ng-app="mainApp">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Team Project</title>
+  </head>
+  <body>
+    <div class="row">
+      <ul class="side-nav">
+        <li>
+          <div class="userView center-align">
+            <div class="background">
+              <img src="./images/office.jpg">
+            </div>
+            <a href="#!user"><img class="userLogo" src="https://robohash.org/nihilnesciuntdicta.png?size=300x300&set=set1"></a>
+            <p class="name">John Doe</p>
+          </div>
+        </li>
+        <li>
+          <a href="#!">
+            <i class="material-icons">pageview</i>Main page</a>
+        </li>
+        <li>
+          <a href="#!/lectures">
+            <i class="material-icons">today</i>Lectures</a>
+        </li>
+        <li>
+          <a href="#!">
+            <i class="material-icons">toc</i>List teachers</a>
+        </li>
+        <li>
+          <a href="#!/students">
+            <i class="material-icons">toc</i>List students</a>
+        </li>
+        <li>
+          <a href="#!">
+            <i class="material-icons">work</i>Group project</a>
+        </li>
+        <li>
+          <a href="#!">
+            <i class="material-icons">toc</i>List group</a>
+        </li>
+      </ul>
+      <div class="containerContent">
+        <div ui-view></div>
+      </div>
+    </div>
+
+  </body>
+  <script src="./dist/bundle.js"></script>
+  <script src="./node_modules/materialize-css/dist/js/materialize.js"></script>
+</html>

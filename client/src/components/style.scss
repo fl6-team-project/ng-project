@@ -1,0 +1,54 @@
+.cardLecture {
+  .card-image{
+    padding: 24px 24px 0;
+    .dateLine .col{
+      padding: 0;
+    }
+  }
+
+  .cardLectureTheme {
+    margin: 0 auto;
+    width: 100px;
+    height: 100px;
+
+    &.HTML {
+      background-image: url("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT2MnnyYcaljS3pzhgIxzc-GRz5q6kr1rHlGsgK1enNoRJJIig0rg");
+      background-size: 100% auto;
+    }
+  }
+
+  h3{
+    font-size: 24px;
+    font-weight: 300;
+  }
+  .card-reveal{
+    padding: 0;
+    .card-title{
+      padding: 24px 24px 0;
+    }
+    .describeCard{
+      padding: 12px 24px;
+    }
+    .lecturelinksCard{
+      border-bottom: 1px solid #dbdbdb;
+      a{
+        display: block;
+      }
+    }
+
+    .btn{
+      width: 100%;
+      margin: 12px 0 0;
+    }
+  }
+
+}
+
+.card{
+  .card-title .dotes{
+    color: #464547;
+    &:hover{
+      color: #39c2d7;
+    }
+  }
+}

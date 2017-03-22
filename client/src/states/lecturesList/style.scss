@@ -1,0 +1,25 @@
+.collapsible{
+  h2{
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+  }
+
+  .lecturelinks a{
+    padding: 0 10px;
+  }
+
+  .row{
+    margin: 0;
+    padding: 10px 0;
+  }
+
+  .describeLecture{
+    margin-bottom: 10px;
+  }
+
+  .collapsible-body{
+    background-color: #fff;
+  }
+
+}

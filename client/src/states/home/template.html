@@ -1,12 +1,20 @@
-<div class="header navbar">
-    <nav class="grey">
-        <div class="nav-wrapper container">
-            <a class="brand-logo">Home</a>
-        </div>
-    </nav>
+<div class="headerTop">
+  <h1>Home</h1>
 </div>
 
-<div ng-controller="HomeController as home" class="main">
+<div class="main">
+  <div class="row">
+    <div class="col s12 m8">
+
+    </div>
+    <div class="col s12 m4">
+      <lecture-item></lecture-item>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="main">
     <div class="row">
         <div class="col s12">
             <ul class="tabs">
@@ -56,7 +64,7 @@
         <div id="test3" class="col s12">Test 3</div>
         <div id="test4" class="col s12">Test 4</div>
     </div>
-</div>
+</div> -->
 
 <script>
     $(document).ready(function(){

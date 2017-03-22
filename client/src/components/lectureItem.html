@@ -1,0 +1,56 @@
+<div class="card cardLecture" ng-repeat="lecture in lectureItem.lectures">
+  <div class="card-image waves-effect waves-block waves-light">
+    <div class="row dateLine">
+      <div class="col s6">
+        <p class="date">
+          <i class="medium material-icons">today</i>{{lecture.lectureScheduledDate}}</p>
+      </div>
+      <div class="col s6 right-align">
+        <p class="date">
+          <i class="medium material-icons">query_builder</i>{{lecture.lectureScheduledTime}}</p>
+      </div>
+    </div>
+    <h3 class="center-align">{{lecture.name}}</h3>
+    <div class="cardLectureTheme {{lecture.theme}}"></div>
+    <div class="lectureLine">
+      <p class="normalWeight">Teacher:</p>
+      <p>{{lecture.lectorId}}</p>
+    </div>
+    <div class="lectureLine">
+      <p class="normalWeight">Assistants:</p>
+      <p>{{lecture.assistants}}</p>
+    </div>
+
+  </div>
+  <div class="card-content">
+    <span class="card-title activator grey-text text-darken-4">
+      <i class="material-icons right dotes">more_vert</i>
+    </span>
+    <p>
+      <a href="{{lecture.contentLecture}}">Link To Presentation</a>
+    </p>
+  </div>
+  <div class="card-reveal">
+    <span class="card-title grey-text text-darken-4">{{lecture.name}}
+      <i class="material-icons right">close</i>
+    </span>
+    <div class="describeCard lecturelinksCard">
+      <a href="{{lecture.contentLecture}}">Link To Presentation</a>
+      <a href="{{lecture.contentPractice}}">Link To Practice</a>
+      <a href="{{lecture.contentHomework}}">Link To Homework</a>
+    </div>
+    <div class="describeCard">
+      <div class="lectureLine">
+        <p class="normalWeight">Teacher:</p>
+        <p>{{lecture.lectorId}}</p>
+      </div>
+      <a href="mailto:test@mail.test">test@mail.test</a>
+      <div class="lectureLine">
+        <p class="normalWeight">Deadline:</p>
+        <p>{{lecture.homeworkDeadline}}</p>
+      </div>
+      <a class="waves-effect waves-light btn" href="#feedbackLecture">Leave feedback</a>
+      <a class="waves-effect waves-light btn" href="#homeworkFeedback">Check HW feedback</a>
+    </div>
+  </div>
+</div>

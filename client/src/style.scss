@@ -1,0 +1,132 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #f2f2f2;
+}
+
+.headerTop {
+  margin: 24px 0;
+
+  h1 {
+    color: #464547;
+    font-size: 32px;
+    text-align: center;
+    margin: 0;
+  }
+}
+
+h2,
+h3 {
+  font-size: 18px;
+}
+
+.btn {
+  background-color: #39c2d7;
+
+  &:hover {
+    background-color: darken(#39c2d7, 10%);
+  }
+}
+
+.main {
+  padding: 0 10px;
+
+  .date {
+    vertical-align: middle;
+    margin: 0 10px 0 0;
+    display: inline-block;
+
+    .normalWeight {
+      margin-right: 10px;
+    }
+
+    i.medium {
+      font-size: 24px;
+      margin-right: 0;
+      vertical-align: bottom;
+      margin-right: 10px;
+    }
+  }
+}
+
+.containerContent {
+  margin-left: 300px;
+
+  a:not(.btn) {
+    color: #39c2d7;
+    text-decoration: none;
+    font-weight: normal;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  i {
+    color: #39c2d7;
+  }
+
+  p {
+    font-weight: 300;
+  }
+
+  .normalWeight {
+    font-weight: 400;
+  }
+}
+
+.side-nav {
+  transform: translateX(0px);
+  background: #464547;
+
+  .userLogo {
+    width: 100px;
+    max-height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto;
+  }
+
+  .userView {
+    padding: 20px;
+    margin: 0;
+
+    .name {
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+      margin: 0;
+    }
+  }
+
+  li > a {
+    color: #fff;
+
+    &:hover {
+      text-decoration: none;
+      color: #39c2d7;
+
+      &> i.material-icons {
+        color: #39c2d7;
+      }
+    }
+
+    &> i.material-icons {
+      color: #fff;
+    }
+  }
+}
+
+.lectureLine{
+  p{
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px 0;
+  }
+
+  .normalWeight{
+    display: inline-block;
+  }
+}
