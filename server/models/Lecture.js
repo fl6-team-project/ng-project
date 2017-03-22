@@ -1,10 +1,6 @@
 var mongoose = require("mongoose");
 
 var LectureSchema = new mongoose.Schema({
-    firstName: {
-        type: String,
-        index: true
-    },
     courseId: {
         type: String,
         index: true
@@ -49,7 +45,10 @@ var LectureSchema = new mongoose.Schema({
         type: String,
         index: true
     },
-    active: Boolean
+    active: {
+        type: Boolean,
+        default: true
+    }
     // owner_id: {
     //     type: mongoose.Schema.Types.ObjectId,
     //     index: true

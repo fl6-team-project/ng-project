@@ -1,8 +1,5 @@
-const $ = require('jquery');
-window.jQuery = $;
-window.$ = $;
-require("../node_modules/materialize-css/dist/css/materialize.css");
 require("../node_modules/materialize-css/dist/js/materialize");
+require("../node_modules/materialize-css/dist/css/materialize.css");
 require("../node_modules/material-design-icons/iconfont/material-icons.css");
 require("./style.scss");
 
