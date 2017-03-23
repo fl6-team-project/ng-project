@@ -7,46 +7,8 @@
     <title>Team Project</title>
   </head>
   <body>
-    <div class="row">
-      <ul class="side-nav">
-        <li>
-          <div class="userView center-align">
-            <div class="background">
-              <img src="./images/office.jpg">
-            </div>
-            <a ui-sref="user"><img class="userLogo" src="https://robohash.org/nihilnesciuntdicta.png?size=300x300&set=set1"></a>
-            <p class="name">John Doe</p>
-          </div>
-        </li>
-        <li>
-          <a ui-sref="home">
-            <i class="material-icons">pageview</i>Main page</a>
-        </li>
-        <li>
-          <a ui-sref="lectures">
-            <i class="material-icons">today</i>Lectures</a>
-        </li>
-        <li>
-          <a ui-sref="">
-            <i class="material-icons">toc</i>List teachers</a>
-        </li>
-        <li>
-          <a ui-sref="students">
-            <i class="material-icons">toc</i>List students</a>
-        </li>
-        <li>
-          <a ui-sref="">
-            <i class="material-icons">work</i>Group project</a>
-        </li>
-        <li>
-          <a ui-sref="">
-            <i class="material-icons">toc</i>List group</a>
-        </li>
-      </ul>
-      <div class="containerContent">
-        <div ui-view></div>
-      </div>
-    </div>
+
+    <ui-view></ui-view>
 
   </body>
   <script src="./bundle.js"></script>
