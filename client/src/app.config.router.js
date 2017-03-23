@@ -1,27 +1,22 @@
-const studentListController = require("./states/studentList/controller.js");
 const lecturesListController = require("./states/lecturesList/controller.js");
 const homeController = require("./states/home/controller.js");
+const personsListComponent = require('./components/personsList/personsListComponent.js');
 
 module.exports = function(app) {
   // We can register controller with angular first
   // Or use a controller as simple function
   app.controller('homeController', homeController);
+  // We need to register component
+  app.component('personsListComponent', personsListComponent);
 
   app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $stateProvider
-    // We can set a templateUrl but then webpack will not load it into bundle
-    // So we have to require template also
-    // and setup a html-loader to correctly process html bundling
-      .state('students', {
+    // students state using component method
+    // now the controller and template included in component
+    // and you should include here only component
+    .state('students', {
       url: '/students',
-      // Will not bundled:
-      //templateUrl: './states/studentList/template.html',
-
-      // Will be bundled correctly:
-      template: require('./states/studentList/template.html'),
-      // controller as simple function - pass a function itself
-      controller: studentListController,
-      controllerAs: '$ctrl'
+      component: 'personsListComponent'
     })
 
     .state('lectures', {

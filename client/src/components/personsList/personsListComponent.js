@@ -1,11 +1,4 @@
-function UsersListController($http) {
-  let self = this;
-
-  $http.get('/api/users').then(function(res) {
-    self.persons = res.data;
-  });
-}
-
+const UsersListController = require('./personsListController.js');
 
 var personsListComponent = {
 	bindings: {
@@ -22,7 +15,5 @@ var personsListComponent = {
 	template: require('./personsList.html'),
 	controller: UsersListController
 };
-
-UsersListController.$inject = ['$http'];
 
 module.exports = personsListComponent;
