@@ -1,3 +1,5 @@
+require("./style.scss");
+
 function UsersListController($http) {
   let self = this;
 
