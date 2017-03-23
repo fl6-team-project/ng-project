@@ -2,7 +2,7 @@
 // but we need apropriate loader - scss-loader and css-loader. Check webpack loaders configuration manual
 require("./style.scss");
 
-function UsersListController($http) {
+function StudentListController($http) {
     let self = this;
 
     $http.get('/api/users').then(function(res) {
@@ -10,6 +10,6 @@ function UsersListController($http) {
     });
 }
 // This is an angular special property. One of the way to safely inject smth to controller function
-UsersListController.$inject = ['$http'];
+StudentListController.$inject = ['$http'];
 
-module.exports = UsersListController;
+module.exports = StudentListController;
