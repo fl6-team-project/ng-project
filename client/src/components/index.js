@@ -1,13 +1,8 @@
-require("./style.scss");
+var personsItemComponent = require("./personItem/personItemComponent"),
+    lectureItemComponent = require("./lectureItem/lectureItemComponent");
 
 module.exports = function(app) {
-  const lectureItemController = require("./lectureItemController.js");
-  app.component('lectureItem', {
-    bindings: {
-      lecture: '='
-    },
-    template: require('./lectureItem.html'),
-    controller: lectureItemController,
-    controllerAs: 'lectureItem'
-  });
+
+  app.component('lectureItem', lectureItemComponent);
+  app.component('personItem', personsItemComponent);
 }

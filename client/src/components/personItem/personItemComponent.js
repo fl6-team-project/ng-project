@@ -1,8 +1,8 @@
-const UsersListController = require('./personsListController.js');
+const UsersListController = require('./personItemController.js');
 
-var personsListComponent = {
+var personsItemComponent = {
 	bindings: {
-		persons: '=?'
+		person: '=?'
 	},
 	// We can set a templateUrl but then webpack will not load it into bundle
     // So we have to require template also
@@ -12,8 +12,8 @@ var personsListComponent = {
     //templateUrl: './states/studentList/template.html',
 
     // Will be bundled correctly:
-	template: require('./personsList.html'),
+	template: require('./personItem.html'),
 	controller: UsersListController
 };
 
-module.exports = personsListComponent;
+module.exports = personsItemComponent;
