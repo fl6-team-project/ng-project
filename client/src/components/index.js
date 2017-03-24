@@ -1,8 +1,10 @@
-var personsItemComponent = require("./personItem/personItemComponent"),
-    lectureItemComponent = require("./lectureItem/lectureItemComponent");
+let personsItemComponent = require("./personItem/personItemComponent"),
+    lectureItemComponent = require("./lectureCardItem/component"),
+    lectureRowItemComponent = require("./lectureRowItem/component");
 
 module.exports = function(app) {
 
-  app.component('lectureItem', lectureItemComponent);
+  app.component('lectureRowItem', lectureRowItemComponent);
+  app.component('lectureCardItem', lectureItemComponent);
   app.component('personItem', personsItemComponent);
 }
