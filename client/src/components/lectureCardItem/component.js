@@ -2,7 +2,7 @@ const lectureItemController = require('./controller');
 
 const lectureItemComponent = {
     bindings: {
-        lecture: '=?'
+        lecture: '='
     },
     template: require('./template.html'),
     controller: lectureItemController

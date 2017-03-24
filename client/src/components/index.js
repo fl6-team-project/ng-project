@@ -1,4 +1,4 @@
-let personsItemComponent = require("./personItem/personItemComponent"),
+let personsItemComponent = require("./personItem/component"),
     lectureItemComponent = require("./lectureCardItem/component"),
     lectureRowItemComponent = require("./lectureRowItem/component");
 

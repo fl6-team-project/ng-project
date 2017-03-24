@@ -1,19 +1,24 @@
-const lecturesListController = require("./states/student/lecturesList/controller.js");
-const homeController = require("./states/student/home/controller.js");
 const studentListComponent = require('./states/student/studentList/component');
 const teacherListComponent = require('./states/student/teacherList/component');
 const homeItemComponent = require('./states/student/home/component');
 const lecturesListComponent = require('./states/student/lecturesList/component');
+const studentComponent = require('./states/student/component');
+const projectComponent = require('./states/student/project/component');
+const adminComponent = require('./states/admin/component');
+const teacherComponent = require('./states/teacher/component');
+
 
 module.exports = function(app) {
-  // We can register controller with angular first
-  // Or use a controller as simple function
-  app.controller('homeController', homeController);
   // We need to register component
+
   app.component('studentListComponent', studentListComponent);
   app.component('teacherListComponent', teacherListComponent);
   app.component('lecturesListComponent', lecturesListComponent);
   app.component('homeItemComponent', homeItemComponent);
+  app.component('studentComponent', studentComponent);
+  app.component('projectComponent', projectComponent);
+  app.component('adminComponent', adminComponent);
+  app.component('teacherComponent', teacherComponent);
 
   app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -21,7 +26,7 @@ module.exports = function(app) {
     /* USER STUDENT STATE */
     .state('student', {
       url: '/student',
-      template: require('./states/student/index.html')
+      component: 'studentComponent'
     })
     // now the controller and template included in component
     // and you should include here only component
@@ -48,19 +53,19 @@ module.exports = function(app) {
 
     .state('student.project', {
       url: '/project',
-      template: 'project group would be here'
+      component: 'projectComponent'
     })
 
     /* USER TEACHER STATE */
     .state('teacher', {
       url: '/teacher',
-      template: 'hello from teacher page'
+      component: 'teacherComponent'
     })
 
     /* USER ADMIN STATE */
     .state('admin', {
       url: '/admin',
-      template: 'hello from admin page'
+      component: 'adminComponent'
     })
 
     $urlRouterProvider.otherwise('/');

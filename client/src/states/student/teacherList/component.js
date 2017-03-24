@@ -2,7 +2,7 @@ const TeacherListController = require('./controller.js');
 
 const teacherListComponent = {
     bindings: {
-       persons: '=?'
+       persons: '='
     },
     template: require('./template.html'),
     controller: TeacherListController

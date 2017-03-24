@@ -2,7 +2,7 @@ const StudentListController = require('./controller.js');
 
 const studentListComponent = {
     bindings: {
-        persons: '=?'
+        persons: '='
     },
     // We can set a templateUrl but then webpack will not load it into bundle
     // So we have to require template also
