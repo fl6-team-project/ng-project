@@ -1,37 +1,71 @@
-const lecturesListController = require("./states/lecturesList/controller.js");
-const homeController = require("./states/home/controller.js");
-const personsListComponent = require('./components/personsList/personsListComponent.js');
+const studentListComponent = require('./states/student/studentList/component');
+const teacherListComponent = require('./states/student/teacherList/component');
+const homeItemComponent = require('./states/student/home/component');
+const lecturesListComponent = require('./states/student/lecturesList/component');
+const studentComponent = require('./states/student/component');
+const projectComponent = require('./states/student/project/component');
+const adminComponent = require('./states/admin/component');
+const teacherComponent = require('./states/teacher/component');
+
 
 module.exports = function(app) {
-  // We can register controller with angular first
-  // Or use a controller as simple function
-  app.controller('homeController', homeController);
   // We need to register component
-  app.component('personsListComponent', personsListComponent);
+
+  app.component('studentListComponent', studentListComponent);
+  app.component('teacherListComponent', teacherListComponent);
+  app.component('lecturesListComponent', lecturesListComponent);
+  app.component('homeItemComponent', homeItemComponent);
+  app.component('studentComponent', studentComponent);
+  app.component('projectComponent', projectComponent);
+  app.component('adminComponent', adminComponent);
+  app.component('teacherComponent', teacherComponent);
 
   app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $stateProvider
-    // students state using component method
+
+    /* USER STUDENT STATE */
+    .state('student', {
+      url: '/student',
+      component: 'studentComponent'
+    })
     // now the controller and template included in component
     // and you should include here only component
-    .state('students', {
-      url: '/students',
-      component: 'personsListComponent'
-    })
 
-    .state('lectures', {
-      url: '/lectures',
-      template: require('./states/lecturesList/template.html'),
-      controller: lecturesListController,
-      controllerAs: '$ctrl'
-    })
-
-    .state('home', {
+    .state('student.home', {
       url: '/',
-      template: require('./states/home/template.html'),
-      // controller as string - name of previously registered controller
-      controller: 'homeController',
-      controllerAs: '$ctrl'
+      component: 'homeItemComponent'
+    })
+
+    .state('student.lectures', {
+      url: '/lectures',
+      component: 'lecturesListComponent'
+    })
+
+    .state('student.students', {
+      url: '/students',
+      component: 'studentListComponent'
+    })
+
+    .state('student.teachers', {
+      url: '/teachers',
+      component: 'teacherListComponent'
+    })
+
+    .state('student.project', {
+      url: '/project',
+      component: 'projectComponent'
+    })
+
+    /* USER TEACHER STATE */
+    .state('teacher', {
+      url: '/teacher',
+      component: 'teacherComponent'
+    })
+
+    /* USER ADMIN STATE */
+    .state('admin', {
+      url: '/admin',
+      component: 'adminComponent'
     })
 
     $urlRouterProvider.otherwise('/');
