@@ -29,7 +29,8 @@ router.route('/login')
                 if (!user || user === 'undefined') {
                     return next()
                 } else {
-                    req.session.user.id = user._id || 123;
+                    req.session.user = {};
+                    req.session.user.id = user._id;
                     req.session.user.role = user.userRole;
                     res.send(req.session.user);
                 }
@@ -59,6 +60,7 @@ router.route('/register')
                 });
                 user.save(function (err) {
                     if (err) return next(err);
+                    req.session.user = {};
                     req.session.user.id = user._id;
                     req.session.user.role = user.userRole;
                     res.send(req.session.user);
