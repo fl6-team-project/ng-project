@@ -5,7 +5,7 @@ function LectureDataInputController($http) {
 
     self.saveEditing = function (id, object) {
         console.log(object);
-        $http.put('/api/lectures/'+id).then(function(res) {
+        $http.put('/api/lectures/'+id, object).then(function(res) {
             self.lectures = res.data;
         });
     };

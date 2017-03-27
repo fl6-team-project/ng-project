@@ -290,7 +290,6 @@ router.route('/lectures/:id')
         Lecture.findById(req.params.id, function(err, lecture) {
             if (err)
                 res.send(err);
-
             lecture.courseId = req.body.courseId;
             lecture.name = req.body.name;
             lecture.img = req.body.theme;
