@@ -11,7 +11,9 @@
       </div>
     </div>
     <h3 class="center-align">{{$ctrl.lecture.name}}</h3>
-    <div class="cardLectureTheme {{$ctrl.lecture.theme}}"></div>
+    <div class="cardLectureTheme">
+      <img ng-src="{{$ctrl.lecture.img}}" alt="" ng-if="$ctrl.lecture.img">
+    </div>
     <div class="lectureLine">
       <p class="normalWeight">Teacher:</p>
       <p>{{$ctrl.lecture.lectorId}}</p>
@@ -27,7 +29,7 @@
       <i class="material-icons right dotes">more_vert</i>
     </span>
     <p>
-      <a href="{{$ctrl.lecture.contentLecture}}">Link To Presentation</a>
+      <a href="{{$ctrl.lecture.contentLecture}}" target="blank">Link To Presentation</a>
     </p>
   </div>
   <div class="card-reveal">
@@ -35,9 +37,9 @@
       <i class="material-icons right">close</i>
     </span>
     <div class="describeCard lecturelinksCard">
-      <a href="{{$ctrl.lecture.contentLecture}}">Link To Presentation</a>
-      <a href="{{$ctrl.lecture.contentPractice}}">Link To Practice</a>
-      <a href="{{$ctrl.lecture.contentHomework}}">Link To Homework</a>
+      <a href="{{$ctrl.lecture.contentLecture}}" target="blank">Link To Presentation</a>
+      <a href="{{$ctrl.lecture.contentPractice}}" target="blank">Link To Practice</a>
+      <a href="{{$ctrl.lecture.contentHomework}}" target="blank">Link To Homework</a>
     </div>
     <div class="describeCard">
       <div class="lectureLine">
@@ -49,8 +51,9 @@
         <p class="normalWeight">Deadline:</p>
         <p>{{$ctrl.lecture.homeworkDeadline}}</p>
       </div>
-      <a class="waves-effect waves-light btn" href="#feedbackLecture">Leave feedback</a>
-      <a class="waves-effect waves-light btn" href="#homeworkFeedback">Check HW feedback</a>
+      <button class="waves-effect waves-light btn" ng-click="$ctrl.openPopUpClick($ctrl.lecture._id)">Leave feedback</button>
+      <button class="waves-effect waves-light btn" href="#homeworkFeedback">Check HW feedback</button>
     </div>
   </div>
+  <feedback-pop-up lecture="$ctrl.lecture"></feedback-pop-up>
 </div>

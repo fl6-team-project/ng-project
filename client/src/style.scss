@@ -7,10 +7,9 @@ body {
 }
 
 .headerTop {
-  margin: 25px 0;
+  margin: 24px 0;
 
   h1 {
-    font-weight: bold;
     color: #464547;
     font-size: 32px;
     text-align: center;
@@ -21,6 +20,10 @@ body {
 h2,
 h3 {
   font-size: 18px;
+}
+
+label {
+  color: rgba(0, 0, 0, 0.87);
 }
 
 .btn {
@@ -94,6 +97,11 @@ h3 {
     padding: 20px;
     margin: 0;
 
+    .background {
+      background-image: url('../images/office.jpg');
+      background-size: cover;
+    }
+
     .name {
       font-size: 18px;
       font-weight: bold;
@@ -120,14 +128,74 @@ h3 {
   }
 }
 
-.lectureLine{
-  p{
+.lectureLine {
+  p {
     display: inline-block;
     vertical-align: top;
     margin: 5px 0;
   }
 
-  .normalWeight{
+  .normalWeight {
     display: inline-block;
+  }
+}
+
+.tabPanel {
+  .tabs {
+    .indicator {
+      background-color: #39c2d7;
+    }
+
+    .tab {
+      a {
+        color: #464547;
+
+        &:hover {
+          color: #39c2d7;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+[type="checkbox"]:checked + label:before {
+  border-right: 2px solid #39c2d7;
+  border-bottom: 2px solid #39c2d7;
+}
+
+.circleBtnBlc {
+  position: relative;
+
+  .circleBtn {
+    background: #39c2d7;
+    position: absolute;
+    top: 20px;
+    right: 0;
+
+    &:hover {
+      background-color: darken(#39c2d7, 10%);
+    }
+
+    i {
+      color: #fff;
+    }
+  }
+}
+
+.modal {
+  .modal-footer {
+    padding: 0 35px;
+    display: block;
+
+    .btn-flat {
+      float: none;
+      display: inline-block;
+
+      &.btn {
+        float: right;
+        color: #fff;
+      }
+    }
   }
 }

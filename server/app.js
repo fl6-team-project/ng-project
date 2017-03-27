@@ -4,13 +4,23 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var index = require('./routes/index');
-// var users = require('./routes/users');
-// var teachers = require('./routes/teachers');
-// var lectures = require('./routes/lectures');
 
-//!!! Connect to BD in separate file - routes.js
+//!!! Connect to BD
+
+var mongoose = require('mongoose');
+// var uri = 'mongodb://admin:admin@ds135830.mlab.com:35830/epamportal'; - Main
+var uri = 'mongodb://test:test@ds137550.mlab.com:37550/sandbox'; // - Test
+mongoose.connect(uri);
+var db = mongoose.connection.db;
+
+// db.on('error', function (err) {
+//     log.error('connection error:', err.message);
+// });
+// db.once('open', function callback () {
+//     log.info("Connected to DB!");
+// });
+
 var routes = require('./routes/routes');
 
 var app = express();
@@ -28,11 +38,36 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// New Error
+app.use(require('./middleware/sendHttpError'));
+//middleware for cookies
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
+app.use(session({
+    secret: 'NewHe11S3cr3t',
+    key: 'sid',
+    cookie: {
+        path: '/',
+        httpOnly: true,
+        maxAge: null
+    },
+    resave: true,
+    saveUninitialized: true,
+    store: new MongoStore({url: uri})
+}));
+
+var loadUser = require('./middleware/loadUser');
+var checkAuth = require('./middleware/checkAuth');
+
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('../client/dist'));
 
 app.use('/', index);
+// app.use(loadUser);
+// app.use(checkAuth);
 app.use('/api', routes);
+
 // app.use('/api/users', users);
 // app.use('/api/teachers', teachers);
 // app.use('/api/lectures', lectures);

@@ -9,7 +9,7 @@ var LectureSchema = new mongoose.Schema({
         type: String,
         index: true
     },
-    theme: {
+    img: {
         type: String,
         index: true
     },

@@ -1,0 +1,12 @@
+<form ng-submit="$ctrl.addTask()" class="col s12">
+  <div class="input-field col s10">
+    <i class="material-icons prefix">mode_edit</i>
+    <textarea id="taskText" class="materialize-textarea" ng-model="$ctrl.text"></textarea>
+    <label for="taskText">Add task</label>
+  </div>
+  <div class="col s2 circleBtnBlc">
+    <button type="submit" class="btn-floating btn-large waves-effect waves-light circleBtn">
+      <i class="material-icons">add</i>
+    </button>
+  </div>
+</form>

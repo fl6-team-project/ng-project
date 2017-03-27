@@ -9,8 +9,13 @@
 
   .cardLectureTheme {
     margin: 0 auto;
-    width: 110px;
-    height: 110px;
+    width: 100px;
+    height: 100px;
+
+    &.HTML {
+      background-image: url('https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT2MnnyYcaljS3pzhgIxzc-GRz5q6kr1rHlGsgK1enNoRJJIig0rg');
+      background-size: 100% auto;
+    }
   }
 
   h3 {
@@ -45,6 +50,8 @@
 }
 
 .card {
+  margin: 0 0 0.75rem;
+
   .card-title .dotes {
     color: #464547;
 
@@ -52,4 +59,10 @@
       color: #39c2d7;
     }
   }
+}
+
+.modal {
+  top: 0 !important;
+  max-height: 100%;
+  padding-bottom: 20px;
 }

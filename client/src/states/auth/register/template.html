@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Register new user</h1>
+            <form ng-submit="reg.registerUser()">
+                <div class="form-group">
+                    <label>Username
+                        <input type="text" id="username" ng-model="reg.username" placeholder="Enter your username" required>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Password
+                        <input type="password" id="password" ng-model="reg.password" placeholder="Enter your password" required>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Name
+                        <input type="text" id="firstName" ng-model="reg.firstName" placeholder="Name, e.g. John">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Surname
+                        <input type="text" id="lastName" ng-model="reg.lastName" placeholder="Surname, e.g. Smith">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>E-mail
+                        <input type="email" id="email" ng-model="reg.email" placeholder="email@example.com" required>
+                    </label>
+                </div>
+                <div ng-if=" reg.regErrorMessage ">
+                    <div class="card-panel red lighten-2">
+                        <p><i class="material-icons">error_outline</i> Username is in use by someone else!</p>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-default">Register now!</button>
+                <br><br>
+                <button type="button" class="btn btn-default" ui-sref="login">Sign in</button>
+                <br><br>
+                <button type="button" class="btn btn-default" ui-sref="main">Home</button>
+            </form>
+
+        </div>
+
+        <div ui-view="student"></div>
+
+    </div>
+</div>
