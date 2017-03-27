@@ -6,7 +6,14 @@ function lecturesListController($http, $element) {
   $http.get('/api/lectures').then(function(res) {
     self.lectures = res.data;
   });
-  // console.log(jQuery(self.$element[0].querySelector('.collapsible')));
+
+  // self.openPopUpClick = function(id){
+  //   let idLecture = '#fb'+id;
+  //   console.log(idLecture);
+  //   jQuery(self.$element[0].querySelector(idLecture)).modal();
+  //   jQuery(self.$element[0].querySelector(idLecture)).modal('open');
+  // }
+
   jQuery(self.$element[0].querySelector('.collapsible')).collapsible('open');
 }
 

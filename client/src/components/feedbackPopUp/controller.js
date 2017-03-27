@@ -1,8 +1,9 @@
-function fedbackPopUpController($http, $scope, $element) {
+function feedbackPopUpController($http, $scope, $element) {
   let self = this;
   self.$element = $element;
 
   $scope.$parent.openPopUpClick = function(id){
+    console.log("click");
     let idLecture = '#fb'+id;
     console.log(idLecture);
     jQuery(self.$element[0].querySelector(idLecture)).modal();
@@ -29,5 +30,5 @@ function fedbackPopUpController($http, $scope, $element) {
   }
 }
 
-fedbackPopUpController.$inject = ['$http', '$scope', '$element'];
-module.exports = fedbackPopUpController;
+feedbackPopUpController.$inject = ['$http', '$scope', '$element'];
+module.exports = feedbackPopUpController;

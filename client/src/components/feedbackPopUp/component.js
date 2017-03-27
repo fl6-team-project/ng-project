@@ -5,7 +5,7 @@ const feedbackPopUpComponent = {
     lecture: '='
   },
   template: require('./template.html'),
-  controller: fedbackPopUpController,
+  controller: feedbackPopUpController,
   controllerAs: 'feedbackPopUp'
 };
 
