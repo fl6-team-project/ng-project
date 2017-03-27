@@ -39,14 +39,23 @@ router.route('/login')
 
 router.route('/register')
     .post(function (req, res, next) {
-        var username = req.body.username;
-        var password = req.body.password;
+        var username = req.body.username,
+            password = req.body.password,
+            firstName = req.body.firstName,
+            lastName = req.body.lastName,
+            email = req.body.email;
 
         User.findOne({username: username}, function (err, user) {
             if (user) {
                 res.json(username);
             } else {
-                var user = new User({username: username, password: password});
+                var user = new User({
+                    username: username,
+                    password: password,
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email
+                });
                 user.save(function (err) {
                     if (err) return next(err);
                     req.session.user.id = user._id;
@@ -67,7 +76,7 @@ router.route('/logout')
 router.route('/users')
     .get(function(req, res, next) {
         // res.send('respond with a resource');
-        Student.find({}, function(err, students) {
+        User.find({}, function(err, students) {
             if (err) throw err;
 
             res.json(students);
@@ -75,7 +84,7 @@ router.route('/users')
     })
     .post(function(req, res) {
 
-        var student = new Student();
+        var student = new User();
         student.firstName = req.body.firstName;
         student.lastName = req.body.lastName;
         student.email = req.body.email;
@@ -89,11 +98,11 @@ router.route('/users')
 
     });
 //Single student api
-router.route('/students/:id')
+router.route('/users/:id')
     .get(function(req, res, next) {
         checkForId(req.params.id, next);
 
-        Student.findById(req.params.id, function(err, student) {
+        User.findById(req.params.id, function(err, student) {
             if (err)
                 res.send(err);
             res.json(student);
@@ -102,7 +111,7 @@ router.route('/students/:id')
     .put(function(req, res, next) {
         checkForId(req.params.id, next);
 
-        Student.findById(req.params.id, function(err, student) {
+        User.findById(req.params.id, function(err, student) {
             if (err)
                 res.send(err);
 
@@ -127,7 +136,7 @@ router.route('/students/:id')
     .delete(function(req, res, next) {
         checkForId(req.params.id, next);
 
-        Student.remove({
+        User.remove({
             _id: req.params.id
         }, function(err, student) {
             if (err)

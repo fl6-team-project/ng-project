@@ -23,12 +23,14 @@ var UserSchema = new mongoose.Schema({
     },
     firstName: {
         type: String,
+        default: 'Unknown',
         index: true,
         // required: true
     },
     lastName: {
         type: String,
         index: true,
+        default: 'Unknown'
         // required: true
     },
     email: {
@@ -46,6 +48,7 @@ var UserSchema = new mongoose.Schema({
     },
     avatar: {
         type: String,
+        default: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=300%C3%97300&w=300&h=300',
         index: true
     },
     aboutMe: {
