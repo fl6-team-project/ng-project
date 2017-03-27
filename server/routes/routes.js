@@ -1,82 +1,135 @@
 var express = require('express');
 var router = express.Router();
-var User = require("../models/User").User;
 var Teacher = require("../models/Teacher").Teacher;
 var Lecture = require("../models/Lecture").Lecture;
 var Feedback = require("../models/Feedback").Feedback;
+var User = require('../models/User').User;
+var AuthError = require('../models/User').AuthError;
+var HttpError = require('../error/index').HttpError;
+var async = require('async');
+var ObjectID = require('mongodb').ObjectID;
 
-var mongoose = require('mongoose');
-var uri = 'mongodb://admin:admin@ds135830.mlab.com:35830/epamportal';
-mongoose.connect(uri);
-var db = mongoose.connection;
 
-// db.on('error', function (err) {
-//     log.error('connection error:', err.message);
-// });
-// db.once('open', function callback () {
-//     log.info("Connected to DB!");
-// });
 
-//Users REST api
+//Authentication API
+
+router.route('/login')
+    .post(function (req, res, next) {
+        var username = req.body.username;
+        var password = req.body.password;
+        User.authorize(username, password, function (err, user) {
+            if (err) {
+                if (err instanceof AuthError) {
+                    return next(new HttpError(403, err.message))
+                } else {
+                    return next(err);
+                }
+            } else {
+                if (!user || user === 'undefined') {
+                    return next()
+                } else {
+                    req.session.user.id = user._id;
+                    req.session.user.role = user.userRole;
+                    res.send(req.session.user);
+                }
+            }
+        });
+    });
+
+
+router.route('/register')
+    .post(function (req, res, next) {
+        var username = req.body.username;
+        var password = req.body.password;
+
+        User.findOne({username: username}, function (err, user) {
+            if (user) {
+                res.json(username);
+            } else {
+                var user = new User({username: username, password: password});
+                user.save(function (err) {
+                    if (err) return next(err);
+                    req.session.user.id = user._id;
+                    req.session.user.role = user.userRole;
+                    res.send(req.session.user);
+                })
+            }
+        })
+    });
+
+router.route('/logout')
+    .post(function (req, res) {
+        req.session.destroy();
+        res.redirect('/');
+    });
+
+//Students REST api
 router.route('/users')
     .get(function(req, res, next) {
-    // res.send('respond with a resource');
-    User.find({}, function(err, users) {
-        if (err) throw err;
-        res.json(users);
-    });
-})
+        // res.send('respond with a resource');
+        Student.find({}, function(err, students) {
+            if (err) throw err;
+
+            res.json(students);
+        });
+    })
     .post(function(req, res) {
 
-        var user = new User();
-        user.firstName = req.body.firstName;
-        user.lastName = req.body.lastName;
-        user.email = req.body.email;
+        var student = new Student();
+        student.firstName = req.body.firstName;
+        student.lastName = req.body.lastName;
+        student.email = req.body.email;
 
-        user.save(function(err) {
+        student.save(function(err) {
             if (err)
                 res.send(err);
 
-            res.json({ message: 'User created!' });
+            res.json({ message: 'Student created!' });
         });
 
     });
-//Single user api
-router.route('/users/:user_id')
-    .get(function(req, res) {
-        User.findById(req.params.user_id, function(err, user) {
-        if (err)
-            res.send(err);
-        res.json(user);
-    });
-})
-    .put(function(req, res) {
-        User.findById(req.params.user_id, function(err, user) {
-        if (err)
-            res.send(err);
+//Single student api
+router.route('/students/:id')
+    .get(function(req, res, next) {
+        checkForId(req.params.id, next);
 
-            user.firstName = req.body.firstName;
-            user.lastName = req.body.lastName;
-            user.email = req.body.email;
-            user.gender = req.body.gender;
-            user.age = req.body.age;
-            user.avatar = req.body.avatar;
-            user.aboutMe = req.body.aboutMe;
-            user.active = req.body.active;
+        Student.findById(req.params.id, function(err, student) {
+            if (err)
+                res.send(err);
+            res.json(student);
+        });
+    })
+    .put(function(req, res, next) {
+        checkForId(req.params.id, next);
 
-            user.save(function(err) {
+        Student.findById(req.params.id, function(err, student) {
             if (err)
                 res.send(err);
 
-            res.json({ message: 'User updated!' });
-        });
+            student.firstName = req.body.firstName;
+            student.lastName = req.body.lastName;
+            student.email = req.body.email;
+            student.gender = req.body.gender;
+            student.age = req.body.age;
+            student.avatar = req.body.avatar;
+            student.aboutMe = req.body.aboutMe;
+            student.active = req.body.active;
 
-    });
-})
-    .delete(function(req, res) {
-        User.remove({
-            _id: req.params.user_id
-        }, function(err, user) {
+            student.save(function(err) {
+                if (err)
+                    res.send(err);
+
+                res.json({ message: 'Student updated!' });
+            });
+
+        });
+    })
+    .delete(function(req, res, next) {
+        checkForId(req.params.id, next);
+
+        Student.remove({
+            _id: req.params.id
+        }, function(err, student) {
             if (err)
                 res.send(err);
 
@@ -110,14 +163,18 @@ router.route('/teachers')
     });
 //Single teacher api
 router.route('/teachers/:id')
-    .get(function(req, res) {
+    .get(function(req, res, next) {
+        checkForId(req.params.id, next);
+
         Teacher.findById(req.params.id, function(err, teacher) {
             if (err)
                 res.send(err);
             res.json(teacher);
         });
     })
-    .put(function(req, res) {
+    .put(function(req, res, next) {
+        checkForId(req.params.id, next);
+
         Teacher.findById(req.params.id, function(err, teacher) {
             if (err)
                 res.send(err);
@@ -141,7 +198,9 @@ router.route('/teachers/:id')
 
         });
     })
-    .delete(function(req, res) {
+    .delete(function(req, res, next) {
+        checkForId(req.params.id, next);
+
         Teacher.remove({
             _id: req.params.id
         }, function(err, teacher) {
@@ -180,14 +239,18 @@ router.route('/lectures')
     });
 //Single lecture api
 router.route('/lectures/:id')
-    .get(function(req, res) {
+    .get(function(req, res, next) {
+        checkForId(req.params.id, next);
+
         Lecture.findById(req.params.id, function(err, lecture) {
             if (err)
                 res.send(err);
             res.json(lecture);
         });
     })
-    .put(function(req, res) {
+    .put(function(req, res, next) {
+        checkForId(req.params.id, next);
+
         Lecture.findById(req.params.id, function(err, lecture) {
             if (err)
                 res.send(err);
@@ -214,7 +277,9 @@ router.route('/lectures/:id')
 
         });
     })
-    .delete(function(req, res) {
+    .delete(function(req, res, next) {
+        checkForId(req.params.id, next);
+
         Lecture.remove({
             _id: req.params.id
         }, function(err, lecture) {
@@ -255,14 +320,18 @@ router.route('/feedbacks')
     });
 //Single feedback api
 router.route('/feedback/:id')
-    .get(function(req, res) {
+    .get(function(req, res, next) {
+        checkForId(req.params.id, next);
+
         Feedback.findById(req.params.id, function(err, feedback) {
             if (err)
                 res.send(err);
             res.json(feedback);
         });
     })
-    .put(function(req, res) {
+    .put(function(req, res, next) {
+        checkForId(req.params.id, next);
+
         Feedback.findById(req.params.id, function(err, feedback) {
             if (err)
                 res.send(err);
@@ -285,10 +354,12 @@ router.route('/feedback/:id')
 
         });
     })
-    .delete(function(req, res) {
+    .delete(function(req, res, next) {
+        checkForId(req.params.id, next);
+
         Feedback.remove({
             _id: req.params.id
-        }, function(err, user) {
+        }, function(err, feedback) {
             if (err)
                 res.send(err);
 
@@ -297,3 +368,14 @@ router.route('/feedback/:id')
     });
 
 module.exports = router;
+
+// try-catch for ids inside requests
+function checkForId(id, next) {
+
+    try {
+        var newId = new ObjectID(id);
+    } catch (e) {
+        return next(404);
+    }
+
+}
