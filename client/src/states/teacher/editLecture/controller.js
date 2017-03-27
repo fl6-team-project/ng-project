@@ -1,14 +1,12 @@
-require("./style.scss");
+function EditLectureController($http, $stateParams) {
+    self = this;
+    self.lecture = $stateParams.lecture;
 
-function lecturesListController($http) {
-  let self = this;
-
-  $http.get('/api/lectures').then(function(res) {
-    self.lectures = res.data;
-  });
+    $http.get('/api/lectures').then(function(res) {
+        self.lectures = res.data;
+    });
 
 }
+EditLectureController.$inject = ['$http','$stateParams'];
 
-lecturesListController.$inject = ['$http'];
-
-module.exports = lecturesListController;
+module.exports = EditLectureController;

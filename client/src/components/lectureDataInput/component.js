@@ -1,11 +1,11 @@
-const LectureRowItemController = require ('./controller.js');
+const LectureDataInputController = require ('./controller.js');
 
-const LectureRowItemComponent = {
+const lectureDataInputComponent = {
     bindings: {
-        lecture: '='
+        lecture: '=?'
     },
-    controller: LectureRowItemController,
+    controller: LectureDataInputController,
     template: require ('./template.html')
 }
 
-module.exports = LectureRowItemComponent;
+module.exports = lectureDataInputComponent;

@@ -1,43 +1,80 @@
-<li>
-    <div class="collapsible-header">
+<div class="row">
+    <form novalidate class="col s12">
         <div class="row">
-            <div class="col s12 m6">
-                <p class="date">
-                    <i class="medium material-icons">today</i>{{$ctrl.lecture.lectureScheduledDate}}</p>
-                <h2>{{$ctrl.lecture.name}}</h2>
+            <div class="input-field col s6">
+                <i class="material-icons prefix">code</i>
+                <input id="title" type="text" class="validate"
+                       ng-model="$ctrl.lecture.name">
+                <label for="title">Title</label>
             </div>
-
-            <div class="col s12 m6 right-align lecturelinks">
-                <a href="{{$ctrl.lecture.contentLecture}}">Link To Presentation</a>
-                <a href="{{$ctrl.lecture.contentPractice}}">Link To Practice</a>
-                <a href="{{$ctrl.lecture.contentHomework}}">Link To Homework</a>
+            <div class="input-field col s6">
+                <i class="material-icons prefix">add_a_photo</i>
+                <input id="theme-img" type="text" class="validate">
+                <label for="theme-img">Theme img</label>
             </div>
         </div>
-    </div>
-    <div class="collapsible-body">
         <div class="row">
-            <div class="col s12 m6">
-                <div class="lectureLine">
-                    <p class="normalWeight">Teacher:</p>
-                    <p>{{$ctrl.lecture.lectorId}}</p>
-                </div>
-                <div class="lectureLine">
-                    <p class="normalWeight">Assistants:</p>
-                    <p>{{$ctrl.lecture.assistants}}</p>
-                </div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">event</i>
+                <input id="date" type="date" class="validate"
+                       ng-model="$ctrl.lecture.lecturelectureScheduledDate">
+                <label for="date">Date</label>
             </div>
-
-            <div class="col s12 m6 right-align lecturelinks">
-                <div class="center-align describeLecture">
-                    <p class="date">
-                        <i class="medium material-icons">schedule</i>
-                        <span class="normalWeight">Deadline:</span>{{$ctrl.lecture.homeworkDeadline}}</p>
-                </div>
-                <div class="center-align">
-                    <a class="waves-effect waves-light btn" href="#feedbackLecture">Leave feedback</a>
-                    <a class="waves-effect waves-light btn" href="#homeworkFeedback">Check HW feedback</a>
-                </div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">alarm</i>
+                <input id="time" type="text" class="validate"
+                       ng-model="$ctrl.lecture.lectureScheduledTime">
+                <label for="time">Time</label>
+            </div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">alarm_off</i>
+                <input id="deadline" type="date" class="validate"
+                       ng-model="$ctrl.lecture.homeworkDeadline">
+                <label for="deadline">Home work deadline</label>
             </div>
         </div>
-    </div>
-</li>
+        <div class="row">
+            <div class="input-field col s4">
+                <i class="material-icons prefix">person</i>
+                <input id="teacher" type="text" class="validate"
+                       ng-model="$ctrl.lecture.lectorId">
+                <label for="teacher">Teacher name</label>
+            </div>
+            <div class="input-field col s8">
+                <i class="material-icons prefix">people_outline</i>
+                <input id="asistans" type="text" class="validate"
+                       ng-model="$ctrl.lecture.assistants">
+                <label for="asistans">Assistants</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">school</i>
+                <input id="lecture-link" type="text" class="validate"
+                       ng-model="$ctrl.lecture.contentLecture">
+                <label for="lecture-link">Link to lecture</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">web</i>
+                <input id="practice-link" type="text" class="validate"
+                       ng-model="$ctrl.lecture.contentPractice">
+                <label for="practice-link">Link to practice</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">home</i>
+                <input id="homework-link" type="text" class="validate"
+                       ng-model="$ctrl.lecture.contentHomework">
+                <label for="homework-link">Link to homework</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <button ng-click="$ctrl.saveEditing($ctrl.lecture._id, $ctrl.lecture)">save</button>
+            </div>
+        </div>
+    </form>
+</div>

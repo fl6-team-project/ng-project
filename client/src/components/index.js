@@ -4,12 +4,14 @@ let personsItemComponent = require("./personItem/component"),
     feedbackPopUpComponent = require("./feedbackPopUp/component"),
     popUpService = require("./feedbackPopUp/popUpService"),
     lectureRowItemComponent = require("./lectureRowItem/component");
+    lectureDataInputComponent = require("./lectureDataInput/component");
 
 module.exports = function(app) {
 
   app.component('lectureRowItem', lectureRowItemComponent);
   app.component('lectureCardItem', lectureItemComponent);
   app.component('personItem', personsItemComponent);
+  app.component('lectureDataInput', lectureDataInputComponent);
   app.component('feedbackPopUp', feedbackPopUpComponent);
 
   const recentTasksController = require("./tasks/recentTasksController.js");

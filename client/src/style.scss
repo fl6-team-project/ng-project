@@ -7,9 +7,10 @@ body {
 }
 
 .headerTop {
-  margin: 24px 0;
+  margin: 25px 0;
 
   h1 {
+    font-weight: bold;
     color: #464547;
     font-size: 32px;
     text-align: center;
@@ -139,7 +140,30 @@ label {
     display: inline-block;
   }
 }
+.collapsible{
+  h2{
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+  }
 
+  .lecturelinks a{
+    padding: 0 10px;
+  }
+
+  .row{
+    margin: 0;
+    padding: 10px 0;
+  }
+
+  .describeLecture{
+    margin-bottom: 10px;
+  }
+
+  .collapsible-body{
+    background-color: #fff;
+  }
+}
 .tabPanel {
   .tabs {
     .indicator {
