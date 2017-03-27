@@ -9,14 +9,15 @@
             </div>
             <div class="input-field col s6">
                 <i class="material-icons prefix">add_a_photo</i>
-                <input id="theme-img" type="text" class="validate">
+                <input id="theme-img" type="text" class="validate"
+                       ng-model="$ctrl.lecture.img">
                 <label for="theme-img">Theme img</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s4">
                 <i class="material-icons prefix">event</i>
-                <input id="date" type="date" class="validate"
+                <input id="date" type="date" class="datepicker"
                        ng-model="$ctrl.lecture.lecturelectureScheduledDate">
                 <label for="date">Date</label>
             </div>
@@ -28,7 +29,7 @@
             </div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">alarm_off</i>
-                <input id="deadline" type="date" class="validate"
+                <input id="deadline" type="date"
                        ng-model="$ctrl.lecture.homeworkDeadline">
                 <label for="deadline">Home work deadline</label>
             </div>
