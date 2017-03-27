@@ -1,0 +1,4 @@
+<p ng-repeat="task in recentTaskItem.tasks">
+  <input type="checkbox" id="{{task._id}}" ng-checked="task.status === 'done'"/>
+  <label for="{{task._id}}" ng-click="recentTaskItem.changeStatus(task)">{{task.text}}</label>
+</p>

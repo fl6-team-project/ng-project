@@ -4,6 +4,7 @@ var Teacher = require("../models/Teacher").Teacher;
 var Lecture = require("../models/Lecture").Lecture;
 var Feedback = require("../models/Feedback").Feedback;
 var User = require('../models/User').User;
+var RecentTasks = require("../models/RecentTasks").RecentTasks;
 var AuthError = require('../models/User').AuthError;
 var HttpError = require('../error/index').HttpError;
 var async = require('async');
@@ -28,7 +29,7 @@ router.route('/login')
                 if (!user || user === 'undefined') {
                     return next()
                 } else {
-                    req.session.user.id = user._id;
+                    req.session.user.id = user._id || 123;
                     req.session.user.role = user.userRole;
                     res.send(req.session.user);
                 }
@@ -220,7 +221,6 @@ router.route('/teachers/:id')
         });
     });
 
-
 //Lectures REST api
 router.route('/lectures')
     .get(function(req, res, next) {
@@ -232,7 +232,7 @@ router.route('/lectures')
     .post(function(req, res) {
 
         var lecture = new Lecture();
-        lecture.theme = req.body.theme;
+        lecture.img = req.body.theme;
         lecture.lectorName = req.body.lectorName;
         lecture.contentLecture = req.body.contentLecture;
         lecture.contentPractice = req.body.contentPractice;
@@ -246,6 +246,17 @@ router.route('/lectures')
         });
 
     });
+
+router.route('/lectures/last')
+  .get(function(req, res, next) {
+    Lecture.find({}, function(err, lectures) {
+      if (err) throw err;
+      res.json(lectures);
+    }).sort({
+      $natural: -1
+    }).limit(2);
+  });
+
 //Single lecture api
 router.route('/lectures/:id')
     .get(function(req, res, next) {
@@ -266,7 +277,7 @@ router.route('/lectures/:id')
 
             lecture.courseId = req.body.courseId;
             lecture.name = req.body.name;
-            lecture.theme = req.body.theme;
+            lecture.img = req.body.theme;
             lecture.lectureScheduledDate = req.body.lectureScheduledDate;
             lecture.lectureScheduledTime = req.body.lectureScheduledTime;
             lecture.lectorName = req.body.lectorName;
@@ -302,79 +313,165 @@ router.route('/lectures/:id')
 //Feedback REST api
 
 router.route('/feedbacks')
-    .get(function(req, res, next) {
-        Feedback.find({}, function(err, feedbacks) {
-            if (err) throw err;
-            res.json(feedbacks);
-        });
-    })
-    .post(function(req, res) {
-
-        var feedback = new Feedback();
-        feedback.courseId = req.body.courseId;
-        feedback.studentName = req.body.studentName;
-        feedback.lecturerName = req.body.lecturerName;
-        feedback.theme = req.body.theme;
-        feedback.overal = req.body.overal;
-        feedback.whatWasGood = req.body.whatWasGood;
-        feedback.whatWasBad = req.body.whatWasBad;
-
-        feedback.save(function(err) {
-            if (err)
-                res.send(err);
-
-            res.json({ message: 'Feedback created!' });
-        });
-
+  .get(function(req, res) {
+    Feedback.find({}, function(err, feedbacks) {
+      if (err)
+        res.send(err);
+      res.json(feedbacks);
     });
+  })
+
+  .post(function(req, res) {
+    var feedback = new Feedback();
+    feedback.courseId = req.body.courseId;
+    feedback.studentId = req.body.studentId;
+    feedback.lectureId = req.body.lectureId;
+    feedback.date = new Date();
+    feedback.overal = req.body.overal;
+    feedback.whatWasGood = req.body.whatWasGood;
+    feedback.whatWasBad = req.body.whatWasBad;
+
+    feedback.save(function(err) {
+      if (err)
+        res.send(err);
+
+      res.json({
+        message: 'Feedback created!'
+      });
+    });
+
+  });
 //Single feedback api
 router.route('/feedback/:id')
-    .get(function(req, res, next) {
-        checkForId(req.params.id, next);
-
-        Feedback.findById(req.params.id, function(err, feedback) {
-            if (err)
-                res.send(err);
-            res.json(feedback);
-        });
-    })
-    .put(function(req, res, next) {
-        checkForId(req.params.id, next);
-
-        Feedback.findById(req.params.id, function(err, feedback) {
-            if (err)
-                res.send(err);
-
-            feedback.courseId = req.body.courseId;
-            feedback.studentName = req.body.studentName;
-            feedback.lecturerName = req.body.lecturerName;
-            feedback.theme = req.body.theme;
-            feedback.updateDate = new Date();
-            feedback.overal = req.body.overal;
-            feedback.whatWasGood = req.body.whatWasGood;
-            feedback.whatWasBad = req.body.whatWasBad;
-
-            feedback.save(function(err) {
-                if (err)
-                    res.send(err);
-
-                res.json({ message: 'Feedback updated!' });
-            });
-
-        });
-    })
-    .delete(function(req, res, next) {
-        checkForId(req.params.id, next);
-
-        Feedback.remove({
-            _id: req.params.id
-        }, function(err, feedback) {
-            if (err)
-                res.send(err);
-
-            res.json({ message: 'Successfully deleted' });
-        });
+  .get(function(req, res) {
+    Feedback.findById(req.params.id, function(err, feedback) {
+      if (err)
+        res.send(err);
+      res.json(feedback);
     });
+  })
+  .put(function(req, res) {
+    Feedback.findById(req.params.id, function(err, feedback) {
+      if (err)
+        res.send(err);
+
+      feedback.courseId = req.body.courseId;
+      feedback.studentId = req.body.studentName;
+      feedback.lectureId = req.body.lecturerName;
+      feedback.date = new Date();
+      feedback.overal = req.body.overal;
+      feedback.whatWasGood = req.body.whatWasGood;
+      feedback.whatWasBad = req.body.whatWasBad;
+
+      feedback.save(function(err) {
+        if (err)
+          res.send(err);
+
+        res.json({
+          message: 'Feedback updated!'
+        });
+      });
+
+    });
+  })
+  .delete(function(req, res) {
+    Feedback.remove({
+      _id: req.params.id
+    }, function(err, user) {
+      if (err)
+        res.send(err);
+
+      res.json({
+        message: 'Successfully deleted'
+      });
+    });
+  });
+
+// Recent tasks
+
+router.route('/tasks/recent')
+  .get(function(req, res, next) {
+    RecentTasks.find({
+      status: 'active'
+    }, function(err, tasks) {
+      if (err) throw err;
+      res.json(tasks);
+    });
+  });
+
+router.route('/tasks/closed')
+  .get(function(req, res, next) {
+    RecentTasks.find({
+      status: 'done'
+    }, function(err, tasks) {
+      if (err) throw err;
+      res.json(tasks);
+    }).sort({
+      $natural: -1
+    }).limit(10);
+  });
+
+router.route('/tasks')
+  .post(function(req, res, next) {
+
+    var recenttasks = new RecentTasks();
+    recenttasks.userId = req.body.studentId;
+    recenttasks.status = req.body.status;
+    recenttasks.text = req.body.text;
+
+    recenttasks.save(function(err) {
+      if (err)
+        res.send(err);
+
+      res.json({
+        message: 'Task created!'
+      });
+    });
+
+  });
+
+
+router.route('/tasks/:id')
+  .get(function(req, res) {
+    RecentTasks.findById(req.params.id, function(err, recenttasks) {
+      if (err)
+        res.send(err);
+      res.json(tasks);
+    });
+  })
+  .put(function(req, res) {
+    RecentTasks.findById(req.params.id, function(err, recenttasks) {
+      if (err)
+        res.send(err);
+
+      recenttasks.userId = req.body.userId;
+      recenttasks.status = req.body.status;
+      recenttasks.date = new Date();
+      recenttasks.text = req.body.text;
+
+      recenttasks.save(function(err) {
+        if (err)
+          res.send(err);
+
+        res.json({
+          message: 'recenttasks updated!'
+        });
+      });
+
+    });
+  })
+  .delete(function(req, res) {
+    RecentTasks.remove({
+      _id: req.params.id
+    }, function(err, user) {
+      if (err)
+        res.send(err);
+
+      res.json({
+        message: 'Successfully deleted'
+      });
+    });
+  });
 
 module.exports = router;
 

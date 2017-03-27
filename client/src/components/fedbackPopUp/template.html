@@ -1,0 +1,25 @@
+<div id="fb{{fedbackPopUp.lecture._id}}" class="modal">
+  <form class="" ng-submit="fedbackPopUp.sendFeedback()">
+
+    <div class="modal-content">
+      <h4 class="center-align">Feedback to lecture:
+      </br>
+      {{fedbackPopUp.lecture.name}}</h4>
+    <div class="input-field col s12">
+      <textarea id="overalFb" class="materialize-textarea" ng-model="fedbackPopUp.overal"></textarea>
+      <label for="overalFb">Your overall opinion about lecture/lecturer/material</label>
+    </div>
+    <div class="input-field col s12">
+      <textarea id="whatWasGoodFb" class="validate materialize-textarea" ng-model="fedbackPopUp.whatWasGood"></textarea>
+      <label for="whatWasGoodFb">What was done well *</label>
+    </div>
+    <div class="input-field col s12">
+      <textarea id="whatWasBadFb" class="validate materialize-textarea" ng-model="fedbackPopUp.whatWasBad"></textarea>
+      <label for="whatWasGoodFb">What could have been done better *</label>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-action modal-close waves-effect waves-effect btn-flat">Cancel</a>
+      <button type="submit" class="modal-action modal-close waves-effect waves-light btn btn-flat">Send</button>
+    </div>
+  </form>
+</div>

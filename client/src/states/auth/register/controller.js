@@ -13,8 +13,8 @@ function registerController($http, $state) {
             lastName: self.lastName,
             email: self.email
         };
-        console.log(data);
-        console.log('test');
+        // console.log(data);
+        // console.log('test');
 
         $http.post('/api/register', data,
             {headers: {
@@ -23,7 +23,7 @@ function registerController($http, $state) {
             }
         ).then(function (res) {
             self.user = res.data;
-            console.log(self.user);
+            // console.log(self.user);
             $state.go('student');
         }, function (err) {
             self.regErrorMessage = true;

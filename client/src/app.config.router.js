@@ -28,25 +28,25 @@ module.exports = function(app) {
   app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $stateProvider
 
-        .state('main', {
-          url: '/',
-          template: require('./states/main/template.html'),
-          // controller as string - name of previously registered controller
-          controller: 'homeController',
-          controllerAs: '$ctrl'
-        })
-        .state('login', {
-          url: '/login',
-          template: require('./states/auth/login/template.html'),
-          controller: loginController,
-          controllerAs: 'login'
-        })
-        .state('register', {
-          url: '/register',
-          template: require('./states/auth/register/template.html'),
-          controller: registerController,
-          controllerAs: 'reg'
-        })
+        // .state('main', {
+        //   url: '/',
+        //   template: require('./states/main/template.html'),
+        //   // controller as string - name of previously registered controller
+        //   controller: 'homeController',
+        //   controllerAs: '$ctrl'
+        // })
+        // .state('login', {
+        //   url: '/login',
+        //   template: require('./states/auth/login/template.html'),
+        //   controller: loginController,
+        //   controllerAs: 'login'
+        // })
+        // .state('register', {
+        //   url: '/register',
+        //   template: require('./states/auth/register/template.html'),
+        //   controller: registerController,
+        //   controllerAs: 'reg'
+        // })
     /* USER STUDENT STATE */
     .state('student', {
       url: '/student',

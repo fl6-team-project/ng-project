@@ -4,6 +4,52 @@
 
 <div class="main">
   <ul class="collapsible lectureList" data-collapsible="expandable">
-    <lecture-row-item ng-repeat="lecture in $ctrl.lectures" lecture="lecture"></lecture-row-item>
+    <li ng-repeat="lecture in $ctrl.lectures">
+        <div class="collapsible-header">
+            <div class="row">
+                <div class="col s12 m6">
+                    <p class="date">
+                        <i class="medium material-icons">today</i>{{lecture.lectureScheduledDate}}</p>
+                    <h2>{{lecture.name}}</h2>
+                </div>
+
+                <div class="col s12 m6 right-align lecturelinks">
+                    <a href="{{lecture.contentLecture}}">Link To Presentation</a>
+                    <a href="{{lecture.contentPractice}}">Link To Practice</a>
+                    <a href="{{lecture.contentHomework}}">Link To Homework</a>
+                </div>
+            </div>
+        </div>
+        <div class="collapsible-body">
+            <div class="row">
+                <div class="col s12 m6">
+                    <div class="lectureLine">
+                        <p class="normalWeight">Teacher:</p>
+                        <p>{{lecture.lectorId}}</p>
+                    </div>
+                    <div class="lectureLine">
+                        <p class="normalWeight">Assistants:</p>
+                        <p>{{lecture.assistants}}</p>
+                    </div>
+                </div>
+
+                <div class="col s12 m6 right-align lecturelinks">
+                    <div class="center-align describeLecture">
+                        <p class="date">
+                            <i class="medium material-icons">schedule</i>
+                            <span class="normalWeight">Deadline:</span>{{lecture.homeworkDeadline}}</p>
+                    </div>
+                    <div class="center-align">
+                        <!-- <a class="waves-effect waves-light btn" href="#feedbackLecture">Leave feedback</a> -->
+                        <button class="waves-effect waves-light btn" ng-click="openPopUpClick(lecture._id)">Leave feedback</button>
+                        <a class="waves-effect waves-light btn" href="#homeworkFeedback">Check HW feedback</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <fedback-pop-up lecture="lecture"></fedback-pop-up>
+    </li>
+
+    <!-- <lecture-row-item ng-repeat="lecture in $ctrl.lectures" lecture="lecture"></lecture-row-item> -->
   </ul>
 </div>
