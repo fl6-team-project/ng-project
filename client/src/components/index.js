@@ -2,6 +2,7 @@ require("./style.scss");
 let personsItemComponent = require("./personItem/component"),
     lectureItemComponent = require("./lectureCardItem/component"),
     feedbackPopUpComponent = require("./feedbackPopUp/component"),
+    popUpService = require("./feedbackPopUp/popUpService"),
     lectureRowItemComponent = require("./lectureRowItem/component");
 
 module.exports = function(app) {
@@ -17,8 +18,7 @@ module.exports = function(app) {
       task: '='
     },
     template: require('./tasks/template.html'),
-    controller: recentTasksController,
-    controllerAs: 'recentTaskItem'
+    controller: recentTasksController
   });
 
   const closedTasksController = require("./tasks/closedTasksController.js");
@@ -27,8 +27,7 @@ module.exports = function(app) {
       task: '='
     },
     template: require('./tasks/template.html'),
-    controller: closedTasksController,
-    controllerAs: 'recentTaskItem'
+    controller: closedTasksController
   });
 
   const formTasksController = require("./tasks/formTasksController.js");
@@ -37,10 +36,10 @@ module.exports = function(app) {
       lecture: '='
     },
     template: require('./tasks/formTasks.html'),
-    controller: formTasksController,
-    controllerAs: 'formTasks'
+    controller: formTasksController
   });
 
   const tasksSharedService = require("./tasks/tasksSharedService.js");
   app.factory('tasksSharedService', tasksSharedService);
+  app.factory('popUpService', popUpService);
 }
