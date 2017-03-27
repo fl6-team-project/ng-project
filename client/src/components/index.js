@@ -1,7 +1,7 @@
 require("./style.scss");
 let personsItemComponent = require("./personItem/component"),
     lectureItemComponent = require("./lectureCardItem/component"),
-    fedbackPopUpComponent = require("./fedbackPopUp/component"),
+    feedbackPopUpComponent = require("./feedbackPopUp/component"),
     lectureRowItemComponent = require("./lectureRowItem/component");
 
 module.exports = function(app) {
@@ -9,7 +9,7 @@ module.exports = function(app) {
   app.component('lectureRowItem', lectureRowItemComponent);
   app.component('lectureCardItem', lectureItemComponent);
   app.component('personItem', personsItemComponent);
-  app.component('fedbackPopUp', fedbackPopUpComponent);
+  app.component('feedbackPopUp', feedbackPopUpComponent);
 
   const recentTasksController = require("./tasks/recentTasksController.js");
   app.component('recentTaskItem', {
