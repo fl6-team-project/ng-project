@@ -1,24 +1,27 @@
 const studentListComponent = require('./states/student/studentList/component');
 const teacherListComponent = require('./states/student/teacherList/component');
 const homeItemComponent = require('./states/student/home/component');
-const lecturesListComponent = require('./states/student/lecturesList/component');
+const studentLecturesListComponent = require('./states/student/lecturesList/component');
 const studentComponent = require('./states/student/component');
 const projectComponent = require('./states/student/project/component');
 const adminComponent = require('./states/admin/component');
 const teacherComponent = require('./states/teacher/component');
-
+const editLectureComponent = require('./states/teacher/editLecture/component');
+const teacherLectureListComponent = require('./states/teacher/lecturesList/component');
 
 module.exports = function(app) {
   // We need to register component
 
   app.component('studentListComponent', studentListComponent);
   app.component('teacherListComponent', teacherListComponent);
-  app.component('lecturesListComponent', lecturesListComponent);
+  app.component('studentLecturesListComponent', studentLecturesListComponent);
   app.component('homeItemComponent', homeItemComponent);
   app.component('studentComponent', studentComponent);
   app.component('projectComponent', projectComponent);
   app.component('adminComponent', adminComponent);
   app.component('teacherComponent', teacherComponent);
+  app.component('editLectureComponent', editLectureComponent);
+  app.component('teacherLectureListComponent', teacherLectureListComponent);
 
   app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -38,7 +41,7 @@ module.exports = function(app) {
 
     .state('student.lectures', {
       url: '/lectures',
-      component: 'lecturesListComponent'
+      component: 'studentLecturesListComponent'
     })
 
     .state('student.students', {
@@ -61,6 +64,20 @@ module.exports = function(app) {
       url: '/teacher',
       component: 'teacherComponent'
     })
+
+    .state('teacher.editLecture', {
+        url: '/edit-lecture',
+        component: 'editLectureComponent',
+        params: {
+            lecture: null
+        }
+    })
+
+    .state('teacher.lectures', {
+        url: '/lectures',
+        component: 'teacherLectureListComponent'
+    })
+
 
     /* USER ADMIN STATE */
     .state('admin', {

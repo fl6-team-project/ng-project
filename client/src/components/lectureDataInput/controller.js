@@ -1,4 +1,17 @@
-function LectureRowItemController() {
+require ('./style.scss');
+
+function LectureDataInputController($http) {
+    self = this;
+
+    self.saveEditing = function (id, object) {
+        console.log(object);
+        $http.put('/api/lectures/'+id).then(function(res) {
+            self.lectures = res.data;
+        });
+    };
+
+
 }
 
-module.exports = LectureRowItemController;
+LectureDataInputController.$inject = ['$http'];
+module.exports = LectureDataInputController;

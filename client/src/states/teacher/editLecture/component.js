@@ -1,10 +1,10 @@
-const LectureListController = require ('./controller');
+const EditLectureController = require ('./controller');
 
 const lectureListComponent = {
     bindings: {
-        lectures: '='
+        lectures: '=?'
     },
-    controller: LectureListController,
+    controller: EditLectureController,
     template: require('./template.html')
 };
 
