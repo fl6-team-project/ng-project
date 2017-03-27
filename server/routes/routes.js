@@ -79,7 +79,10 @@ router.route('/logout')
 router.route('/users')
     .get(function(req, res, next) {
         // res.send('respond with a resource');
-        User.find({}, function(err, students) {
+        var query = User.findOne({ 'userRole': 'user' });
+
+        query.select('_id firstName lastName email age aboutMe gender avatar');
+        query.exec ( function(err, students) {
             if (err) throw err;
 
             res.json(students);
@@ -153,7 +156,10 @@ router.route('/users/:id')
 //Teachers REST api
 router.route('/teachers')
     .get(function(req, res, next) {
-        Teacher.find({}, function(err, teachers) {
+        var query = User.findOne({ 'userRole': 'teacher' });
+
+        query.select('_id firstName lastName email age aboutMe lectures');
+        query.exec (function(err, teachers) {
             if (err) throw err;
             res.json(teachers);
         });
