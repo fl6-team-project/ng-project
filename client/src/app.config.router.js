@@ -4,6 +4,7 @@ const homeItemComponent = require('./states/student/home/component');
 const lecturesListComponent = require('./states/student/lecturesList/component');
 const studentComponent = require('./states/student/component');
 const projectComponent = require('./states/student/project/component');
+const editComponent = require('./states/student/edit/component');
 const adminComponent = require('./states/admin/component');
 const teacherComponent = require('./states/teacher/component');
 const loginComponent = require('./states/auth/login/loginComponent');
@@ -19,6 +20,7 @@ module.exports = function(app) {
     app.component('homeItemComponent', homeItemComponent);
     app.component('studentComponent', studentComponent);
     app.component('projectComponent', projectComponent);
+    app.component('editComponent', editComponent);
     app.component('adminComponent', adminComponent);
     app.component('teacherComponent', teacherComponent);
     app.component('loginComponent', loginComponent);
@@ -76,6 +78,11 @@ module.exports = function(app) {
             .state('student.project', {
                 url: '/project',
                 component: 'projectComponent'
+            })
+
+            .state('student.edit', {
+                url: '/edit',
+                component: 'editComponent'
             })
 
             /* USER TEACHER STATE */
