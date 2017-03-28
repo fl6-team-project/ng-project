@@ -11,8 +11,7 @@ function loginController($http, $state, AuthService) {
         password: self.password
     };
         AuthService.login(data).then(function (res) {
-            user = res.data;
-            console.log(user);
+            self.user = res.data;
             $state.go('student');
         }, function (err) {
             self.loginErrorMessage = true;
