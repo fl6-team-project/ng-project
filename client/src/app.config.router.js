@@ -4,13 +4,15 @@ const homeItemComponent = require('./states/student/home/component');
 const studentLecturesListComponent = require('./states/student/lecturesList/component');
 const studentComponent = require('./states/student/component');
 const projectComponent = require('./states/student/project/component');
-const editComponent = require('./states/student/edit/component');
+const editProfileComponent = require('./states/student/edit/component');
 const adminComponent = require('./states/admin/component');
 const teacherComponent = require('./states/teacher/component');
 const editLectureComponent = require('./states/teacher/editLecture/component');
 const teacherLectureListComponent = require('./states/teacher/lecturesList/component');
 const loginComponent = require('./states/auth/login/loginComponent');
 const registerComponent = require('./states/auth/register/registerComponent');
+
+const adminCoursesComponent = require('./states/admin/courses/component');
 
 
 module.exports = function(app) {
@@ -27,7 +29,8 @@ module.exports = function(app) {
   app.component('teacherLectureListComponent', teacherLectureListComponent);
   app.component('loginComponent', loginComponent);
   app.component('registerComponent', registerComponent);
-  app.component('editComponent', editComponent);
+  app.component('editProfileComponent', editProfileComponent);
+  app.component('adminCoursesComponent', adminCoursesComponent);
 
     app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
         $stateProvider
@@ -84,7 +87,7 @@ module.exports = function(app) {
 
         .state('student.edit', {
             url: '/edit',
-            component: 'editComponent'
+            component: 'editProfileComponent'
         })
 
         /* USER TEACHER STATE */
@@ -116,7 +119,22 @@ module.exports = function(app) {
             data: {
                 requireLogin: false
             }
+        })
+
+        // .state('admin.home', {
+        //     url: '/',
+        //     component: 'homeItemComponent'
+        // })
+
+        .state('admin.courses', {
+            url: '/courses',
+            component: 'adminCoursesComponent'
         });
+
+        // .state('admin.lectures', {
+        //   url: '/lectures',
+        //   component: 'adminLecturesListComponent'
+        // })
 
     $urlRouterProvider.otherwise('/');
   }]);

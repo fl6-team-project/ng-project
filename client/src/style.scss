@@ -111,6 +111,15 @@ label {
     }
   }
 
+  .collapsible{
+    a{
+      padding: 0 32px;
+    }
+    .collapsible-body a{
+      color: #464547;
+    }
+  }
+
   li > a {
     color: #fff;
 

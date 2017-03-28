@@ -1,10 +1,44 @@
 <div class="row">
-    <ul class="side-nav">
+  <ul class="side-nav">
+    <li>
+      <div class="userView center-align">
+        <div class="background"></div>
+        <a ui-sref="user"><img class="userLogo" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=300%C3%97300&w=300&h=300"></a>
+        <p class="name">Admin</p>
+      </div>
+    </li>
+    <li>
+      <a ui-sref="student.home">
+        <i class="material-icons">pageview</i>Main page</a>
+    </li>
+    <li>
+      <ul class="collapsible" data-collapsible="accordion">
         <li>
-            here would be admin menu
+          <a class="collapsible-header waves-effect waves-teal">
+            <i class="material-icons">business</i>Courses</a>
+          <div class="collapsible-body">
+            <ul>
+              <li ng-repeat="course in $ctrl.courses"><a ui-sref="admin.courses">{{course.name}}</a></li>
+              <li><a href="#">Add Course</a></li>
+            </ul>
+          </div>
         </li>
-    </ul>
-    <div class="containerContent">
-        <div ui-view></div>
-    </div>
+      </ul>
+    </li>
+    <li>
+      <a ui-sref="student.teachers">
+        <i class="material-icons">toc</i>List teachers</a>
+    </li>
+    <li>
+      <a ui-sref="student.students">
+        <i class="material-icons">toc</i>List students</a>
+    </li>
+    <li>
+      <a ui-sref="student.lectures">
+        <i class="material-icons">work</i>List lectures</a>
+    </li>
+  </ul>
+  <div class="containerContent">
+    <div ui-view></div>
+  </div>
 </div>

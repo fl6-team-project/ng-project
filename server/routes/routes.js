@@ -5,6 +5,7 @@ var Feedback = require("../models/Feedback").Feedback;
 var User = require('../models/User').User;
 var RecentTasks = require("../models/RecentTasks").RecentTasks;
 var Project = require("../models/Project").Project;
+var Course = require("../models/Course").Course;
 var AuthError = require('../models/User').AuthError;
 var HttpError = require('../error/index').HttpError;
 var async = require('async');
@@ -124,13 +125,13 @@ router.route('/users/:id')
             student.firstName = req.body.firstName;
             student.lastName = req.body.lastName;
             student.email = req.body.email;
-            student.gender = req.body.gender;
-            student.age = req.body.age;
+            // student.gender = req.body.gender;
+            // student.age = req.body.age;
             student.avatar = req.body.avatar;
-            student.aboutMe = req.body.aboutMe;
+            // student.aboutMe = req.body.aboutMe;
             student.username = req.body.username;
             student.password = req.body.password;
-            student.active = req.body.active;
+            // student.active = req.body.active;
             student.userRole = 'user';
 
 
@@ -504,6 +505,15 @@ router.route('/project/team/:id')
       if (err)
         res.send(err);
       res.json(team);
+    });
+  });
+
+router.route('/courses')
+  .get(function(req, res) {
+    Course.find({}, function(err, courses) {
+      if (err)
+        res.send(err);
+      res.json(courses);
     });
   });
 
