@@ -3,12 +3,12 @@ let personsItemComponent = require("./personItem/component"),
     lectureItemComponent = require("./lectureCardItem/component"),
     feedbackPopUpComponent = require("./feedbackPopUp/component"),
     popUpService = require("./feedbackPopUp/popUpService"),
-    lectureRowItemComponent = require("./lectureRowItem/component");
+    lecturesRowListComponent = require("./lecturesRowList/component");
     lectureDataInputComponent = require("./lectureDataInput/component");
 
 module.exports = function(app) {
 
-  app.component('lectureRowItem', lectureRowItemComponent);
+  app.component('lecturesRowList', lecturesRowListComponent);
   app.component('lectureCardItem', lectureItemComponent);
   app.component('personItem', personsItemComponent);
   app.component('lectureDataInput', lectureDataInputComponent);
