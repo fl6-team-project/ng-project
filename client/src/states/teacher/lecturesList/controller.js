@@ -1,13 +1,4 @@
-function lecturesListController($http) {
-  let self = this;
-
-  $http.get('/api/lectures').then(function(res) {
-    self.lectures = res.data;
-  });
-
-
+function LecturesListController() {
 }
 
-lecturesListController.$inject = ['$http'];
-
-module.exports = lecturesListController;
+module.exports = LecturesListController;
