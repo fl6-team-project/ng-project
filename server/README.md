@@ -6,7 +6,11 @@ in order to start backend install required packages `npm install` & run
  
     SET DEBUG=ng-project:* & npm start
 
-Default database set up to test one, don't forget to change it later
+Default database set up at mLabs.
+
+When user registers - his role by default is 'user'. Admin would be able to change it
+
+New student's default pass: 'temporary_password'; teacher's default pass: 'teacher_tmp'
 
 TODO
 ---
