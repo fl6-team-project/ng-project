@@ -4,7 +4,7 @@
             <div class="col s12 m5">
                 <p class="date">
                     <i class="medium material-icons">today</i>
-                    {{$ctrl.lecture.lectureScheduledDate}}
+                    {{$ctrl.lecture.lectureScheduledDate | date: "yyyy-MM-dd"}}
                 </p>
                 <h2>{{$ctrl.lecture.name}}</h2>
             </div>
@@ -35,7 +35,8 @@
                 <div class="center-align describeLecture">
                     <p class="date">
                         <i class="medium material-icons">schedule</i>
-                        <span class="normalWeight">Deadline:</span>{{$ctrl.lecture.homeworkDeadline}}</p>
+                        <span class="normalWeight">Deadline:</span>
+                        {{$ctrl.lecture.homeworkDeadline | date: "yyyy-MM-dd"}}</p>
                 </div>
                 <div class="center-align">
                     <a class="waves-effect waves-light btn" href="#feedbackLecture">Leave feedback</a>

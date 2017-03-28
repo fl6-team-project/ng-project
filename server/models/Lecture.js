@@ -9,12 +9,12 @@ var LectureSchema = new mongoose.Schema({
         type: String,
         index: true
     },
-    theme: {
+    img: {
         type: String,
         index: true
     },
     lectureScheduledDate: {
-        type: String,
+        type: Date,
         index: true
     },
     lectureScheduledTime: {
@@ -26,7 +26,7 @@ var LectureSchema = new mongoose.Schema({
         index: true
     },
     homeworkDeadline: {
-        type: String,
+        type: Date,
         index: true
     },
     assistants: {

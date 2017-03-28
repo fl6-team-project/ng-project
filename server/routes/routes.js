@@ -191,9 +191,10 @@ router.route('/lectures/:id')
         Lecture.findById(req.params.id, function(err, lecture) {
             if (err)
                 res.send(err);
+            console.log(req.body.homeworkDeadline);
             lecture.courseId = req.body.courseId;
             lecture.name = req.body.name;
-            lecture.theme = req.body.theme;
+            lecture.img = req.body.img;
             lecture.lectureScheduledDate = req.body.lectureScheduledDate;
             lecture.lectureScheduledTime = req.body.lectureScheduledTime;
             lecture.lectorName = req.body.lectorName;
