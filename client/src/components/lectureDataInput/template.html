@@ -1,0 +1,81 @@
+<div class="row">
+    <form novalidate class="col s12">
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">code</i>
+                <input id="title" type="text" class="validate"
+                       ng-model="$ctrl.lecture.name">
+                <label for="title">Title</label>
+            </div>
+            <div class="input-field col s6">
+                <i class="material-icons prefix">add_a_photo</i>
+                <input id="theme-img" type="text" class="validate"
+                       ng-model="$ctrl.lecture.img">
+                <label for="theme-img">Theme img</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s4">
+                <i class="material-icons prefix">event</i>
+                <input id="date" type="date" class="validate"
+                       ng-model="$ctrl.lecture.lectureScheduledDate">
+                <label class="active" for="time">Lecture date</label>
+            </div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">alarm</i>
+                <input id="time" type="text" class="validate"
+                       ng-model="$ctrl.lecture.lectureScheduledTime">
+                <label for="time">Time</label>
+            </div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">alarm_off</i>
+                <input id="deadline" type="date" class="validate"
+                       ng-model="$ctrl.lecture.homeworkDeadline">
+                <label class="active" for="deadline">Home work deadline</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s4">
+                <i class="material-icons prefix">person</i>
+                <input id="teacher" type="text" class="validate"
+                       ng-model="$ctrl.lecture.lectorId">
+                <label for="teacher">Teacher name</label>
+            </div>
+            <div class="input-field col s8">
+                <i class="material-icons prefix">people_outline</i>
+                <input id="asistans" type="text" class="validate"
+                       ng-model="$ctrl.lecture.assistants">
+                <label for="asistans">Assistants</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">school</i>
+                <input id="lecture-link" type="text" class="validate"
+                       ng-model="$ctrl.lecture.contentLecture">
+                <label for="lecture-link">Link to lecture</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">web</i>
+                <input id="practice-link" type="text" class="validate"
+                       ng-model="$ctrl.lecture.contentPractice">
+                <label for="practice-link">Link to practice</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">home</i>
+                <input id="homework-link" type="text" class="validate"
+                       ng-model="$ctrl.lecture.contentHomework">
+                <label for="homework-link">Link to homework</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <button ng-click="$ctrl.saveEditing($ctrl.lecture._id, $ctrl.lecture)">save</button>
+            </div>
+        </div>
+    </form>
+</div>
