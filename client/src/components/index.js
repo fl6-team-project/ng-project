@@ -3,6 +3,8 @@ let personsItemComponent = require("./personItem/component"),
     lectureItemComponent = require("./lectureCardItem/component"),
     feedbackPopUpComponent = require("./feedbackPopUp/component"),
     popUpService = require("./feedbackPopUp/popUpService"),
+    groupProjectTeamComponent = require("./groupProjectTeam/component"),
+    groupProjectInfoComponent = require("./groupProjectInfo/component"),
     lectureRowItemComponent = require("./lectureRowItem/component");
 
 module.exports = function(app) {
@@ -11,6 +13,8 @@ module.exports = function(app) {
   app.component('lectureCardItem', lectureItemComponent);
   app.component('personItem', personsItemComponent);
   app.component('feedbackPopUp', feedbackPopUpComponent);
+  app.component('groupProjectTeam', groupProjectTeamComponent);
+  app.component('groupProjectInfo', groupProjectInfoComponent);
 
   const recentTasksController = require("./tasks/recentTasksController.js");
   app.component('recentTaskItem', {

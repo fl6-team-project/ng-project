@@ -1,5 +1,5 @@
 <div class="headerTop">
-    <h1>Group Project</h1>
+  <h1>Group Project</h1>
 </div>
 
 <div class="main">
@@ -14,20 +14,13 @@
             <li class="tab col s3">
               <a href="#project">Project</a>
             </li>
-            <li class="tab col s3">
-              <a href="#links">Links</a>
-            </li>
           </ul>
         </div>
         <div id="team" class="col s12">
-          <!-- <recent-task-item></recent-task-item> -->
-          <!-- <form-tasks></form-tasks> -->
+          <group-project-team project="$ctrl.project"></group-project-team>
         </div>
         <div id="project" class="col s12">
-          <!-- <closed-task-item></closed-task-item> -->
-        </div>
-        <div id="links" class="col s12">
-          <!-- <closed-task-item></closed-task-item> -->
+          <group-project-info project="$ctrl.project"></group-project-info>
         </div>
       </div>
     </div>
