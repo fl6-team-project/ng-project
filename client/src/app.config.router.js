@@ -103,12 +103,6 @@ module.exports = function(app) {
             component: 'teacherLectureListComponent'
         })
 
-
-        /* USER ADMIN STATE */
-        .state('admin', {
-          url: '/admin',
-          component: 'adminComponent'
-        })
         /* USER ADMIN STATE */
         .state('admin', {
             url: '/admin',
