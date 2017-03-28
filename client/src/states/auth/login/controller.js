@@ -3,7 +3,7 @@ function loginController($http, $state, AuthService) {
     self.loginErrorMessage = false;
     self.username = '';
     self.password = '';
-    self.user = '';
+    self.user = null;
 
     self.logIn = function () {
         var data = {
@@ -12,7 +12,10 @@ function loginController($http, $state, AuthService) {
     };
         AuthService.login(data).then(function (res) {
             user = res.data;
+            console.log(user);
             $state.go('student');
+        }, function (err) {
+            self.loginErrorMessage = true;
         });
     }
 }

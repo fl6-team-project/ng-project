@@ -24,7 +24,7 @@ app.service('AuthService', function AuthService($q, $http) {
                     deferred.reject('Wrong username or password');
                 }
             }, function (err) {
-                self.loginErrorMessage = true;
+                deferred.reject('Error');
             });
             return deferred.promise;
         },
