@@ -1,3 +1,54 @@
+<div class="headerTop">
+  <h1>Edit profile:
+    {{$ctrl.user.username}}</h1>
+</div>
 <div class="main">
-  <p>Here will be edit profile</p>
+  <div class="row">
+    <div class="col s12 white">
+      <form class="editProfile" ng-submit="$ctrl.editProfile()">
+        <div class="row">
+          <div class="col s6">
+            <h3>General Info</h3>
+            <div class="input-field activeLabel">
+              <input id="first_name" type="text" class="validate" ng-model="$ctrl.user.firstName">
+              <label for="first_name">First Name</label>
+            </div>
+            <div class="input-field activeLabel">
+              <input id="last_name" type="text" class="validate" ng-model="$ctrl.user.lastName">
+              <label for="last_name">Last Name</label>
+            </div>
+            <div class="input-field activeLabel">
+              <input id="email" ng-model="$ctrl.user.email" type="email" class="validate">
+              <label for="email">Email</label>
+            </div>
+          </div>
+          <div class="col s6">
+            <h3>Upload new avatar</h3>
+            <div class="file-field input-field">
+              <div class="btn">
+                <span>File</span>
+                <input type="file">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text" ng-model="$ctrl.user.avatar">
+              </div>
+            </div>
+            <div class="userAvatar">
+              <img ng-src="{{$ctrl.user.avatar}}" alt="">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 activeLabel">
+            <textarea id="textarea1" class="materialize-textarea" ng-model="$ctrl.user.aboutMe"></textarea>
+            <label for="textarea1">Short info</label>
+          </div>
+        </div>
+        <div class="row center-align">
+          <button type="submit" class="btn waves-effect waves-light btn-large">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

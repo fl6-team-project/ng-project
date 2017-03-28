@@ -85,7 +85,7 @@ router.route('/users')
             res.json(students);
         });
     })
-    .post(function(req, res) {
+    .post(function(req, res, next) {
 
         var student = new User();
         student.username = req.body.username;
@@ -114,7 +114,7 @@ router.route('/users/:id')
             res.json(student);
         });
     })
-    .put(function(req, res, next) {
+    .put(function(req, res) {
         checkForId(req.params.id, next);
 
         User.findById(req.params.id, function(err, student) {
