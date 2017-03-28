@@ -292,7 +292,7 @@ router.route('/lectures/:id')
                 res.send(err);
             lecture.courseId = req.body.courseId;
             lecture.name = req.body.name;
-            lecture.img = req.body.theme;
+            lecture.img = req.body.img;
             lecture.lectureScheduledDate = req.body.lectureScheduledDate;
             lecture.lectureScheduledTime = req.body.lectureScheduledTime;
             lecture.lectorName = req.body.lectorName;
