@@ -63,6 +63,10 @@ var UserSchema = new mongoose.Schema({
         type: String,
         default: 'user',
         index: true
+    },
+    lectures: {
+        type: Array,
+        index: true
     }
     // owner_id: {
     //     type: mongoose.Schema.Types.ObjectId,

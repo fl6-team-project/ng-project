@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var Teacher = require("../models/Teacher").Teacher;
 var Lecture = require("../models/Lecture").Lecture;
 var Feedback = require("../models/Feedback").Feedback;
 var User = require('../models/User').User;
@@ -79,18 +78,21 @@ router.route('/logout')
 router.route('/users')
     .get(function(req, res, next) {
         // res.send('respond with a resource');
-        User.find({}, function(err, students) {
+        var query = User.find({ 'userRole': 'user' });
+        query.exec ( function(err, students) {
             if (err) throw err;
-
             res.json(students);
         });
     })
     .post(function(req, res) {
 
         var student = new User();
+        student.username = req.body.username;
+        student.password = 'temporary_password';
         student.firstName = req.body.firstName;
         student.lastName = req.body.lastName;
         student.email = req.body.email;
+        student.userRole = 'user';
 
         student.save(function(err) {
             if (err)
@@ -125,7 +127,11 @@ router.route('/users/:id')
             student.age = req.body.age;
             student.avatar = req.body.avatar;
             student.aboutMe = req.body.aboutMe;
+            student.username = req.body.username;
+            student.password = req.body.password;
             student.active = req.body.active;
+            student.userRole = 'user';
+
 
             student.save(function(err) {
                 if (err)
@@ -153,17 +159,22 @@ router.route('/users/:id')
 //Teachers REST api
 router.route('/teachers')
     .get(function(req, res, next) {
-        Teacher.find({}, function(err, teachers) {
+        var query = User.find({ 'userRole': 'teacher' });
+
+        query.exec (function(err, teachers) {
             if (err) throw err;
             res.json(teachers);
         });
     })
     .post(function(req, res) {
 
-        var teacher = new Teacher();
+        var teacher = new User();
+        teacher.username = req.body.username;
+        teacher.password = 'teacher_tmp';
         teacher.firstName = req.body.firstName;
         teacher.lastName = req.body.lastName;
         teacher.email = req.body.email;
+        teacher.userRole = 'teacher';
 
         teacher.save(function(err) {
             if (err)
@@ -178,7 +189,7 @@ router.route('/teachers/:id')
     .get(function(req, res, next) {
         checkForId(req.params.id, next);
 
-        Teacher.findById(req.params.id, function(err, teacher) {
+        User.findById(req.params.id, function(err, teacher) {
             if (err)
                 res.send(err);
             res.json(teacher);
@@ -187,10 +198,12 @@ router.route('/teachers/:id')
     .put(function(req, res, next) {
         checkForId(req.params.id, next);
 
-        Teacher.findById(req.params.id, function(err, teacher) {
+        User.findById(req.params.id, function(err, teacher) {
             if (err)
                 res.send(err);
 
+            teacher.username = req.body.username;
+            teacher.password = req.body.password;
             teacher.firstName = req.body.firstName;
             teacher.lastName = req.body.lastName;
             teacher.email = req.body.email;
@@ -200,6 +213,7 @@ router.route('/teachers/:id')
             teacher.aboutMe = req.body.aboutMe;
             teacher.lectures = req.body.lectures;
             teacher.active = req.body.active;
+            teacher.userRole = 'teacher';
 
             teacher.save(function(err) {
                 if (err)
@@ -213,7 +227,7 @@ router.route('/teachers/:id')
     .delete(function(req, res, next) {
         checkForId(req.params.id, next);
 
-        Teacher.remove({
+        User.remove({
             _id: req.params.id
         }, function(err, teacher) {
             if (err)

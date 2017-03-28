@@ -9,8 +9,8 @@ var index = require('./routes/index');
 //!!! Connect to BD
 
 var mongoose = require('mongoose');
-// var uri = 'mongodb://admin:admin@ds135830.mlab.com:35830/epamportal'; - Main
-var uri = 'mongodb://test:test@ds137550.mlab.com:37550/sandbox'; // - Test
+var uri = 'mongodb://admin:admin@ds135830.mlab.com:35830/epamportal'; // - Main
+// var uri = 'mongodb://test:test@ds137550.mlab.com:37550/sandbox'; // - Test
 mongoose.connect(uri);
 var db = mongoose.connection.db;
 

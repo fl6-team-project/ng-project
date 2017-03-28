@@ -17,7 +17,6 @@ function loginController($http, $state) {
             }
         ).then(function (res) {
             self.user = res.data;
-            // console.log(self.user);
             $state.go('student');
         }, function (err) {
             self.loginErrorMessage = true;
