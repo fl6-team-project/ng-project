@@ -3,7 +3,7 @@
     <div class="row dateLine">
       <div class="col s6">
         <p class="date">
-          <i class="medium material-icons">today</i>{{$ctrl.lecture.lectureScheduledDate}}</p>
+          <i class="medium material-icons">today</i>{{$ctrl.lecture.lectureScheduledDate | date: "yyyy-MM-dd"}}</p>
       </div>
       <div class="col s6 right-align">
         <p class="date">
@@ -49,7 +49,7 @@
       <a href="mailto:test@mail.test">test@mail.test</a>
       <div class="lectureLine">
         <p class="normalWeight">Deadline:</p>
-        <p>{{$ctrl.lecture.homeworkDeadline}}</p>
+        <p>{{$ctrl.lecture.homeworkDeadline | date: "yyyy-MM-dd"}}</p>
       </div>
       <button class="waves-effect waves-light btn" ng-click="$ctrl.openPopUpClick($ctrl.lecture._id)">Leave feedback</button>
       <button class="waves-effect waves-light btn" href="#homeworkFeedback">Check HW feedback</button>

@@ -1,7 +1,3 @@
-// We must require styles also to allow WEBPACK to pack this style file into bundle
-// but we need apropriate loader - scss-loader and css-loader. Check webpack loaders configuration manual
-require("./style.scss");
-
 function StudentListController($http) {
     let self = this;
 
