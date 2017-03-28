@@ -59,7 +59,7 @@ app.run(function($transitions) {
                 case 'admin':
                     return trans.router.stateService.target('admin');
                     break;
-                case 'student':
+                case 'user':
                     return trans.router.stateService.target('student');
                     break;
             };
@@ -72,7 +72,7 @@ app.run(function($transitions) {
             return trans.router.stateService.target('login');
         } else {
             switch(auth.getUser().data.role) {
-                case 'student':
+                case 'user':
                     return trans.router.stateService.target('student');
                     break;
                 case 'teacher':
