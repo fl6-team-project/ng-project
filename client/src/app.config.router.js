@@ -10,6 +10,9 @@ const editLectureComponent = require('./states/teacher/editLecture/component');
 const teacherLectureListComponent = require('./states/teacher/lecturesList/component');
 const loginComponent = require('./states/auth/login/loginComponent');
 const registerComponent = require('./states/auth/register/registerComponent');
+const adminLectureListComponent = require('./states/admin/lecturesList/component');
+const adminEditLectureComponent = require('./states/admin/editLecture/component');
+const addLectureComponent = require('./states/admin/addLecture/component');
 
 
 module.exports = function(app) {
@@ -27,6 +30,9 @@ module.exports = function(app) {
   app.component('teacherLectureListComponent', teacherLectureListComponent);
   app.component('loginComponent', loginComponent);
   app.component('registerComponent', registerComponent);
+  app.component('adminLectureListComponent', adminLectureListComponent);
+  app.component('addLectureComponent', addLectureComponent);
+  app.component('adminEditLectureComponent', adminEditLectureComponent);
 
     app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
         $stateProvider
@@ -109,6 +115,27 @@ module.exports = function(app) {
             component: 'adminComponent',
             data: {
                 requireLogin: false
+            }
+        })
+
+        .state('admin.lectures', {
+            url: '/lectures',
+            component: 'adminLectureListComponent',
+        })
+
+        .state('admin.editLecture', {
+            url: '/edit-lecture',
+            component: 'editLectureComponent',
+            params: {
+                lecture: null
+            }
+        })
+
+        .state('admin.addLecture', {
+            url: '/add-lecture',
+            component: 'editLectureComponent',
+            params: {
+                lecture: null
             }
         });
 
