@@ -1,12 +1,5 @@
-function AddLectureController($http, $stateParams) {
-    self = this;
-    self.lecture = $stateParams.lecture;
-
-    $http.get('/api/lectures').then(function(res) {
-        self.lectures = res.data;
-    });
-
+function AddLectureController() {
+    this.actionMethod = 'add';
 }
-AddLectureController.$inject = ['$http','$stateParams'];
 
 module.exports = AddLectureController;

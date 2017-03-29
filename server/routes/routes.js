@@ -246,13 +246,20 @@ router.route('/lectures')
         });
     })
     .post(function(req, res) {
+        console.log(req.body);
 
         var lecture = new Lecture();
-        lecture.img = req.body.theme;
+        lecture.name = req.body.name;
+        lecture.img = req.body.img;
+        lecture.lectureScheduledDate = req.body.lectureScheduledDate;
+        lecture.lectureScheduledTime = req.body.lectureScheduledTime;
         lecture.lectorName = req.body.lectorName;
+        lecture.homeworkDeadline = req.body.homeworkDeadline;
+        lecture.assistants = req.body.assistants;
         lecture.contentLecture = req.body.contentLecture;
         lecture.contentPractice = req.body.contentPractice;
         lecture.contentHomework = req.body.contentHomework;
+        lecture.active = req.body.active;
 
         lecture.save(function(err) {
             if (err)
@@ -290,7 +297,6 @@ router.route('/lectures/:id')
         Lecture.findById(req.params.id, function(err, lecture) {
             if (err)
                 res.send(err);
-            lecture.courseId = req.body.courseId;
             lecture.name = req.body.name;
             lecture.img = req.body.img;
             lecture.lectureScheduledDate = req.body.lectureScheduledDate;

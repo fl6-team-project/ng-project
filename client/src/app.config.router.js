@@ -133,7 +133,7 @@ module.exports = function(app) {
 
         .state('admin.addLecture', {
             url: '/add-lecture',
-            component: 'editLectureComponent',
+            component: 'addLectureComponent',
             params: {
                 lecture: null
             }
