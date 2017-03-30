@@ -1,29 +1,24 @@
-function loginController($http, $state) {
+function loginController($http, $state, AuthService) {
     let self = this;
     self.loginErrorMessage = false;
     self.username = '';
     self.password = '';
-    self.user = '';
+    self.user = null;
 
     self.logIn = function () {
         var data = {
         username: self.username,
         password: self.password
     };
-        $http.post('/api/login', data,
-            {headers: {
-                'x-requested-with': 'XMLHttpRequest'
-                }
-            }
-        ).then(function (res) {
+        AuthService.login(data).then(function (res) {
             self.user = res.data;
-            $state.go('student');
+            $state.go('student.home');
         }, function (err) {
             self.loginErrorMessage = true;
         });
     }
 }
 
-loginController.$inject = ['$http', '$state'];
+loginController.$inject = ['$http', '$state', 'AuthService'];
 
 module.exports = loginController;
