@@ -13,6 +13,7 @@ const registerComponent = require('./states/auth/register/registerComponent');
 const adminLectureListComponent = require('./states/admin/lecturesList/component');
 const adminEditLectureComponent = require('./states/admin/editLecture/component');
 const addLectureComponent = require('./states/admin/addLecture/component');
+const addUserComponent = require('./states/admin/addUser/component');
 
 
 module.exports = function(app) {
@@ -33,6 +34,7 @@ module.exports = function(app) {
   app.component('adminLectureListComponent', adminLectureListComponent);
   app.component('addLectureComponent', addLectureComponent);
   app.component('adminEditLectureComponent', adminEditLectureComponent);
+  app.component('addUserComponent', addUserComponent);
 
     app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
         $stateProvider
@@ -137,6 +139,11 @@ module.exports = function(app) {
             params: {
                 lecture: null
             }
+        })
+
+        .state('admin.addUser', {
+            url: '/add-user',
+            component: 'addUserComponent',
         });
 
     $urlRouterProvider.otherwise('/');
