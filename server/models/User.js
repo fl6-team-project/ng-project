@@ -7,15 +7,15 @@ var UserSchema = new mongoose.Schema({
     username: {
         type: String,
         unique: true,
-        required: true
+        //required: true
     },
     hashedPassword: {
         type: String,
-        required: true
+        //required: true
     },
     salt: {
         type: String,
-        required: true
+        //required: true
     },
     created: {
         type: Date,

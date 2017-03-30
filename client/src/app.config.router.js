@@ -10,7 +10,6 @@ const editLectureComponent = require('./states/teacher/editLecture/component');
 const teacherLectureListComponent = require('./states/teacher/lecturesList/component');
 const loginComponent = require('./states/auth/login/loginComponent');
 const registerComponent = require('./states/auth/register/registerComponent');
-const adminLectureListComponent = require('./states/admin/lecturesList/component');
 const adminEditLectureComponent = require('./states/admin/editLecture/component');
 const addLectureComponent = require('./states/admin/addLecture/component');
 const addUserComponent = require('./states/admin/addUser/component');
@@ -31,7 +30,6 @@ module.exports = function(app) {
   app.component('teacherLectureListComponent', teacherLectureListComponent);
   app.component('loginComponent', loginComponent);
   app.component('registerComponent', registerComponent);
-  app.component('adminLectureListComponent', adminLectureListComponent);
   app.component('addLectureComponent', addLectureComponent);
   app.component('adminEditLectureComponent', adminEditLectureComponent);
   app.component('addUserComponent', addUserComponent);
@@ -118,11 +116,6 @@ module.exports = function(app) {
             data: {
                 requireLogin: false
             }
-        })
-
-        .state('admin.lectures', {
-            url: '/lectures',
-            component: 'adminLectureListComponent',
         })
 
         .state('admin.editLecture', {

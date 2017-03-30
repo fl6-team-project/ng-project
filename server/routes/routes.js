@@ -90,20 +90,15 @@ router.route('/users')
         user.firstName = req.body.firstName;
         user.lastName = req.body.lastName;
         user.email = req.body.email;
-        user.gender = req.body.gender;
-        user.age = req.body.age;
-        user.avatar = req.body.avatar;
-        user.aboutMe = req.body.aboutMe;
-        user.username = req.body.username;
-        user.password = req.body.password;
+        user.password = 'test-password';
         user.active = 'active';
         user.userRole = req.body.userRole;
 
-        student.save(function(err) {
+        user.save(function(err) {
             if (err)
                 res.send(err);
 
-            res.json({ message: 'Student created!' });
+            res.json({ message: 'User created!' });
         });
 
     });

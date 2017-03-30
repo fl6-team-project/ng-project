@@ -26,32 +26,32 @@
                            ng-model="$ctrl.user.email">
                     <label for="email">Email</label>
                 </div>
-                <div class="input-field col s6">
-                    <i class="material-icons prefix">wc</i>
-                        <input ng-model="$ctrl.user.gender" class="with-gap"
-                               name="gender" type="radio" id="man" value="man" checked />
-                        <label for="man">man</label>
+                <!--<div class="input-field col s6">-->
+                    <!--<i class="material-icons prefix">wc</i>-->
+                        <!--<input ng-model="$ctrl.user.gender" class="with-gap"-->
+                               <!--name="gender" type="radio" id="man" value="man" checked />-->
+                        <!--<label for="man">man</label>-->
 
-                        <input ng-model="$ctrl.user.gender" class="with-gap"
-                               name="gender" type="radio" id="woman" value="woman" />
-                        <label for="woman">woman</label>
-                    <label class="active" for="woman">Gende</label>
-                </div>
+                        <!--<input ng-model="$ctrl.user.gender" class="with-gap"-->
+                               <!--name="gender" type="radio" id="woman" value="woman" />-->
+                        <!--<label for="woman">woman</label>-->
+                    <!--<label class="active" for="woman">Gender</label>-->
+                <!--</div>-->
             </div>
-            <div class="row">
-                <div class="input-field col s4">
-                    <i class="material-icons prefix">cake</i>
-                    <input id="age" type="number" class="validate"
-                           ng-model="$ctrl.user.age">
-                    <label for="age">Age</label>
-                </div>
-                <div class="input-field col s8">
-                    <i class="material-icons prefix">add_a_photo</i>
-                    <input id="avatar" type="text" class="validate"
-                           ng-model="$ctrl.user.img">
-                    <label for="avatar">Avatar</label>
-                </div>
-            </div>
+            <!--<div class="row">-->
+                <!--<div class="input-field col s4">-->
+                    <!--<i class="material-icons prefix">cake</i>-->
+                    <!--<input id="age" type="number" class="validate"-->
+                           <!--ng-model="$ctrl.user.age">-->
+                    <!--<label for="age">Age</label>-->
+                <!--</div>-->
+                <!--<div class="input-field col s8">-->
+                    <!--<i class="material-icons prefix">add_a_photo</i>-->
+                    <!--<input id="avatar" type="text" class="validate"-->
+                           <!--ng-model="$ctrl.user.img">-->
+                    <!--<label for="avatar">Avatar</label>-->
+                <!--</div>-->
+            <!--</div>-->
             <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">school</i>
@@ -62,25 +62,25 @@
                     </select>
                     <label for="userRole">User role</label>
                 </div>
-                <div class="input-field col s6">
-                    <i class="material-icons prefix">vpn_key</i>
-                    <input id="courseid" type="text" class="validate"
-                           ng-model="$ctrl.user.courseId" value="58d370a9734d1d3c86d14b0f">
-                    <label for="courseid">courseId</label>
-                </div>
+                <!--<div class="input-field col s6">-->
+                    <!--<i class="material-icons prefix">vpn_key</i>-->
+                    <!--<input id="courseid" type="text" class="validate"-->
+                           <!--ng-model="$ctrl.user.courseId" value="58d370a9734d1d3c86d14b0f">-->
+                    <!--<label for="courseid">courseId</label>-->
+                <!--</div>-->
             </div>
-            {{description}}
-            <div class="row">
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">description</i>
-                    <textarea id="about" class="materialize-textarea"
-                              ng-model="$ctrl.user.aboutMe"></textarea>
-                    <label for="about">About me</label>
-                </div>
+            <!--<div class="row">-->
+                <!--<div class="input-field col s12">-->
+                    <!--<i class="material-icons prefix">description</i>-->
+                    <!--<textarea id="about" class="materialize-textarea"-->
+                              <!--ng-model="$ctrl.user.aboutMe"></textarea>-->
+                    <!--<label for="about">About me</label>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <div class="row center-align">
+                <button class="btn waves-effect waves-light btn-large" ng-click="$ctrl.addUser($ctrl.user)">add</button>
             </div>
-
-            <button class="btn waves-effect waves-light btn-large" ng-click="$ctrl.addUser($ctrl.user)">add</button>
-
         </form>
     </div>
 
