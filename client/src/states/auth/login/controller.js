@@ -12,7 +12,7 @@ function loginController($http, $state, AuthService) {
     };
         AuthService.login(data).then(function (res) {
             self.user = res.data;
-            $state.go('student');
+            $state.go('student.home');
         }, function (err) {
             self.loginErrorMessage = true;
         });

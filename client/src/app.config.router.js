@@ -128,7 +128,7 @@ module.exports = function(app) {
         })
 
         .state('admin.users', {
-            url: 'users-list',
+            url: '/users-list',
             component: 'userListComponent'
         })
 

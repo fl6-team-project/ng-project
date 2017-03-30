@@ -33,7 +33,7 @@ registerComponentsFunction(app);
 // Handle manual change in address line
 app.run(function($transitions) {
 
-    $transitions.onStart({ to: 'student'}, function(trans) {
+    $transitions.onStart({ to: 'student.*'}, function(trans) {
         var auth = trans.injector().get('AuthService');
         if (!auth.exists()) {
             // User isn't authenticated. Redirect to a new Target State
@@ -52,7 +52,7 @@ app.run(function($transitions) {
 
         }
     });
-    $transitions.onStart({ to: 'teacher' }, function(trans) {
+    $transitions.onStart({ to: 'teacher.*' }, function(trans) {
         var auth = trans.injector().get('AuthService');
         if (!auth.exists()) {
             // User isn't authenticated. Redirect to a new Target State
@@ -70,7 +70,62 @@ app.run(function($transitions) {
             })
         }
     });
-    $transitions.onStart({ to: 'admin' }, function(trans) {
+    $transitions.onStart({ to: 'admin.*' }, function(trans) {
+        var auth = trans.injector().get('AuthService');
+        if (!auth.exists()) {
+            // User isn't authenticated. Redirect to a new Target State
+            return trans.router.stateService.target('login');
+        } else {
+            return auth.userRole().then(function (role) {
+                switch (role) {
+                    case 'student':
+                        return trans.router.stateService.target('student');
+                        break;
+                    case 'teacher':
+                        return trans.router.stateService.target('teacher');
+                        break;
+                }
+            });
+        }
+    });
+    $transitions.onStart({ to: 'student.*'}, function(trans) {
+        var auth = trans.injector().get('AuthService');
+        if (!auth.exists()) {
+            // User isn't authenticated. Redirect to a new Target State
+            return trans.router.stateService.target('login');
+        } else {
+            return auth.userRole().then(function (role) {
+                switch (role) {
+                    case 'admin':
+                        return trans.router.stateService.target('admin');
+                        break;
+                    case 'teacher':
+                        return trans.router.stateService.target('teacher');
+                        break;
+                };
+            });
+
+        }
+    });
+    $transitions.onStart({ to: 'teacher.*' }, function(trans) {
+        var auth = trans.injector().get('AuthService');
+        if (!auth.exists()) {
+            // User isn't authenticated. Redirect to a new Target State
+            return trans.router.stateService.target('login');
+        } else {
+            return auth.userRole().then(function (role) {
+                switch (role) {
+                    case 'admin':
+                        return trans.router.stateService.target('admin');
+                        break;
+                    case 'student':
+                        return trans.router.stateService.target('student');
+                        break;
+                };
+            })
+        }
+    });
+    $transitions.onStart({ to: 'admin.*' }, function(trans) {
         var auth = trans.injector().get('AuthService');
         if (!auth.exists()) {
             // User isn't authenticated. Redirect to a new Target State

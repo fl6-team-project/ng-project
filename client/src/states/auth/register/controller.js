@@ -21,7 +21,7 @@ function registerController($http, $state) {
             }
         ).then(function (res) {
             self.user = res.data;
-            $state.go('student');
+            $state.go('student.home');
         }, function (err) {
             self.regErrorMessage = true;
         });
