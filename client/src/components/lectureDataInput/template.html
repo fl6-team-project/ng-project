@@ -75,8 +75,6 @@
         <div class="row">
             <div class="input-field col s12 center-align">
                 <button class="btn waves-effect waves-light btn-large" ng-if="$ctrl.actionmethod === 'add'" ng-click="$ctrl.addLecture($ctrl.lecture)">add</button>
-
-                <!--@todo action method to edit-->
                 <button class="btn waves-effect waves-light btn-large" ng-if="$ctrl.actionmethod === 'edit'" ng-click="$ctrl.saveEditing($ctrl.lecture._id, $ctrl.lecture)">save</button>
             </div>
         </div>

@@ -87,19 +87,19 @@ router.route('/users')
     })
     .post(function(req, res) {
 
-        var student = new User();
-        student.username = req.body.username;
-        student.password = 'temporary_password';
-        student.firstName = req.body.firstName;
-        student.lastName = req.body.lastName;
-        student.email = req.body.email;
-        student.userRole = 'student';
+        var user = new User();
+        user.firstName = req.body.firstName;
+        user.lastName = req.body.lastName;
+        user.email = req.body.email;
+        user.password = 'test-password';
+        user.active = 'active';
+        user.userRole = req.body.userRole;
 
-        student.save(function(err) {
+        user.save(function(err) {
             if (err)
                 res.send(err);
 
-            res.json({ message: 'Student created!' });
+            res.json({ message: 'User created!' });
         });
 
     });
@@ -247,7 +247,6 @@ router.route('/lectures')
         });
     })
     .post(function(req, res) {
-        console.log(req.body);
 
         var lecture = new Lecture();
         lecture.name = req.body.name;
