@@ -1,14 +1,15 @@
 module.exports = function(app) {
 
 app.service('AuthService', ['$q', '$http', '$state', function AuthService($q, $http, $state) {
-    var authorized = null;
+    localStorage.setItem('userAuthorized', null);
     var deferred = $q.defer();
+
     return {
         getUser: function () {
-            return authorized;
+            return JSON.parse(localStorage.getItem('userAuthorized'));
         },
         exists: function () {
-            return authorized != null;
+            return JSON.parse(localStorage.getItem('userAuthorized')) != null;
         },
         login: function (userData) {
             $http.post('/api/login', userData,
@@ -18,7 +19,7 @@ app.service('AuthService', ['$q', '$http', '$state', function AuthService($q, $h
                 }
             ).then(function (user) {
                 if (user) {
-                    authorized = user;
+                    localStorage.setItem('userAuthorized', JSON.stringify(user));
                     deferred.resolve(user);
                 } else {
                     deferred.reject('Wrong username or password');
@@ -29,13 +30,11 @@ app.service('AuthService', ['$q', '$http', '$state', function AuthService($q, $h
             return deferred.promise;
         },
         logout: function () {
-            authorized = null;
+            localStorage.setItem('userAuthorized', null);
             $http.post('/api/logout');
-            $state.go('/');
-
         },
         userRole: function () {
-            return this.exists() ? authorized.role : 'guest';
+            return this.exists() ? JSON.parse(localStorage.getItem('userAuthorized')).role : 'guest';
         }
     }
 }])
