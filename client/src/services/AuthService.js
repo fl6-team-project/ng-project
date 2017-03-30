@@ -1,6 +1,6 @@
 module.exports = function(app) {
 
-app.service('AuthService', ['$q', '$http', '$state', function AuthService($q, $http, $state) {
+app.service('AuthService', function AuthService($q, $http) {
     localStorage.setItem('userAuthorized', null);
     var deferred = $q.defer();
 
@@ -9,7 +9,7 @@ app.service('AuthService', ['$q', '$http', '$state', function AuthService($q, $h
             return JSON.parse(localStorage.getItem('userAuthorized'));
         },
         exists: function () {
-            return JSON.parse(localStorage.getItem('userAuthorized')) != null;
+            return JSON.parse(localStorage.getItem('userAuthorized')) !== null;
         },
         login: function (userData) {
             $http.post('/api/login', userData,
@@ -35,9 +35,9 @@ app.service('AuthService', ['$q', '$http', '$state', function AuthService($q, $h
         },
         userRole: function () {
             if (this.exists()) {
-                let id = JSON.parse(localStorage.getItem('userAuthorized')).data;
+                let id = JSON.parse(localStorage.getItem('userAuthorized'));
                 let user = '';
-                $http.get('/api/users/' + id).then(function (res) {
+                return $http.get('/api/users/' + id).then(function (res) {
                     user = res.data;
                     return user.userRole;
                 });
@@ -46,7 +46,7 @@ app.service('AuthService', ['$q', '$http', '$state', function AuthService($q, $h
             }
         }
     }
-}])
+})
 
 
 };
