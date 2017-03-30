@@ -4,6 +4,7 @@ var Lecture = require("../models/Lecture").Lecture;
 var Feedback = require("../models/Feedback").Feedback;
 var User = require('../models/User').User;
 var RecentTasks = require("../models/RecentTasks").RecentTasks;
+var Project = require("../models/Project").Project;
 var AuthError = require('../models/User').AuthError;
 var HttpError = require('../error/index').HttpError;
 var async = require('async');
@@ -78,7 +79,7 @@ router.route('/logout')
 router.route('/users')
     .get(function(req, res, next) {
         // res.send('respond with a resource');
-        var query = User.find({ 'userRole': 'user' });
+        var query = User.find({ 'userRole': 'student' });
         query.exec ( function(err, students) {
             if (err) throw err;
             res.json(students);
@@ -92,7 +93,7 @@ router.route('/users')
         student.firstName = req.body.firstName;
         student.lastName = req.body.lastName;
         student.email = req.body.email;
-        student.userRole = 'user';
+        student.userRole = 'student';
 
         student.save(function(err) {
             if (err)
@@ -130,7 +131,7 @@ router.route('/users/:id')
             student.username = req.body.username;
             student.password = req.body.password;
             student.active = req.body.active;
-            student.userRole = 'user';
+            student.userRole = 'student';
 
 
             student.save(function(err) {
@@ -491,6 +492,24 @@ router.route('/tasks/:id')
       res.json({
         message: 'Successfully deleted'
       });
+    });
+  });
+
+router.route('/project/team')
+  .get(function(req, res, next) {
+    Project.find({}, function(err, team) {
+      if (err) throw err;
+      console.log(res);
+      res.json(team);
+    });
+  });
+
+router.route('/project/team/:id')
+  .get(function(req, res) {
+    Project.findById(req.params.id, function(err, team) {
+      if (err)
+        res.send(err);
+      res.json(team);
     });
   });
 

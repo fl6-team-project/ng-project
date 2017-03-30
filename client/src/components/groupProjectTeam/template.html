@@ -1,0 +1,12 @@
+<div class="center-align">
+  <h3>Team Lead</h3>
+  <div class="centerDiv">
+    <person-item person="$ctrl.lead"></person-item>
+  </div>
+</div>
+<div class="center-align">
+  <h3>Students</h3>
+  <div class="row">
+    <person-item ng-repeat="person in $ctrl.students" person="person"></person-item>
+  </div>
+</div>

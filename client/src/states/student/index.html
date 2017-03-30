@@ -3,8 +3,8 @@
         <li>
             <div class="userView center-align">
                 <div class="background"></div>
-                <a ui-sref="user"><img class="userLogo" src="https://robohash.org/nihilnesciuntdicta.png?size=300x300&set=set1"></a>
-                <p class="name">John Doe</p>
+                <a ui-sref="user"><img class="userLogo" ng-src="{{$ctrl.user.avatar}}"></a>
+                <p class="name">{{$ctrl.user.firstName}} {{$ctrl.user.lastName}}</p>
             </div>
         </li>
         <li>
@@ -26,6 +26,14 @@
         <li>
             <a ui-sref="student.project">
                 <i class="material-icons">work</i>Group project</a>
+        </li>
+        <li>
+            <a ng-click="$ctrl.logout()">
+                <i class="material-icons">power_settings_new</i>Log out</a>
+        </li>
+        <li>
+            <a ui-sref="student.edit">
+                <i class="material-icons">mode_edit</i>Edit profile</a>
         </li>
     </ul>
     <div class="containerContent">
