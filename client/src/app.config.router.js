@@ -4,6 +4,7 @@ const homeItemComponent = require('./states/student/home/component');
 const studentLecturesListComponent = require('./states/student/lecturesList/component');
 const studentComponent = require('./states/student/component');
 const projectComponent = require('./states/student/project/component');
+const editComponent = require('./states/student/edit/component');
 const adminComponent = require('./states/admin/component');
 const teacherComponent = require('./states/teacher/component');
 const editLectureComponent = require('./states/teacher/editLecture/component');
@@ -13,7 +14,6 @@ const registerComponent = require('./states/auth/register/registerComponent');
 
 
 module.exports = function(app) {
-  // We need to register component
 
   app.component('studentListComponent', studentListComponent);
   app.component('teacherListComponent', teacherListComponent);
@@ -27,6 +27,7 @@ module.exports = function(app) {
   app.component('teacherLectureListComponent', teacherLectureListComponent);
   app.component('loginComponent', loginComponent);
   app.component('registerComponent', registerComponent);
+  app.component('editComponent', editComponent);
 
     app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
         $stateProvider
@@ -70,6 +71,11 @@ module.exports = function(app) {
         .state('student.project', {
           url: '/project',
           component: 'projectComponent'
+        })
+
+        .state('student.edit', {
+            url: '/edit',
+            component: 'editComponent'
         })
 
         /* USER TEACHER STATE */

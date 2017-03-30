@@ -1,5 +1,5 @@
 
-function formTasksController($http, $element, $scope, sharedService, $rootScope) {
+function formTasksController($http, $element, $scope, sharedService) {
   let self = this;
 
   self.addTask = function() {
