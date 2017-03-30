@@ -34,25 +34,16 @@ module.exports = function(app) {
         /* AUTH STATES */
         .state('login', {
             url: '/',
-            component: 'loginComponent',
-            data: {
-                requireLogin: false
-            }
+            component: 'loginComponent'
         })
         .state('register', {
             url: '/register',
-            component: 'registerComponent',
-            data: {
-                requireLogin: false
-            }
+            component: 'registerComponent'
         })
         /* USER STUDENT STATE */
         .state('student', {
             url: '/student',
-            component: 'studentComponent',
-            data: {
-                requireLogin: false
-            }
+            component: 'studentComponent'
         })
         // now the controller and template included in component
         // and you should include here only component
@@ -90,10 +81,7 @@ module.exports = function(app) {
         /* USER TEACHER STATE */
         .state('teacher', {
             url: '/teacher',
-            component: 'teacherComponent',
-            data: {
-                requireLogin: false
-            }
+            component: 'teacherComponent'
         })
 
         .state('teacher.editLecture', {
@@ -112,10 +100,7 @@ module.exports = function(app) {
         /* USER ADMIN STATE */
         .state('admin', {
             url: '/admin',
-            component: 'adminComponent',
-            data: {
-                requireLogin: false
-            }
+            component: 'adminComponent'
         });
 
     $urlRouterProvider.otherwise('/');

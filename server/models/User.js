@@ -61,7 +61,7 @@ var UserSchema = new mongoose.Schema({
     },
     userRole: {
         type: String,
-        default: 'user',
+        default: 'student',
         index: true
     },
     lectures: {

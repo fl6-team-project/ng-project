@@ -79,7 +79,7 @@ router.route('/logout')
 router.route('/users')
     .get(function(req, res, next) {
         // res.send('respond with a resource');
-        var query = User.find({ 'userRole': 'user' });
+        var query = User.find({ 'userRole': 'student' });
         query.exec ( function(err, students) {
             if (err) throw err;
             res.json(students);
@@ -93,7 +93,7 @@ router.route('/users')
         student.firstName = req.body.firstName;
         student.lastName = req.body.lastName;
         student.email = req.body.email;
-        student.userRole = 'user';
+        student.userRole = 'student';
 
         student.save(function(err) {
             if (err)
@@ -131,7 +131,7 @@ router.route('/users/:id')
             student.username = req.body.username;
             student.password = req.body.password;
             student.active = req.body.active;
-            student.userRole = 'user';
+            student.userRole = 'student';
 
 
             student.save(function(err) {

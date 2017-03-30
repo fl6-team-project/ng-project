@@ -1,12 +1,17 @@
-function StudentController($http) {
-  let self = this;
-  let id = '58da511b462e204c9caafdb8';
-  let url = '/api/users/' + id;
-  $http.get(url).then(function(res) {
-      self.user = res.data;
-      console.log(self.user);
-  });
+function StudentController($http, $state, AuthService) {
+    let self = this;
+    self.userInfo = AuthService.getUser().data;
+    let id = self.userInfo.id;
+    let url = '/api/users/' + id;
+    $http.get(url).then(function(res) {
+        self.user = res.data;
+    });
+    self.logout = function() {
+        AuthService.logout();
+        $state.go('login');
+
+    };
 }
 
-StudentController.$inject = ['$http'];
+StudentController.$inject = ['$http', '$state', 'AuthService'];
 module.exports = StudentController;
