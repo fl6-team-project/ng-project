@@ -8,6 +8,18 @@
             <a ui-sref="admin.addUser">
                 <i class="material-icons">add</i>Add user</a>
         </li>
+        <li>
+        <a ui-sref="admin.users">
+            <i class="material-icons">toc</i>Users List</a>
+    </li>
+        <li>
+            <a ng-click="$ctrl.logout()">
+                <i class="material-icons">power_settings_new</i>Log out</a>
+        </li>
+        <!--<li>-->
+            <!--<a ui-sref="admin.edit">-->
+                <!--<i class="material-icons">mode_edit</i>Edit profile</a>-->
+        <!--</li>-->
     </ul>
     <div class="containerContent">
         <div ui-view></div>

@@ -1,13 +1,16 @@
 function lectureCardItemController($http, $element, AuthService) {
     let self = this;
     self.$element = $element;
-    self.role = AuthService.getUser().data.role;
+    let id = AuthService.getUser();
+    let url = '/api/users/' + id;
+    $http.get(url).then(function (res) {
+        self.role = res.data.userRole;
+    });
 
     $http.get('/api/lectures/last').then(function (res) {
         self.lectures = res.data;
     });
 
-    console.log(AuthService.getUser().data);
 
     jQuery(self.$element[0].querySelector('ul.tabs')).tabs();
 }

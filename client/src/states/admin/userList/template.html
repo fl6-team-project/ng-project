@@ -1,0 +1,17 @@
+<div class="headerTop">
+  <h1>USERS LIST</h1>
+</div>
+
+<div class="row" style="display: block; padding-bottom: 60px;">
+    <div class="input-field col s6">
+        <label>Filter users by role
+            <select ng-model="roleFilter" ng-options="l as l for l in ctrl.userRoles" style="display:block">
+                <option value="">all</option>
+            </select>
+        </label>
+    </div>
+</div>
+
+
+<person-item  ng-repeat="person in ctrl.persons | filter: (!!roleFilter || undefined) && {userRole: roleFilter}" person="person"></person-item>
+

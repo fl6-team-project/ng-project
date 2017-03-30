@@ -74,6 +74,16 @@ router.route('/logout')
         req.session.destroy();
         res.redirect('/');
     });
+//All users API for admin:
+router.route('/users/all')
+    .get(function(req, res, next) {
+        // res.send('respond with a resource');
+        var query = User.find({});
+        query.exec ( function(err, users) {
+            if (err) throw err;
+            res.json(users);
+        });
+    });
 
 //Students REST api
 router.route('/users')
