@@ -19,7 +19,7 @@ app.service('AuthService', ['$q', '$http', '$state', function AuthService($q, $h
                 }
             ).then(function (user) {
                 if (user) {
-                    localStorage.setItem('userAuthorized', JSON.stringify(user));
+                    localStorage.setItem('userAuthorized', JSON.stringify(user.data.id));
                     deferred.resolve(user);
                 } else {
                     deferred.reject('Wrong username or password');
@@ -34,7 +34,16 @@ app.service('AuthService', ['$q', '$http', '$state', function AuthService($q, $h
             $http.post('/api/logout');
         },
         userRole: function () {
-            return this.exists() ? JSON.parse(localStorage.getItem('userAuthorized')).role : 'guest';
+            if (this.exists()) {
+                let id = JSON.parse(localStorage.getItem('userAuthorized')).data;
+                let user = '';
+                $http.get('/api/users/' + id).then(function (res) {
+                    user = res.data;
+                    return user.userRole;
+                });
+            } else {
+                return 'guest';
+            }
         }
     }
 }])
