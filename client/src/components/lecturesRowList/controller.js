@@ -14,7 +14,6 @@ function LecturesRowListController($http, $state, $timeout) {
     });
 
     self.runEdit = function (lecture) {
-        console.log(lecture);
         $state.go('teacher.editLecture', {lecture: lecture });
     };
 }

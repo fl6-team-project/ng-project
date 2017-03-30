@@ -2,7 +2,8 @@ const LectureDataInputController = require ('./controller.js');
 
 const lectureDataInputComponent = {
     bindings: {
-        lecture: '=?'
+        lecture: '=?',
+        actionmethod: '=?'
     },
     controller: LectureDataInputController,
     template: require ('./template.html')

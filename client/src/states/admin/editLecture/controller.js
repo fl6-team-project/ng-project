@@ -1,7 +1,7 @@
 function EditLectureController($stateParams) {
     self = this;
     self.lecture = $stateParams.lecture;
-    self.actionMethod = 'edit';
+    self.lecture = 'edit';
 }
 EditLectureController.$inject = ['$stateParams'];
 
