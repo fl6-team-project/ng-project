@@ -1,6 +1,6 @@
 module.exports = function(app) {
 
-app.service('AuthService', function AuthService($q, $http) {
+app.service('AuthService', ['$q', '$http', '$state', function AuthService($q, $http, $state) {
     var authorized = null;
     var deferred = $q.defer();
     return {
@@ -31,12 +31,14 @@ app.service('AuthService', function AuthService($q, $http) {
         logout: function () {
             authorized = null;
             $http.post('/api/logout');
+            $state.go('/');
+
         },
         userRole: function () {
             return this.exists() ? authorized.role : 'guest';
         }
     }
-})
+}])
 
 
 };
