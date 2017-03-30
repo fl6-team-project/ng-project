@@ -14,6 +14,7 @@ const registerComponent = require('./states/auth/register/registerComponent');
 const adminEditLectureComponent = require('./states/admin/editLecture/component');
 const addLectureComponent = require('./states/admin/addLecture/component');
 const addUserComponent = require('./states/admin/addUser/component');
+const userListComponent = require('./states/admin/userList/component');
 
 
 module.exports = function(app) {
@@ -34,6 +35,7 @@ module.exports = function(app) {
   app.component('adminEditLectureComponent', adminEditLectureComponent);
   app.component('addUserComponent', addUserComponent);
   app.component('editComponent', editComponent);
+  app.component('userListComponent', userListComponent);
 
     app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
         $stateProvider
@@ -106,10 +108,7 @@ module.exports = function(app) {
         /* USER ADMIN STATE */
         .state('admin', {
             url: '/admin',
-            component: 'adminComponent',
-            data: {
-                requireLogin: false
-            }
+            component: 'adminComponent'
         })
 
         .state('admin.editLecture', {
@@ -126,6 +125,11 @@ module.exports = function(app) {
             params: {
                 lecture: null
             }
+        })
+
+        .state('admin.users', {
+            url: 'users-list',
+            component: 'userListComponent'
         })
 
         .state('admin.addUser', {
