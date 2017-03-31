@@ -2,4 +2,10 @@
     <h1>TEACHERS LIST</h1>
 </div>
 
-<person-item  ng-repeat="person in $ctrl.persons" person="person"></person-item>
+<div>
+    <label> <h2>Search students:</h2>
+        <input type="text" ng-model="teacherFilter" placeholder="Enter teacher's name or e-mail here...">
+    </label>
+</div>
+
+<person-item  ng-repeat="person in $ctrl.persons | filter: {$: teacherFilter}" person="person"></person-item>

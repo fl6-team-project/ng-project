@@ -1,5 +1,11 @@
+<div>
+    <label> <h2>Search lectures:</h2>
+        <input type="text" ng-model="lectureFilter" placeholder="Enter lecture title here...">
+    </label>
+</div>
+
 <ul class="collapsible lectureList" data-collapsible="accordion">
-    <li ng-repeat="lecture in $ctrl.lectures">
+    <li ng-repeat="lecture in $ctrl.lectures | filter: {name: lectureFilter}">
         <div class="collapsible-header">
             <div class="row">
                 <div class="col s12 m5">
@@ -39,8 +45,9 @@
                             {{lecture.homeworkDeadline | date: "yyyy-MM-dd"}}</p>
                     </div>
                     <div class="center-align">
-                        <a class="waves-effect waves-light btn" href="#feedbackLecture">Leave feedback</a>
-                        <a class="waves-effect waves-light btn" href="#homeworkFeedback">Check HW feedback</a>
+                        <!-- popups are not working right now in this version-->
+                        <button class="waves-effect waves-light btn" ng-click="$ctrl.openPopUpClick($ctrl.lecture._id)">Leave feedback</button>
+                        <button class="waves-effect waves-light btn" href="#homeworkFeedback">Check HW feedback</button>
                     </div>
                 </div>
             </div>
