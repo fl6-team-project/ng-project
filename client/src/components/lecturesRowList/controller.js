@@ -1,7 +1,13 @@
 require('./style.scss');
 
-function LecturesRowListController($http, $state, $timeout) {
+function LecturesRowListController($http, $state, $timeout, AuthService) {
     let self = this;
+
+    self.role = '';
+
+    AuthService.userRole().then(function (userRole) {
+        self.role = userRole;
+    });
 
     $http.get('/api/lectures').then(function(res) {
         self.lectures = res.data;
@@ -14,11 +20,11 @@ function LecturesRowListController($http, $state, $timeout) {
     });
 
     self.runEdit = function (lecture) {
-        $state.go('teacher.editLecture', {lecture: lecture });
+        $state.go(self.role + '.editLecture', {lecture: lecture });
     };
 }
 
 
-LecturesRowListController.$inject = ['$http', '$state', '$timeout'];
+LecturesRowListController.$inject = ['$http', '$state', '$timeout', 'AuthService'];
 
 module.exports = LecturesRowListController;

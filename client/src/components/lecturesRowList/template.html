@@ -10,8 +10,8 @@
                     <h2>{{lecture.name}}</h2>
                 </div>
                 <div class="col s12 m7 right-align lecturelinks">
-                    <!--@todo hide the edit for students-->
-                    <i class="material-icons" ng-click="$ctrl.runEdit(lecture)">mode_edit</i>
+                    <i class="material-icons" ng-if="$ctrl.role === 'admin' || $ctrl.role === 'teacher'"
+                       ng-click="$ctrl.runEdit(lecture)">mode_edit</i>
                     <a href="{{lecture.contentLecture}}">Link To Presentation</a>
                     <a href="{{lecture.contentPractice}}">Link To Practice</a>
                     <a href="{{lecture.contentHomework}}">Link To Homework</a>
