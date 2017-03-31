@@ -46,7 +46,7 @@
               <i class="material-icons circle">folder</i>
               <span class="title">{{course.name}}</span>
               <p><b>Start from:</b> {{course.startFrom}}</p>
-              <button class="secondary-content buttonCollection"><i class="material-icons red-text">delete</i></button>
+              <button class="secondary-content buttonCollection" ng-click="$ctrl.deleteCourse(course._id)"><i class="material-icons red-text">delete</i></button>
             </li>
           </ul>
         </span>

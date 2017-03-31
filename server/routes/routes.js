@@ -602,7 +602,7 @@ router.route('/project/team/:id')
   .delete(function(req, res) {
     Project.remove({
       _id: req.params.id
-    }, function(err, user) {
+    }, function(err, project) {
       if (err)
         res.send(err);
 
@@ -643,6 +643,18 @@ router.route('/courses/:id')
       if (err)
         res.send(err);
       res.json(team);
+    });
+  })
+  .delete(function(req, res) {
+    Course.remove({
+      _id: req.params.id
+    }, function(err, course) {
+      if (err)
+        res.send(err);
+
+      res.json({
+        message: 'Successfully deleted'
+      });
     });
   });
 
