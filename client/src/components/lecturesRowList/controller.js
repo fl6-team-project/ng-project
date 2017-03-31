@@ -1,6 +1,6 @@
 require('./style.scss');
 
-function LecturesRowListController($http, $state, $timeout, AuthService) {
+function LecturesRowListController($http, $state, $timeout, AuthService, popUpService) {
     let self = this;
 
     self.role = '';
@@ -10,7 +10,9 @@ function LecturesRowListController($http, $state, $timeout, AuthService) {
     });
 
     $http.get('/api/lectures').then(function(res) {
-        self.lectures = res.data;
+        self.lectures = res.data.sort(function (a, b) {
+            return new Date(a.lectureScheduledDate).getTime() - new Date(b.lectureScheduledDate).getTime();
+        });
     });
 
     $timeout(function () {
@@ -33,9 +35,12 @@ function LecturesRowListController($http, $state, $timeout, AuthService) {
         });
 
     };
+    self.openPopUpClick = function(id){
+        popUpService.openPopUpClick(id);
+    }
 }
 
 
-LecturesRowListController.$inject = ['$http', '$state', '$timeout', 'AuthService'];
+LecturesRowListController.$inject = ['$http', '$state', '$timeout', 'AuthService', 'popUpService'];
 
 module.exports = LecturesRowListController;
