@@ -12,6 +12,13 @@
     </div>
 </div>
 
+<div>
+    <label> <h2>Search users:</h2>
+        <input type="text" ng-model="userFilter" placeholder="Enter user's name or e-mail here...">
+    </label>
+</div>
 
-<person-item  ng-repeat="person in ctrl.persons | filter: (!!roleFilter || undefined) && {userRole: roleFilter}" person="person"></person-item>
+
+<person-item  ng-repeat="person in ctrl.persons | filter: (!!roleFilter || undefined) && {userRole: roleFilter} |
+filter: {$: userFilter} " person="person"></person-item>
 
