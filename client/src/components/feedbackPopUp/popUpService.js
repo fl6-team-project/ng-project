@@ -3,9 +3,8 @@ function popUpService($rootScope) {
   let self = this;
 
   popUpService.openPopUpClick = function(id){
-    let idLecture = '#fb'+id;
-    jQuery(idLecture).modal();
-    jQuery(idLecture).modal('open');
+    jQuery(id).modal();
+    jQuery(id).modal('open');
   }
   return popUpService;
 }

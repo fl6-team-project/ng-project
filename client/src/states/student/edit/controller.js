@@ -1,6 +1,6 @@
 require("./style.scss");
 
-function EditController($http, $element, $scope, Upload, $timeout) {
+function EditController($http, $element, $scope, $timeout) {
   let self = this;
   self.$element = $element;
   self.editMess = {
@@ -8,11 +8,6 @@ function EditController($http, $element, $scope, Upload, $timeout) {
     'message': "Sorry, smth wrong. Let/'s try later!",
     "btn": "Ok"
   };
-  // let scope = $rootScope.$new();
-  // scope.$on('setData', function(event, data) {
-  //   self.user = data;
-  // });
-
 
   let id = '58da511b462e204c9caafdb8';
   let url = '/api/users/' + id;
@@ -21,6 +16,7 @@ function EditController($http, $element, $scope, Upload, $timeout) {
   });
 
   self.editProfile = function() {
+    console.log("save");
     let url = '/api/users/' + self.user._id;
     let data = self.user;
     console.log(data);
@@ -43,33 +39,7 @@ function EditController($http, $element, $scope, Upload, $timeout) {
       });
   }
 
-  $scope.uploadPic = function(file) {
-    file.upload = Upload.upload({
-      // url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-      url: '/api/edit/upload',
-      headers: {
-        'Content-Type': file.type
-      },
-      data: {
-        username: $scope.username,
-        file: file
-      },
-    });
-
-    file.upload.then(function(response) {
-      $timeout(function() {
-        file.result = response.data;
-      });
-    }, function(response) {
-      if (response.status > 0)
-        $scope.errorMsg = response.status + ': ' + response.data;
-    }, function(evt) {
-      // Math.min is to fix IE which reports 200% sometimes
-      file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-    });
-  }
-
 }
 
-EditController.$inject = ['$http', '$element', '$scope', 'Upload', '$timeout'];
+EditController.$inject = ['$http', '$element', '$scope', '$timeout'];
 module.exports = EditController;

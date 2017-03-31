@@ -47,10 +47,12 @@
                     <div class="center-align">
                         <!-- popups are not working right now in this version-->
                         <button class="waves-effect waves-light btn blueBtn" ng-click="$ctrl.openPopUpClick(lecture._id)">Leave feedback</button>
-                        <button class="waves-effect waves-light btn blueBtn" href="#homeworkFeedback">Check HW feedback</button>
+                        <button class="waves-effect waves-light btn blueBtn" ng-click="$ctrl.openCheckHWPopUp(lecture._id)">Check HW feedback</button>
                     </div>
                 </div>
             </div>
         </div>
+        <feedback-pop-up lecture="lecture" serv="$ctrl.serv"></feedback-pop-up>
+        <feedback-pop-up lecture="lecture" serv="$ctrl.serv"></feedback-pop-up>
     </li>
 </ul>
