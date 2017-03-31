@@ -52,8 +52,9 @@
         <p>{{$ctrl.lecture.homeworkDeadline | date: "yyyy-MM-dd"}}</p>
       </div>
       <button class="waves-effect waves-light btn blueBtn" ng-click="$ctrl.openPopUpClick($ctrl.lecture._id)">Leave feedback</button>
-      <button class="waves-effect waves-light btn blueBtn" href="#homeworkFeedback">Check HW feedback</button>
+      <button class="waves-effect waves-light btn blueBtn" ng-click="$ctrl.openCheckHWPopUp($ctrl.lecture._id)">Check HW feedback</button>
     </div>
   </div>
-  <feedback-pop-up lecture="$ctrl.lecture"></feedback-pop-up>
+  <feedback-pop-up lecture="$ctrl.lecture" serv="$ctrl.serv"></feedback-pop-up>
+  <feedback-pop-up lecture="$ctrl.lecture" serv="$ctrl.serv"></feedback-pop-up>
 </div>
