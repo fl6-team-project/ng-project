@@ -4,7 +4,8 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
 
   self.$element = $element;
   jQuery(self.$element[0].querySelector('ul.tabs')).tabs();
-
+  self.create = true;
+  // adminProjServ.courseId = self.course._id;
   let getStudents = function(){
     let url = '/api/course/students/' + self.course._id;
 
@@ -16,6 +17,7 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
   let getProjects = function(){
     $http.get('/api/course/projects').then(function(res) {
         self.projects = res.data;
+        console.log(self.projects);
     });
   }
 

@@ -2,7 +2,8 @@ const adminProjectFormController = require("./controller.js");
 
 const adminProjectFormComponent = {
   bindings: {
-    projectitem: '='
+    projectitem: '=',
+    create: '='
   },
   template: require('./template.html'),
   controller: adminProjectFormController

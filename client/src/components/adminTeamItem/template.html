@@ -1,4 +1,4 @@
-<div class="row teamItem">
+<div class="row teamItem" ng-hide="$ctrl.teamForm">
   <div class="col s12 m4 center-align">
     <h3>Lead</h3>
     <input type="text" ng-hide="true" ng-model="$ctrl.project.lead">
@@ -26,7 +26,7 @@
       </a>
       <ul>
         <li>
-          <button class="btn-floating green" ng-click="editTeam($ctrl.project._id)">
+          <button class="btn-floating green" ng-click="$ctrl.editTeam($ctrl.project._id)">
             <i class="material-icons">mode_edit</i>
           </button>
         </li>
@@ -46,4 +46,4 @@
     </div>
   </div>
 </div>
-<admin-project-form projectitem="$ctrl.project"></admin-project-form>
+<admin-project-form projectitem="$ctrl.project" ng-show="$ctrl.teamForm" create="$ctrl.create"></admin-project-form>

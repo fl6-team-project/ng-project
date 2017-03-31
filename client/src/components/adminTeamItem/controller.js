@@ -2,6 +2,8 @@ function adminTeamItemController($http, $rootScope, $scope, $element, adminProjS
   let scope = $rootScope.$new();
   let self = this;
   self.studentsInfo = [];
+  self.teamForm = false;
+  self.create = false;
   self.getLeadData = function(id){
     let url = '/api/teachers/' + id;
     $http.get(url).then(function(res) {
@@ -18,8 +20,8 @@ function adminTeamItemController($http, $rootScope, $scope, $element, adminProjS
     }
   };
 
-  let editTeam = function(id){
-
+  self.editTeam = function(id){
+    self.teamForm = true;
   }
 
   self.deleteTeam = function(id){

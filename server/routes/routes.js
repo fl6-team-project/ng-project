@@ -524,7 +524,27 @@ router.route('/course/projects')
         res.send(err);
       res.json(projects);
     });
-  });
+  })
+  .post(function(req, res, next) {
+
+    var projects = new Project();
+    project.lead = req.body.lead;
+    project.students = req.body.students;
+    project.name = req.body.name;
+    project.description = req.body.description;
+    project.technologies = req.body.technologies;
+    project.courseId = req.body.courseId;
+
+    projects.save(function(err) {
+      if (err)
+        res.send(err);
+
+      res.json({
+        message: 'Project created!'
+      });
+    });
+
+  });;
 
 router.route('/project/team/:id')
   .get(function(req, res) {
@@ -541,7 +561,7 @@ router.route('/project/team/:id')
 
       project.lead = req.body.lead;
       project.students = req.body.students;
-      project.name = req.body.students;
+      project.name = req.body.name;
       project.description = req.body.description;
       project.technologies = req.body.technologies;
       project.courseId = req.body.courseId;

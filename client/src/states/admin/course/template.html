@@ -26,6 +26,7 @@
           </div>
         </div>
         <div id="teams" class="col s12">
+          <admin-project-form projectitem="$ctrl.project" create="$ctrl.create"></admin-project-form>
           <admin-team-item ng-repeat="project in $ctrl.projects track by $index" project="project"></admin-team-item>
         </div>
       </div>
