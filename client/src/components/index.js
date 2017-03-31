@@ -5,17 +5,17 @@ let personsItemComponent = require("./personItem/component"),
     feedbackPopUpComponent = require("./feedbackPopUp/component"),
     popUpService = require("./feedbackPopUp/popUpService"),
     adminProjServ = require("./adminTeamItem/adminProjServ"),
-    groupProjectTeamComponent = require("./groupProjectTeam/component"),
-    groupProjectInfoComponent = require("./groupProjectInfo/component"),
-    lectureRowItemComponent = require("./lectureRowItem/component"),
-    lectureDataInputComponent = require("./lectureDataInput/component"),
     adminTeamItemComponent = require("./adminTeamItem/component"),
     adminProjectFormComponent = require("./adminProjectForm/component"),
     popUpInfoComponent = require("./popUpInfo/component");
+    lecturesRowListComponent = require("./lecturesRowList/component");
+    groupProjectTeamComponent = require("./groupProjectTeam/component"),
+    groupProjectInfoComponent = require("./groupProjectInfo/component"),
+    lectureDataInputComponent = require("./lectureDataInput/component");
 
 module.exports = function(app) {
 
-  app.component('lectureRowItem', lectureRowItemComponent);
+  app.component('lecturesRowList', lecturesRowListComponent);
   app.component('lectureCardItem', lectureItemComponent);
   app.component('personItem', personsItemComponent);
   app.component('personSmallItem', personsSmallItemComponent);

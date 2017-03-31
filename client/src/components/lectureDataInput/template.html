@@ -19,7 +19,7 @@
                 <i class="material-icons prefix">event</i>
                 <input id="date" type="date" class="validate"
                        ng-model="$ctrl.lecture.lectureScheduledDate">
-                <label class="active" for="time">Lecture date</label>
+                <label class="active" for="date">Lecture date</label>
             </div>
             <div class="input-field col s4">
                 <i class="material-icons prefix">alarm</i>
@@ -38,7 +38,7 @@
             <div class="input-field col s4">
                 <i class="material-icons prefix">person</i>
                 <input id="teacher" type="text" class="validate"
-                       ng-model="$ctrl.lecture.lectorId">
+                       ng-model="$ctrl.lecture.lectorName">
                 <label for="teacher">Teacher name</label>
             </div>
             <div class="input-field col s8">
@@ -73,8 +73,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s12">
-                <button ng-click="$ctrl.saveEditing($ctrl.lecture._id, $ctrl.lecture)">save</button>
+            <div class="input-field col s12 center-align">
+                <button class="btn waves-effect waves-light btn-large" ng-if="$ctrl.actionmethod === 'add'" ng-click="$ctrl.addLecture($ctrl.lecture)">add</button>
+                <button class="btn waves-effect waves-light btn-large" ng-if="$ctrl.actionmethod === 'edit'" ng-click="$ctrl.saveEditing($ctrl.lecture._id, $ctrl.lecture)">save</button>
             </div>
         </div>
     </form>

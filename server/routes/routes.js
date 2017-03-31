@@ -76,6 +76,17 @@ router.route('/logout')
     res.redirect('/');
   });
 
+//All users API for admin:
+router.route('/users/all')
+  .get(function(req, res, next) {
+    // res.send('respond with a resource');
+    var query = User.find({});
+    query.exec(function(err, users) {
+      if (err) throw err;
+      res.json(users);
+    });
+  });
+
 //Students REST api
 router.route('/users')
   .get(function(req, res, next) {
@@ -88,27 +99,25 @@ router.route('/users')
       res.json(students);
     });
   })
-  .post(function(req, res, next) {
+  .post(function(req, res) {
 
-    var student = new User();
-    student.username = req.body.username;
-    student.password = 'temporary_password';
-    student.firstName = req.body.firstName;
-    student.lastName = req.body.lastName;
-    student.email = req.body.email;
-    student.userRole = 'user';
+    var user = new User();
+    user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
+    user.email = req.body.email;
+    user.password = 'test-password';
+    user.active = 'active';
+    user.userRole = req.body.userRole;
 
-    student.save(function(err) {
+    user.save(function(err) {
       if (err)
         res.send(err);
 
       res.json({
-        message: 'Student created!'
+        message: 'User created!'
       });
     });
-
   });
-
 router.route('/course/students/:course')
   .get(function(req, res, next) {
     // res.send('respond with a resource');
@@ -147,10 +156,9 @@ router.route('/users/:id')
       student.avatar = req.body.avatar;
       student.aboutMe = req.body.aboutMe;
       student.username = req.body.username;
-      // student.password = req.body.password;
+      student.password = req.body.password;
       student.active = req.body.active;
-      student.userRole = 'user';
-
+      student.userRole = 'student';
 
       student.save(function(err) {
         if (err)
@@ -181,84 +189,92 @@ router.route('/users/:id')
 
 //Teachers REST api
 router.route('/teachers')
-    .get(function(req, res, next) {
-        var query = User.find({ 'userRole': 'teacher' });
-
-        query.exec (function(err, teachers) {
-            if (err) throw err;
-            res.json(teachers);
-        });
-    })
-    .post(function(req, res) {
-
-        var teacher = new User();
-        teacher.username = req.body.username;
-        teacher.password = 'teacher_tmp';
-        teacher.firstName = req.body.firstName;
-        teacher.lastName = req.body.lastName;
-        teacher.email = req.body.email;
-        teacher.userRole = 'teacher';
-
-        teacher.save(function(err) {
-            if (err)
-                res.send(err);
-
-            res.json({ message: 'Teacher created!' });
-        });
-
+  .get(function(req, res, next) {
+    var query = User.find({
+      'userRole': 'teacher'
     });
+
+    query.exec(function(err, teachers) {
+      if (err) throw err;
+      res.json(teachers);
+    });
+  })
+  .post(function(req, res) {
+
+    var teacher = new User();
+    teacher.username = req.body.username;
+    teacher.password = 'teacher_tmp';
+    teacher.firstName = req.body.firstName;
+    teacher.lastName = req.body.lastName;
+    teacher.email = req.body.email;
+    teacher.userRole = 'teacher';
+
+    teacher.save(function(err) {
+      if (err)
+        res.send(err);
+
+      res.json({
+        message: 'Teacher created!'
+      });
+    });
+
+  });
 //Single teacher api
 router.route('/teachers/:id')
-    .get(function(req, res, next) {
-        checkForId(req.params.id, next);
+  .get(function(req, res, next) {
+    checkForId(req.params.id, next);
 
-        User.findById(req.params.id, function(err, teacher) {
-            if (err)
-                res.send(err);
-            res.json(teacher);
-        });
-    })
-    .put(function(req, res, next) {
-        checkForId(req.params.id, next);
-
-        User.findById(req.params.id, function(err, teacher) {
-            if (err)
-                res.send(err);
-
-            teacher.username = req.body.username;
-            teacher.password = req.body.password;
-            teacher.firstName = req.body.firstName;
-            teacher.lastName = req.body.lastName;
-            teacher.email = req.body.email;
-            teacher.gender = req.body.gender;
-            teacher.age = req.body.age;
-            teacher.avatar = req.body.avatar;
-            teacher.aboutMe = req.body.aboutMe;
-            teacher.lectures = req.body.lectures;
-            teacher.active = req.body.active;
-            teacher.userRole = 'teacher';
-
-            teacher.save(function(err) {
-                if (err)
-                    res.send(err);
-
-                res.json({ message: 'Teacher updated!' });
-            });
-
-        });
-    })
-    .delete(function(req, res, next) {
-        checkForId(req.params.id, next);
-
-        User.remove({
-            _id: req.params.id
-        }, function(err, teacher) {
-            if (err)
-                res.send(err);
-
-            res.json({ message: 'Successfully deleted' });
-        });
+    User.findById(req.params.id, function(err, teacher) {
+      if (err)
+        res.send(err);
+      res.json(teacher);
     });
+  })
+  .put(function(req, res, next) {
+    checkForId(req.params.id, next);
+
+    User.findById(req.params.id, function(err, teacher) {
+      if (err)
+        res.send(err);
+
+      teacher.username = req.body.username;
+      teacher.password = req.body.password;
+      teacher.firstName = req.body.firstName;
+      teacher.lastName = req.body.lastName;
+      teacher.email = req.body.email;
+      teacher.gender = req.body.gender;
+      teacher.age = req.body.age;
+      teacher.avatar = req.body.avatar;
+      teacher.aboutMe = req.body.aboutMe;
+      teacher.lectures = req.body.lectures;
+      teacher.active = req.body.active;
+      teacher.userRole = 'teacher';
+
+      teacher.save(function(err) {
+        if (err)
+          res.send(err);
+
+        res.json({
+          message: 'Teacher updated!'
+        });
+      });
+
+    });
+  })
+  .delete(function(req, res, next) {
+    checkForId(req.params.id, next);
+
+    User.remove({
+      _id: req.params.id
+    }, function(err, teacher) {
+      if (err)
+        res.send(err);
+
+      res.json({
+        message: 'Successfully deleted'
+      });
+    });
+  });
 
 //Lectures REST api
 router.route('/lectures')
@@ -271,11 +287,17 @@ router.route('/lectures')
   .post(function(req, res) {
 
     var lecture = new Lecture();
-    lecture.img = req.body.theme;
+    lecture.name = req.body.name;
+    lecture.img = req.body.img;
+    lecture.lectureScheduledDate = req.body.lectureScheduledDate;
+    lecture.lectureScheduledTime = req.body.lectureScheduledTime;
     lecture.lectorName = req.body.lectorName;
+    lecture.homeworkDeadline = req.body.homeworkDeadline;
+    lecture.assistants = req.body.assistants;
     lecture.contentLecture = req.body.contentLecture;
     lecture.contentPractice = req.body.contentPractice;
     lecture.contentHomework = req.body.contentHomework;
+    lecture.active = req.body.active;
 
     lecture.save(function(err) {
       if (err)

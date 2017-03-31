@@ -11,6 +11,10 @@ const editLectureComponent = require('./states/teacher/editLecture/component');
 const teacherLectureListComponent = require('./states/teacher/lecturesList/component');
 const loginComponent = require('./states/auth/login/loginComponent');
 const registerComponent = require('./states/auth/register/registerComponent');
+const adminEditLectureComponent = require('./states/admin/editLecture/component');
+const addLectureComponent = require('./states/admin/addLecture/component');
+const addUserComponent = require('./states/admin/addUser/component');
+const userListComponent = require('./states/admin/userList/component');
 
 const adminCourseComponent = require('./states/admin/course/component');
 
@@ -31,31 +35,26 @@ module.exports = function(app) {
   app.component('registerComponent', registerComponent);
   app.component('editProfileComponent', editProfileComponent);
   app.component('adminCourseComponent', adminCourseComponent);
+  app.component('addLectureComponent', addLectureComponent);
+  app.component('adminEditLectureComponent', adminEditLectureComponent);
+  app.component('addUserComponent', addUserComponent);
+  app.component('userListComponent', userListComponent);
 
     app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
         $stateProvider
         /* AUTH STATES */
         .state('login', {
             url: '/',
-            component: 'loginComponent',
-            data: {
-                requireLogin: false
-            }
+            component: 'loginComponent'
         })
         .state('register', {
             url: '/register',
-            component: 'registerComponent',
-            data: {
-                requireLogin: false
-            }
+            component: 'registerComponent'
         })
         /* USER STUDENT STATE */
         .state('student', {
             url: '/student',
-            component: 'studentComponent',
-            data: {
-                requireLogin: false
-            }
+            component: 'studentComponent'
         })
         // now the controller and template included in component
         // and you should include here only component
@@ -93,10 +92,7 @@ module.exports = function(app) {
         /* USER TEACHER STATE */
         .state('teacher', {
             url: '/teacher',
-            component: 'teacherComponent',
-            data: {
-                requireLogin: false
-            }
+            component: 'teacherComponent'
         })
 
         .state('teacher.editLecture', {
@@ -115,9 +111,14 @@ module.exports = function(app) {
         /* USER ADMIN STATE */
         .state('admin', {
             url: '/admin',
-            component: 'adminComponent',
-            data: {
-                requireLogin: false
+            component: 'adminComponent'
+        })
+
+        .state('admin.editLecture', {
+            url: '/edit-lecture',
+            component: 'editLectureComponent',
+            params: {
+                lecture: null
             }
         })
 
@@ -134,6 +135,24 @@ module.exports = function(app) {
         .state('admin.course', {
             url: '/course',
             component: 'adminCourseComponent'
+        })
+
+        .state('admin.addLecture', {
+            url: '/add-lecture',
+            component: 'addLectureComponent',
+            params: {
+                lecture: null
+            }
+        })
+
+        .state('admin.users', {
+            url: '/users-list',
+            component: 'userListComponent'
+        })
+
+        .state('admin.addUser', {
+            url: '/add-user',
+            component: 'addUserComponent',
         });
 
         // .state('admin.lectures', {

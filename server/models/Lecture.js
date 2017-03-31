@@ -1,10 +1,6 @@
 var mongoose = require("mongoose");
 
 var LectureSchema = new mongoose.Schema({
-    courseId: {
-        type: String,
-        index: true
-    },
     name: {
         type: String,
         index: true

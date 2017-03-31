@@ -16,27 +16,40 @@
             <i class="material-icons">business</i>Courses</a>
           <div class="collapsible-body">
             <ul>
-              <li ng-repeat="course in $ctrl.courses"><a ui-sref="admin.course" ng-click="$ctrl.sendCourseInfo(course)">{{course.name}}</a></li>
+              <li ng-repeat="course in $ctrl.courses">
+                <a ui-sref="admin.course" ng-click="$ctrl.sendCourseInfo(course)">{{course.name}}</a>
+              </li>
               <!-- <li><a ui-sref="admin.courses" ng-click="$ctrl.sendCourseInfo(course)">All Courses</a></li> -->
-              <li><a href="#">Add Course</a></li>
+              <li>
+                <a href="#">Add Course</a>
+              </li>
             </ul>
           </div>
         </li>
       </ul>
     </li>
     <li>
-      <a ui-sref="student.teachers">
-        <i class="material-icons">toc</i>List teachers</a>
+      <a ui-sref="admin.addUser">
+        <i class="material-icons">add</i>Add user</a>
     </li>
     <li>
-      <a ui-sref="student.students">
-        <i class="material-icons">toc</i>List students</a>
+      <a ui-sref="admin.users">
+        <i class="material-icons">toc</i>Users List</a>
     </li>
     <li>
-      <a ui-sref="student.lectures">
+      <a ui-sref="admin.lectures">
         <i class="material-icons">work</i>List lectures</a>
     </li>
+    <li>
+      <a ui-sref="admin.edit">
+        <i class="material-icons">mode_edit</i>Edit profile</a>
+    </li>
+    <li>
+      <a ng-click="$ctrl.logout()">
+        <i class="material-icons">power_settings_new</i>Log out</a>
+    </li>
   </ul>
+
   <div class="containerContent">
     <div ui-view></div>
   </div>

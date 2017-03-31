@@ -19,6 +19,14 @@ function LectureDataInputController($http, $state, $timeout) {
         });
     };
 
+    self.addLecture = function (object) {
+        $http.post('/api/lectures', object).then(function(res) {
+            //redirect to lecture list
+            //@todo automated redirection to user role
+            $state.go('admin.lectures');
+        });
+    };
+
 }
 
 

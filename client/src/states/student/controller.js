@@ -1,12 +1,22 @@
-function StudentController($http) {
-  let self = this;
-  let id = '58da511b462e204c9caafdb8';
-  let url = '/api/users/' + id;
-  $http.get(url).then(function(res) {
-      self.user = res.data;
-      // $rootScope.$broadcast('setData', self.user);
-  });
+function StudentController($http, $state, AuthService) {
+    let self = this;
+    if (AuthService.exists()) {
+        let id = AuthService.getUser();
+        let url = '/api/users/' + id;
+        $http.get(url).then(function (res) {
+            self.user = res.data;
+        });
+
+    } else {
+        $state.go('login');
+    }
+
+    self.logout = function () {
+        AuthService.logout();
+        $state.go('login');
+
+    };
 }
 
-StudentController.$inject = ['$http'];
+StudentController.$inject = ['$http', '$state', 'AuthService'];
 module.exports = StudentController;
