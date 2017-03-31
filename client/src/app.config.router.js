@@ -12,7 +12,7 @@ const teacherLectureListComponent = require('./states/teacher/lecturesList/compo
 const loginComponent = require('./states/auth/login/loginComponent');
 const registerComponent = require('./states/auth/register/registerComponent');
 
-const adminCoursesComponent = require('./states/admin/courses/component');
+const adminCourseComponent = require('./states/admin/course/component');
 
 
 module.exports = function(app) {
@@ -30,7 +30,7 @@ module.exports = function(app) {
   app.component('loginComponent', loginComponent);
   app.component('registerComponent', registerComponent);
   app.component('editProfileComponent', editProfileComponent);
-  app.component('adminCoursesComponent', adminCoursesComponent);
+  app.component('adminCourseComponent', adminCourseComponent);
 
     app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
         $stateProvider
@@ -129,6 +129,11 @@ module.exports = function(app) {
         .state('admin.courses', {
             url: '/courses',
             component: 'adminCoursesComponent'
+        })
+
+        .state('admin.course', {
+            url: '/course',
+            component: 'adminCourseComponent'
         });
 
         // .state('admin.lectures', {

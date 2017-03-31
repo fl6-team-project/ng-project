@@ -11,151 +11,172 @@ var HttpError = require('../error/index').HttpError;
 var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
 
-
-
 //Authentication API
 
 router.route('/login')
-    .post(function (req, res, next) {
-        var username = req.body.username;
-        var password = req.body.password;
-        User.authorize(username, password, function (err, user) {
-            if (err) {
-                if (err instanceof AuthError) {
-                    return next(new HttpError(403, err.message))
-                } else {
-                    return next(err);
-                }
-            } else {
-                if (!user || user === 'undefined') {
-                    return next()
-                } else {
-                    req.session.user = {};
-                    req.session.user.id = user._id;
-                    req.session.user.role = user.userRole;
-                    res.send(req.session.user);
-                }
-            }
-        });
+  .post(function(req, res, next) {
+    var username = req.body.username;
+    var password = req.body.password;
+    User.authorize(username, password, function(err, user) {
+      if (err) {
+        if (err instanceof AuthError) {
+          return next(new HttpError(403, err.message))
+        } else {
+          return next(err);
+        }
+      } else {
+        if (!user || user === 'undefined') {
+          return next()
+        } else {
+          req.session.user = {};
+          req.session.user.id = user._id;
+          req.session.user.role = user.userRole;
+          res.send(req.session.user);
+        }
+      }
     });
+  });
 
 
 router.route('/register')
-    .post(function (req, res, next) {
-        var username = req.body.username,
-            password = req.body.password,
-            firstName = req.body.firstName,
-            lastName = req.body.lastName,
-            email = req.body.email;
+  .post(function(req, res, next) {
+    var username = req.body.username,
+      password = req.body.password,
+      firstName = req.body.firstName,
+      lastName = req.body.lastName,
+      email = req.body.email;
 
-        User.findOne({username: username}, function (err, user) {
-            if (user) {
-                res.json(username);
-            } else {
-                var user = new User({
-                    username: username,
-                    password: password,
-                    firstName: firstName,
-                    lastName: lastName,
-                    email: email
-                });
-                user.save(function (err) {
-                    if (err) return next(err);
-                    req.session.user = {};
-                    req.session.user.id = user._id;
-                    req.session.user.role = user.userRole;
-                    res.send(req.session.user);
-                })
-            }
+    User.findOne({
+      username: username
+    }, function(err, user) {
+      if (user) {
+        res.json(username);
+      } else {
+        var user = new User({
+          username: username,
+          password: password,
+          firstName: firstName,
+          lastName: lastName,
+          email: email
+        });
+        user.save(function(err) {
+          if (err) return next(err);
+          req.session.user = {};
+          req.session.user.id = user._id;
+          req.session.user.role = user.userRole;
+          res.send(req.session.user);
         })
-    });
+      }
+    })
+  });
 
 router.route('/logout')
-    .post(function (req, res) {
-        req.session.destroy();
-        res.redirect('/');
-    });
+  .post(function(req, res) {
+    req.session.destroy();
+    res.redirect('/');
+  });
 
 //Students REST api
 router.route('/users')
-    .get(function(req, res, next) {
-        // res.send('respond with a resource');
-        var query = User.find({ 'userRole': 'user' });
-        query.exec ( function(err, students) {
-            if (err) throw err;
-            res.json(students);
-        });
-    })
-    .post(function(req, res, next) {
-
-        var student = new User();
-        student.username = req.body.username;
-        student.password = 'temporary_password';
-        student.firstName = req.body.firstName;
-        student.lastName = req.body.lastName;
-        student.email = req.body.email;
-        student.userRole = 'user';
-
-        student.save(function(err) {
-            if (err)
-                res.send(err);
-
-            res.json({ message: 'Student created!' });
-        });
-
+  .get(function(req, res, next) {
+    // res.send('respond with a resource');
+    var query = User.find({
+      'userRole': 'student'
     });
+    query.exec(function(err, students) {
+      if (err) throw err;
+      res.json(students);
+    });
+  })
+  .post(function(req, res, next) {
+
+    var student = new User();
+    student.username = req.body.username;
+    student.password = 'temporary_password';
+    student.firstName = req.body.firstName;
+    student.lastName = req.body.lastName;
+    student.email = req.body.email;
+    student.userRole = 'user';
+
+    student.save(function(err) {
+      if (err)
+        res.send(err);
+
+      res.json({
+        message: 'Student created!'
+      });
+    });
+
+  });
+
+router.route('/course/students/:course')
+  .get(function(req, res, next) {
+    // res.send('respond with a resource');
+    var query = User.find({
+      'userRole': 'student',
+      'courseId': req.params.course
+    });
+    query.exec(function(err, students) {
+      if (err) throw err;
+      res.json(students);
+    });
+  });
 //Single student api
 router.route('/users/:id')
-    .get(function(req, res, next) {
-        checkForId(req.params.id, next);
+  .get(function(req, res, next) {
+    checkForId(req.params.id, next);
 
-        User.findById(req.params.id, function(err, student) {
-            if (err)
-                res.send(err);
-            res.json(student);
-        });
-    })
-    .put(function(req, res) {
-        checkForId(req.params.id, next);
-
-        User.findById(req.params.id, function(err, student) {
-            if (err)
-                res.send(err);
-
-            student.firstName = req.body.firstName;
-            student.lastName = req.body.lastName;
-            student.email = req.body.email;
-            // student.gender = req.body.gender;
-            // student.age = req.body.age;
-            student.avatar = req.body.avatar;
-            // student.aboutMe = req.body.aboutMe;
-            student.username = req.body.username;
-            student.password = req.body.password;
-            // student.active = req.body.active;
-            student.userRole = 'user';
-
-
-            student.save(function(err) {
-                if (err)
-                    res.send(err);
-
-                res.json({ message: 'Student updated!' });
-            });
-
-        });
-    })
-    .delete(function(req, res, next) {
-        checkForId(req.params.id, next);
-
-        User.remove({
-            _id: req.params.id
-        }, function(err, student) {
-            if (err)
-                res.send(err);
-
-            res.json({ message: 'Successfully deleted' });
-        });
+    User.findById(req.params.id, function(err, student) {
+      if (err)
+        res.send(err);
+      res.json(student);
     });
+  })
+  .put(function(req, res) {
+    // checkForId(req.params.id, next);
+
+    User.findById(req.params.id, function(err, student) {
+      if (err)
+        res.send(err);
+
+      student.firstName = req.body.firstName;
+      student.lastName = req.body.lastName;
+      student.email = req.body.email;
+      student.gender = req.body.gender;
+      student.age = req.body.age;
+      student.avatar = req.body.avatar;
+      student.aboutMe = req.body.aboutMe;
+      student.username = req.body.username;
+      // student.password = req.body.password;
+      student.active = req.body.active;
+      student.userRole = 'user';
+
+
+      student.save(function(err) {
+        if (err)
+          res.send(err);
+
+        res.json({
+          message: 'Student updated!'
+        });
+      });
+
+    });
+  })
+  .delete(function(req, res, next) {
+    checkForId(req.params.id, next);
+
+    User.remove({
+      _id: req.params.id
+    }, function(err, student) {
+      if (err)
+        res.send(err);
+
+      res.json({
+        message: 'Successfully deleted'
+      });
+    });
+  });
 
 
 //Teachers REST api
@@ -241,29 +262,31 @@ router.route('/teachers/:id')
 
 //Lectures REST api
 router.route('/lectures')
-    .get(function(req, res, next) {
-        Lecture.find({}, function(err, lectures) {
-            if (err) throw err;
-            res.json(lectures);
-        });
-    })
-    .post(function(req, res) {
-
-        var lecture = new Lecture();
-        lecture.img = req.body.theme;
-        lecture.lectorName = req.body.lectorName;
-        lecture.contentLecture = req.body.contentLecture;
-        lecture.contentPractice = req.body.contentPractice;
-        lecture.contentHomework = req.body.contentHomework;
-
-        lecture.save(function(err) {
-            if (err)
-                res.send(err);
-
-            res.json({ message: 'Lecture created!' });
-        });
-
+  .get(function(req, res, next) {
+    Lecture.find({}, function(err, lectures) {
+      if (err) throw err;
+      res.json(lectures);
     });
+  })
+  .post(function(req, res) {
+
+    var lecture = new Lecture();
+    lecture.img = req.body.theme;
+    lecture.lectorName = req.body.lectorName;
+    lecture.contentLecture = req.body.contentLecture;
+    lecture.contentPractice = req.body.contentPractice;
+    lecture.contentHomework = req.body.contentHomework;
+
+    lecture.save(function(err) {
+      if (err)
+        res.send(err);
+
+      res.json({
+        message: 'Lecture created!'
+      });
+    });
+
+  });
 
 router.route('/lectures/last')
   .get(function(req, res, next) {
@@ -277,55 +300,59 @@ router.route('/lectures/last')
 
 //Single lecture api
 router.route('/lectures/:id')
-    .get(function(req, res, next) {
-        checkForId(req.params.id, next);
+  .get(function(req, res, next) {
+    checkForId(req.params.id, next);
 
-        Lecture.findById(req.params.id, function(err, lecture) {
-            if (err)
-                res.send(err);
-            res.json(lecture);
-        });
-    })
-    .put(function(req, res, next) {
-        checkForId(req.params.id, next);
-
-        Lecture.findById(req.params.id, function(err, lecture) {
-            if (err)
-                res.send(err);
-            lecture.courseId = req.body.courseId;
-            lecture.name = req.body.name;
-            lecture.img = req.body.img;
-            lecture.lectureScheduledDate = req.body.lectureScheduledDate;
-            lecture.lectureScheduledTime = req.body.lectureScheduledTime;
-            lecture.lectorName = req.body.lectorName;
-            lecture.homeworkDeadline = req.body.homeworkDeadline;
-            lecture.assistants = req.body.assistants;
-            lecture.contentLecture = req.body.contentLecture;
-            lecture.contentPractice = req.body.contentPractice;
-            lecture.contentHomework = req.body.contentHomework;
-            lecture.active = req.body.active;
-
-            lecture.save(function(err) {
-                if (err)
-                    res.send(err);
-
-                res.json({ message: 'Lecture updated!' });
-            });
-
-        });
-    })
-    .delete(function(req, res, next) {
-        checkForId(req.params.id, next);
-
-        Lecture.remove({
-            _id: req.params.id
-        }, function(err, lecture) {
-            if (err)
-                res.send(err);
-
-            res.json({ message: 'Successfully deleted' });
-        });
+    Lecture.findById(req.params.id, function(err, lecture) {
+      if (err)
+        res.send(err);
+      res.json(lecture);
     });
+  })
+  .put(function(req, res, next) {
+    checkForId(req.params.id, next);
+
+    Lecture.findById(req.params.id, function(err, lecture) {
+      if (err)
+        res.send(err);
+      lecture.courseId = req.body.courseId;
+      lecture.name = req.body.name;
+      lecture.img = req.body.img;
+      lecture.lectureScheduledDate = req.body.lectureScheduledDate;
+      lecture.lectureScheduledTime = req.body.lectureScheduledTime;
+      lecture.lectorName = req.body.lectorName;
+      lecture.homeworkDeadline = req.body.homeworkDeadline;
+      lecture.assistants = req.body.assistants;
+      lecture.contentLecture = req.body.contentLecture;
+      lecture.contentPractice = req.body.contentPractice;
+      lecture.contentHomework = req.body.contentHomework;
+      lecture.active = req.body.active;
+
+      lecture.save(function(err) {
+        if (err)
+          res.send(err);
+
+        res.json({
+          message: 'Lecture updated!'
+        });
+      });
+
+    });
+  })
+  .delete(function(req, res, next) {
+    checkForId(req.params.id, next);
+
+    Lecture.remove({
+      _id: req.params.id
+    }, function(err, lecture) {
+      if (err)
+        res.send(err);
+
+      res.json({
+        message: 'Successfully deleted'
+      });
+    });
+  });
 
 //Feedback REST api
 
@@ -338,26 +365,26 @@ router.route('/feedbacks')
     });
   })
 
-  .post(function(req, res) {
-    var feedback = new Feedback();
-    feedback.courseId = req.body.courseId;
-    feedback.studentId = req.body.studentId;
-    feedback.lectureId = req.body.lectureId;
-    feedback.date = new Date();
-    feedback.overal = req.body.overal;
-    feedback.whatWasGood = req.body.whatWasGood;
-    feedback.whatWasBad = req.body.whatWasBad;
+.post(function(req, res) {
+  var feedback = new Feedback();
+  feedback.courseId = req.body.courseId;
+  feedback.studentId = req.body.studentId;
+  feedback.lectureId = req.body.lectureId;
+  feedback.date = new Date();
+  feedback.overal = req.body.overal;
+  feedback.whatWasGood = req.body.whatWasGood;
+  feedback.whatWasBad = req.body.whatWasBad;
 
-    feedback.save(function(err) {
-      if (err)
-        res.send(err);
+  feedback.save(function(err) {
+    if (err)
+      res.send(err);
 
-      res.json({
-        message: 'Feedback created!'
-      });
+    res.json({
+      message: 'Feedback created!'
     });
-
   });
+
+});
 //Single feedback api
 router.route('/feedback/:id')
   .get(function(req, res) {
@@ -490,12 +517,12 @@ router.route('/tasks/:id')
     });
   });
 
-router.route('/project/team')
-  .get(function(req, res, next) {
-    Project.find({}, function(err, team) {
-      if (err) throw err;
-      console.log(res);
-      res.json(team);
+router.route('/course/projects')
+  .get(function(req, res) {
+    Project.find({}, function(err, projects) {
+      if (err)
+        res.send(err);
+      res.json(projects);
     });
   });
 
@@ -505,6 +532,41 @@ router.route('/project/team/:id')
       if (err)
         res.send(err);
       res.json(team);
+    });
+  })
+  .put(function(req, res) {
+    Project.findById(req.params.id, function(err, project) {
+      if (err)
+        res.send(err);
+
+      project.lead = req.body.lead;
+      project.students = req.body.students;
+      project.name = req.body.students;
+      project.description = req.body.description;
+      project.technologies = req.body.technologies;
+      project.courseId = req.body.courseId;
+
+      project.save(function(err) {
+        if (err)
+          res.send(err);
+
+        res.json({
+          message: 'project updated!'
+        });
+      });
+
+    });
+  })
+  .delete(function(req, res) {
+    Project.remove({
+      _id: req.params.id
+    }, function(err, user) {
+      if (err)
+        res.send(err);
+
+      res.json({
+        message: 'Successfully deleted'
+      });
     });
   });
 
@@ -517,15 +579,46 @@ router.route('/courses')
     });
   });
 
+router.route('/courses')
+  .get(function(req, res) {
+    Course.find({}, function(err, courses) {
+      if (err)
+        res.send(err);
+      res.json(courses);
+    });
+  });
+
+router.route('/courses/:id')
+  .get(function(req, res) {
+    Course.findById(req.params.id, function(err, team) {
+      if (err)
+        res.send(err);
+      res.json(team);
+    });
+  });
+
+router.route('/edit/upload')
+  .post(function(req, res) {
+    // console.log(req);
+    // console.log(res);
+    upload(req, res, function(err) {
+      if (err) {
+        return res.end("Error uploading file.");
+      }
+      res.end("File is uploaded");
+    });
+  });
+
+
 module.exports = router;
 
 // try-catch for ids inside requests
 function checkForId(id, next) {
 
-    try {
-        var newId = new ObjectID(id);
-    } catch (e) {
-        return next(404);
-    }
+  try {
+    var newId = new ObjectID(id);
+  } catch (e) {
+    return next(404);
+  }
 
 }

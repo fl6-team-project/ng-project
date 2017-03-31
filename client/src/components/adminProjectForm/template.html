@@ -1,0 +1,27 @@
+<div class="row">
+  <h3 class="center-align">Edit team:</h3>
+  <form ng-submit="$ctrl.saveTeam()">
+    {{$ctrl.data.model}}
+    <div class="input-field col s12 s12">
+
+      <select class="icons selectLead" ng-model="$ctrl.leads.model">
+        <option value="" disabled selected ng-if="$ctrl.leads.model">Choose students</option>
+        <option ng-repeat="option in $ctrl.leads.availableOptions" value="{{option._id}}" data-icon="{{option.avatar}}" class="circle">{{option.firstName}} {{option.lastName}}</option>
+      </select>
+
+      <label>Choose Lead for group</label>
+    </div>
+
+    <div class="input-field col s12">
+      <select multiple class="icons selectStudents" ng-model="$ctrl.stud.model">
+        <option value="" disabled selected ng-if="$ctrl.stud.model">Choose students</option>
+        <option ng-repeat="studone in $ctrl.stud.availableOptions" value="{{studone._id}}" data-icon="{{studone.avatar}}" class="circle">{{studone.firstName}} {{studone.lastName}}</option>
+      </select>
+      <label>Choose students for group</label>
+    </div>
+
+    <div class="center-align">
+      <button type="submit" class="waves-effect waves-light btn blueBtn">Save</button>
+    </div>
+  </form>
+</div>

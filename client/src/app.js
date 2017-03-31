@@ -13,12 +13,15 @@ const router = require('angular-ui-router');
 
 // importing configuration function
 const routerConfiguration = require('./app.config.router');
+const ngFileUpload = require('ng-file-upload');
 
 // Create new angular application (module) with dependencies. This dependencies need to be registered in module.
 const app = angular.module('mainApp', [
     // dependencies here
-    'ui.router'
+    'ui.router',
+    'ngFileUpload'
 ]);
+
 
 // call configuration function and pass our angular application there
 routerConfiguration(app);

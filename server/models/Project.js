@@ -13,6 +13,10 @@ var ProjectSchema = new mongoose.Schema({
     type: Array,
     index: true
   },
+  courseId: {
+    type: String,
+    index: true
+  },
   description: {
     type: String,
     index: true

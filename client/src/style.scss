@@ -27,14 +27,6 @@ label {
   color: rgba(0, 0, 0, 0.87);
 }
 
-.btn {
-  background-color: #39c2d7;
-
-  &:hover {
-    background-color: darken(#39c2d7, 10%);
-  }
-}
-
 .main {
   padding: 0 10px;
 
@@ -82,17 +74,17 @@ label {
   }
 }
 
+.userLogo {
+  width: 100px;
+  max-height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
 .side-nav {
   transform: translateX(0px);
   background: #464547;
-
-  .userLogo {
-    width: 100px;
-    max-height: 100px;
-    overflow: hidden;
-    border-radius: 50%;
-    margin: 0 auto;
-  }
 
   .userView {
     padding: 20px;
@@ -176,6 +168,9 @@ label {
 }
 
 .tabPanel {
+  .tabContent{
+    padding: 32px 0 16px;
+  }
   .tabs {
     .indicator {
       background-color: #39c2d7;
@@ -199,22 +194,18 @@ label {
   border-bottom: 2px solid #39c2d7;
 }
 
+[type="radio"]:checked + label:after, [type="radio"].with-gap:checked + label:after{
+  background-color: #39c2d7;
+  border-color: #39c2d7;
+}
+
 .circleBtnBlc {
   position: relative;
 
   .circleBtn {
-    background: #39c2d7;
     position: absolute;
     top: 20px;
     right: 0;
-
-    &:hover {
-      background-color: darken(#39c2d7, 10%);
-    }
-
-    i {
-      color: #fff;
-    }
   }
 }
 
@@ -233,6 +224,11 @@ label {
       }
     }
   }
+  &.modalForm{
+    top: 0 !important;
+    max-height: 100%;
+    padding-bottom: 20px;
+  }
 }
 
 .centerDiv .col {
@@ -246,4 +242,20 @@ label {
     -webkit-transform: translateY(-140%);
     transform: translateY(-140%);
   }
+}
+
+.blueBtn{
+  background: #39c2d7;
+  color: #fff;
+  &:hover {
+    background-color: darken(#39c2d7, 10%);
+  }
+
+  i {
+    color: #fff;
+  }
+}
+
+.radioLine{
+  padding: 16px 0 32px;
 }
