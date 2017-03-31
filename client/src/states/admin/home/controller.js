@@ -1,6 +1,6 @@
 require("./style.scss");
 
-function HomeAdminController($http, $element, AuthService) {
+function HomeAdminController($http, $element, AuthService, adminProjServ) {
     let self = this;
     self.$element = $element;
     let id = AuthService.getUser();
@@ -18,6 +18,8 @@ function HomeAdminController($http, $element, AuthService) {
           self.course = res.data;
           self.courseName = '';
           self.startFrom = '';
+
+          adminProjServ.updateListCourse();
         },
         function(err) {
           self.error = true;
@@ -32,10 +34,20 @@ function HomeAdminController($http, $element, AuthService) {
         self.userCount = res.data.length
     });
 
+    let getCouses = function() {
+      $http.get('/api/courses').then(function(res) {
+        self.courses = res.data;
+        console.log(self.courses);
+      });
+    }
 
-    // jQuery(self.$element[0].querySelector('ul.tabs')).tabs();
+    getCouses();
+
+    self.deleteCourse = function(id){
+      self.teamForm = true;
+    }
 }
 
-HomeAdminController.$inject = ['$http', '$element', 'AuthService'];
+HomeAdminController.$inject = ['$http', '$element', 'AuthService', 'adminProjServ'];
 
 module.exports = HomeAdminController;

@@ -4,11 +4,10 @@
 
 <div class="main">
   <div class="row">
-    <div class="col s12 m5">
+    <div class="col s12 m6">
       <div class="adminHomeCard card-panel white">
         <span>
-          <h2 class="center-align">Get Started</h2>
-          <p>Create new course:</p>
+          <h2 class="center-align">Create course</h2>
           <form ng-submit="$ctrl.saveCourse()">
             <div class="input-field">
               <input id="courseName" type="text" class="validate" ng-model="$ctrl.courseName">
@@ -24,8 +23,7 @@
           </form>
         </span>
       </div>
-    </div>
-    <div class="col s12 m5">
+
       <div class="adminHomeCard card-panel white">
         <span>
           <h2 class="center-align">More Actions</h2>
@@ -36,6 +34,21 @@
             <a ui-sref="admin.lectures" class="collection-item">
               <span class="new badge" data-badge-caption="lectures">{{$ctrl.lectCount}}</span>List lectures</a>
           </div>
+        </span>
+      </div>
+    </div>
+    <div class="col s12 m6">
+      <div class="adminHomeCard card-panel white">
+        <span>
+          <h2 class="center-align">Courses</h2>
+          <ul class="collection">
+            <li class="collection-item avatar" ng-repeat="course in $ctrl.courses">
+              <i class="material-icons circle">folder</i>
+              <span class="title">{{course.name}}</span>
+              <p><b>Start from:</b> {{course.startFrom}}</p>
+              <button class="secondary-content buttonCollection"><i class="material-icons red-text">delete</i></button>
+            </li>
+          </ul>
         </span>
       </div>
     </div>

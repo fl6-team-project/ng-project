@@ -21,7 +21,7 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
     });
   }
 
-  scope.$on('updateDataAdmCourse', function(event) {
+  scope.$on('updateCourseItem', function(event) {
       getProjects();
       getStudents();
   });
