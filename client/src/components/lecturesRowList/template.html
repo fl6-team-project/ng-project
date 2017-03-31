@@ -15,9 +15,12 @@
 
                     <i class="material-icons" ng-if="$ctrl.role === 'admin'"
                        ng-click="$ctrl.runDelete(lecture._id)">delete</i>
-                    <a href="{{lecture.contentLecture}}">Link To Presentation</a>
-                    <a href="{{lecture.contentPractice}}">Link To Practice</a>
-                    <a href="{{lecture.contentHomework}}">Link To Homework</a>
+                    <a href="{{lecture.contentLecture}}">
+                        Presentation<i class="material-icons prefix">school</i></a>
+                    <a href="{{lecture.contentPractice}}">
+                        Practice<i class="material-icons prefix">web</i></a>
+                    <a href="{{lecture.contentHomework}}">
+                        Homework<i class="material-icons prefix">home</i></a>
                 </div>
             </div>
         </div>
