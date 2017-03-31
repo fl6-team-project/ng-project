@@ -566,7 +566,7 @@ router.route('/course/projects')
       });
     });
 
-  });;
+  });
 
 router.route('/project/team/:id')
   .get(function(req, res) {
@@ -619,14 +619,21 @@ router.route('/courses')
         res.send(err);
       res.json(courses);
     });
-  });
+  })
+  .post(function(req, res, next) {
 
-router.route('/courses')
-  .get(function(req, res) {
-    Course.find({}, function(err, courses) {
+    var course = new Course();
+    course.name = req.body.name;
+    course.startFrom = req.body.startFrom;
+    course.studentsGroupId = 0;
+
+    course.save(function(err) {
       if (err)
         res.send(err);
-      res.json(courses);
+
+      res.json({
+        message: 'Course created!'
+      });
     });
   });
 
