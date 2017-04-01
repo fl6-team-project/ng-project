@@ -1,8 +1,13 @@
 require("./style.scss");
 let personsItemComponent = require("./personItem/component"),
+    personsSmallItemComponent = require("./personSmallItem/component"),
     lectureItemComponent = require("./lectureCardItem/component"),
     feedbackPopUpComponent = require("./feedbackPopUp/component"),
     popUpService = require("./feedbackPopUp/popUpService"),
+    adminProjServ = require("./adminTeamItem/adminProjServ"),
+    adminTeamItemComponent = require("./adminTeamItem/component"),
+    adminProjectFormComponent = require("./adminProjectForm/component"),
+    popUpInfoComponent = require("./popUpInfo/component");
     lecturesRowListComponent = require("./lecturesRowList/component");
     groupProjectTeamComponent = require("./groupProjectTeam/component"),
     groupProjectInfoComponent = require("./groupProjectInfo/component"),
@@ -13,10 +18,14 @@ module.exports = function(app) {
   app.component('lecturesRowList', lecturesRowListComponent);
   app.component('lectureCardItem', lectureItemComponent);
   app.component('personItem', personsItemComponent);
+  app.component('personSmallItem', personsSmallItemComponent);
   app.component('lectureDataInput', lectureDataInputComponent);
   app.component('feedbackPopUp', feedbackPopUpComponent);
   app.component('groupProjectTeam', groupProjectTeamComponent);
   app.component('groupProjectInfo', groupProjectInfoComponent);
+  app.component('adminTeamItem', adminTeamItemComponent);
+  app.component('popUpInfo', popUpInfoComponent);
+  app.component('adminProjectForm', adminProjectFormComponent);
 
   const recentTasksController = require("./tasks/recentTasksController.js");
   app.component('recentTaskItem', {
@@ -48,4 +57,5 @@ module.exports = function(app) {
   const tasksSharedService = require("./tasks/tasksSharedService.js");
   app.factory('tasksSharedService', tasksSharedService);
   app.factory('popUpService', popUpService);
+  app.factory('adminProjServ', adminProjServ);
 }

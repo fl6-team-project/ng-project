@@ -1,0 +1,14 @@
+.userSmallItem {
+  display: inline-block;
+  padding: 16px;
+
+  .userSmallDesc {
+    font-size: 14px;
+
+    .name {
+      font-size: 16px;
+      margin: 5px 0;
+      text-transform: uppercase;
+    }
+  }
+}

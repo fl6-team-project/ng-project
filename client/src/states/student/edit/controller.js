@@ -1,16 +1,45 @@
-function EditController($http) {
+require("./style.scss");
+
+function EditController($http, $element, $scope, $timeout) {
   let self = this;
-  // self.$element = $element;
-  // jQuery(self.$element[0].querySelector('ul.tabs')).tabs();
-  //
-  // let id = '58d9b90d734d1d34490eff3a';
-  // let url = '/api/project/team/' + id;
-  // $http.get(url).then(function(res) {
-  //     self.project = res.data;
-  //     $rootScope.$broadcast('getProject', self.project);
-  // });
+  self.$element = $element;
+  self.editMess = {
+    'title': 'Error',
+    'message': "Sorry, smth wrong. Let/'s try later!",
+    "btn": "Ok"
+  };
+
+  let id = '58da511b462e204c9caafdb8';
+  let url = '/api/users/' + id;
+  $http.get(url).then(function(res) {
+    self.user = res.data;
+  });
+
+  self.editProfile = function() {
+    console.log("save");
+    let url = '/api/users/' + self.user._id;
+    let data = self.user;
+    console.log(data);
+    self.error = false;
+
+    $http.put(url, data).then(function(res) {
+        self.student = res.data;
+        self.editMess = {
+          'title': 'Success',
+          'message': 'Your profile edit',
+          "btn": "Cool!"
+        };
+        jQuery('.modal').modal();
+        jQuery('.modal').modal('open');
+      },
+      function(err) {
+        self.error = true;
+        jQuery('.modal').modal();
+        jQuery('.modal').modal('open');
+      });
+  }
 
 }
 
-EditController.$inject = ['$http'];
+EditController.$inject = ['$http', '$element', '$scope', '$timeout'];
 module.exports = EditController;

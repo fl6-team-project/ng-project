@@ -29,7 +29,6 @@ routerConfiguration(app);
 const registerComponentsFunction = require('./components/index.js');
 registerComponentsFunction(app);
 
-
 // Handle manual change in address line
 app.run(function($transitions) {
 

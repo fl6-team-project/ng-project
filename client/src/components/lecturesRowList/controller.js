@@ -35,8 +35,17 @@ function LecturesRowListController($http, $state, $timeout, AuthService, popUpSe
         });
 
     };
+
     self.openPopUpClick = function(id){
-        popUpService.openPopUpClick(id);
+      self.serv = 'feedback';
+      let idLecture = '#fb'+id;
+      popUpService.openPopUpClick(idLecture);
+    }
+
+    self.openCheckHWPopUp = function(id){
+      self.serv = 'homework';
+      let idLecture = '#hw'+id;
+      popUpService.openPopUpClick(idLecture);
     }
 }
 

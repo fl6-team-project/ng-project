@@ -1,3 +1,66 @@
-<div class="main">
-  <p>Here will be edit profile</p>
+<div class="headerTop">
+  <h1>Edit profile:
+    {{$ctrl.user.username}}</h1>
 </div>
+<div class="main">
+  <div class="row">
+    <div class="col s12 white">
+      <div class="row">
+
+        <div class="col s6">
+          <form class="editProfile" ng-submit="$ctrl.editProfile()">
+
+            <h3>General Info</h3>
+            <div class="input-field activeLabel">
+              <input id="first_name" type="text" class="validate" ng-model="$ctrl.user.firstName">
+              <label for="first_name">First Name</label>
+            </div>
+            <div class="input-field activeLabel">
+              <input id="last_name" type="text" class="validate" ng-model="$ctrl.user.lastName">
+              <label for="last_name">Last Name</label>
+            </div>
+            <div class="input-field activeLabel">
+              <input id="age" ng-model="$ctrl.user.age" type="number" class="validate">
+              <label for="age">Age</label>
+            </div>
+            <div class="radioLine">
+              <p>
+                <input name="gender" type="radio" value="male" id="male" ng-model="$ctrl.user.gender"/>
+                <label for="male">Male</label>
+              </p>
+              <p>
+                <input name="gender" type="radio" value="female" id="female" ng-model="$ctrl.user.gender"/>
+                <label for="female">Female</label>
+              </p>
+            </div>
+            <div class="input-field activeLabel">
+              <input id="email" ng-model="$ctrl.user.email" type="email" class="validate">
+              <label for="email">Email</label>
+            </div>
+            <div class="input-field activeLabel">
+              <textarea id="textarea1" class="materialize-textarea" ng-model="$ctrl.user.aboutMe"></textarea>
+              <label for="textarea1">Short info</label>
+            </div>
+          </div>
+          <div class="col s6">
+            <h3>Set new avatar</h3>
+            <div class="input-field activeLabel">
+              <input id="avatar" ng-model="$ctrl.user.avatar" type="email" class="validate">
+              <label for="avatar">Avatar</label>
+            </div>
+            <div class="userAvatar">
+              <img ng-src="{{$ctrl.user.avatar}}" alt="">
+            </div>
+          </div>
+          <div class="col s12 center-align">
+            <button type="submit" class="btn waves-effect waves-light btn blueBtn">Save</button>
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<pop-up-info message="$ctrl.editMess"></pop-up-info>

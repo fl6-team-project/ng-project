@@ -1,27 +1,56 @@
 <div class="row">
-    <ul class="side-nav">
+  <ul class="side-nav">
+    <li>
+      <div class="userView center-align adminView">
+        <img class="" src="https://www.epam-group.ru/content/dam/epam/global/EPAM_logo.svg"/>
+      </div>
+    </li>
+    <li>
+      <a ui-sref="student.home">
+        <i class="material-icons">pageview</i>Main page</a>
+    </li>
+    <li>
+      <ul class="collapsible" data-collapsible="accordion">
         <li>
-            <a ui-sref="admin.lectures">
-                <i class="material-icons">pageview</i>Lectures List</a>
+          <a class="collapsible-header waves-effect waves-teal">
+            <i class="material-icons">business</i>Courses</a>
+          <div class="collapsible-body">
+            <ul>
+              <li ng-repeat="course in $ctrl.courses">
+                <a ui-sref="admin.course" ng-click="$ctrl.sendCourseInfo(course)">{{course.name}}</a>
+              </li>
+              <!-- <li><a ui-sref="admin.courses" ng-click="$ctrl.sendCourseInfo(course)">All Courses</a></li> -->
+              <li>
+                <a href="#">Add Course</a>
+              </li>
+            </ul>
+          </div>
         </li>
-        <li>
-            <a ui-sref="admin.addUser">
-                <i class="material-icons">add</i>Add user</a>
-        </li>
-        <li>
-        <a ui-sref="admin.users">
-            <i class="material-icons">toc</i>Users List</a>
-        </li>
-        <li>
-            <a ui-sref="admin.edit">
-                <i class="material-icons">mode_edit</i>Edit profile</a>
-        </li>
-        <li>
-            <a ng-click="$ctrl.logout()">
-                <i class="material-icons">power_settings_new</i>Log out</a>
-        </li>
-    </ul>
-    <div class="containerContent">
-        <div ui-view></div>
-    </div>
+      </ul>
+    </li>
+    <li>
+      <a ui-sref="admin.addUser">
+        <i class="material-icons">add</i>Add user</a>
+    </li>
+    <li>
+      <a ui-sref="admin.users">
+        <i class="material-icons">toc</i>Users List</a>
+    </li>
+    <li>
+      <a ui-sref="admin.lectures">
+        <i class="material-icons">work</i>List lectures</a>
+    </li>
+    <li>
+      <a ui-sref="admin.edit">
+        <i class="material-icons">mode_edit</i>Edit profile</a>
+    </li>
+    <li>
+      <a ng-click="$ctrl.logout()">
+        <i class="material-icons">power_settings_new</i>Log out</a>
+    </li>
+  </ul>
+
+  <div class="containerContent">
+    <div ui-view></div>
+  </div>
 </div>

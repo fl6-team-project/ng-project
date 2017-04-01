@@ -67,6 +67,14 @@ var UserSchema = new mongoose.Schema({
     lectures: {
         type: Array,
         index: true
+    },
+    courseId: {
+        type: Array,
+        index: true
+    },
+    groupProjectId: {
+        type: Array,
+        index: true
     }
     // owner_id: {
     //     type: mongoose.Schema.Types.ObjectId,

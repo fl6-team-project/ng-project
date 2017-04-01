@@ -4,7 +4,7 @@ const homeItemComponent = require('./states/student/home/component');
 const studentLecturesListComponent = require('./states/student/lecturesList/component');
 const studentComponent = require('./states/student/component');
 const projectComponent = require('./states/student/project/component');
-const editComponent = require('./states/student/edit/component');
+const editProfileComponent = require('./states/student/edit/component');
 const adminComponent = require('./states/admin/component');
 const teacherComponent = require('./states/teacher/component');
 const editLectureComponent = require('./states/teacher/editLecture/component');
@@ -16,6 +16,8 @@ const addLectureComponent = require('./states/admin/addLecture/component');
 const addUserComponent = require('./states/admin/addUser/component');
 const userListComponent = require('./states/admin/userList/component');
 const adminLectureListComponent = require('./states/admin/lecturesList/component');
+
+const adminCourseComponent = require('./states/admin/course/component');
 
 
 module.exports = function(app) {
@@ -32,10 +34,11 @@ module.exports = function(app) {
   app.component('teacherLectureListComponent', teacherLectureListComponent);
   app.component('loginComponent', loginComponent);
   app.component('registerComponent', registerComponent);
+  app.component('editProfileComponent', editProfileComponent);
+  app.component('adminCourseComponent', adminCourseComponent);
   app.component('addLectureComponent', addLectureComponent);
   app.component('adminEditLectureComponent', adminEditLectureComponent);
   app.component('addUserComponent', addUserComponent);
-  app.component('editComponent', editComponent);
   app.component('userListComponent', userListComponent);
   app.component('adminLectureListComponent', adminLectureListComponent);
 
@@ -85,7 +88,7 @@ module.exports = function(app) {
 
         .state('student.edit', {
             url: '/edit',
-            component: 'editComponent'
+            component: 'editProfileComponent'
         })
 
         /* USER TEACHER STATE */
@@ -126,6 +129,21 @@ module.exports = function(app) {
             }
         })
 
+        // .state('admin.home', {
+        //     url: '/',
+        //     component: 'homeItemComponent'
+        // })
+
+        .state('admin.courses', {
+            url: '/courses',
+            component: 'adminCoursesComponent'
+        })
+
+        .state('admin.course', {
+            url: '/course',
+            component: 'adminCourseComponent'
+        })
+
         .state('admin.addLecture', {
             url: '/add-lecture',
             component: 'addLectureComponent',
@@ -143,6 +161,11 @@ module.exports = function(app) {
             url: '/add-user',
             component: 'addUserComponent',
         });
+
+        // .state('admin.lectures', {
+        //   url: '/lectures',
+        //   component: 'adminLecturesListComponent'
+        // })
 
     $urlRouterProvider.otherwise('/');
   }]);

@@ -2,7 +2,8 @@ const feedbackPopUpController = require("./controller.js");
 
 const feedbackPopUpComponent = {
   bindings: {
-    lecture: '='
+    lecture: '=',
+    serv: '='
   },
   template: require('./template.html'),
   controller: feedbackPopUpController,

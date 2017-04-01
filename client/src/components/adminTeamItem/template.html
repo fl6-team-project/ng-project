@@ -1,0 +1,49 @@
+<div class="row teamItem" ng-hide="$ctrl.teamForm">
+  <div class="col s12 m4 center-align">
+    <h3>Lead</h3>
+    <input type="text" ng-hide="true" ng-model="$ctrl.project.lead">
+    <person-small-item person="$ctrl.leadInfo"></person-small-item>
+  </div>
+  <div class="col s12 m6">
+    <h3>Project</h3>
+    <p>
+      <b>Name:</b>
+      {{$ctrl.project.name}}
+    </p>
+    <p>
+      <b>Description:</b>
+      {{$ctrl.project.description}}
+    </p>
+    <p>
+      <b>Technologies:</b>
+      {{$ctrl.project.technologies}}
+    </p>
+  </div>
+  <div class="col s12 m2">
+    <div class="fixed-action-btn horizontal editBtnAction">
+      <a class="btn-floating btn-large blueBtn">
+        <i class="large material-icons">reorder</i>
+      </a>
+      <ul>
+        <li>
+          <button class="btn-floating green" ng-click="$ctrl.editTeam($ctrl.project._id)">
+            <i class="material-icons">mode_edit</i>
+          </button>
+        </li>
+        <li>
+          <button class="btn-floating red" ng-click="$ctrl.deleteTeam($ctrl.project._id)">
+            <i class="material-icons">delete</i>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col s12 center-align">
+    <h3>Team</h3>
+    <div class="row">
+      <input type="text" ng-hide="true" ng-model="$ctrl.project.students">
+      <person-small-item ng-repeat="person in $ctrl.studentsInfo" person="person"></person-small-item>
+    </div>
+  </div>
+</div>
+<admin-project-form projectitem="$ctrl.project" ng-show="$ctrl.teamForm" create="$ctrl.create"></admin-project-form>
