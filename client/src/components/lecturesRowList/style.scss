@@ -18,6 +18,40 @@
     margin-bottom: 10px;
   }
 
+  .collapsible-header{
+    p {
+      display: inline-block;
+    }
+    i {
+      float: none;
+      display: inline-block;
+    }
+    .lecturelinks {
+      &> a{
+        display: inline-block;
+      }
+      .material-icons {
+        margin: 0;
+        vertical-align: middle;
+      }
+    }
+    .lecturelinks a,
+    .lecturelinks .material-icons{
+      color: white;
+    }
+
+    &:hover .lecturelinks a,
+    &:hover .lecturelinks .material-icons{
+      color: #39c2d7;
+
+      &:hover,
+      &:hover .material-icons{
+        color: black;
+        text-decoration: none;
+      }
+    }
+  }
+
   .collapsible-body{
     background-color: #fff;
   }

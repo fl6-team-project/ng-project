@@ -1,7 +1,13 @@
 require('./style.scss');
 
-function LecturesRowListController($http, $state, $timeout, popUpService) {
+function LecturesRowListController($http, $state, $timeout, AuthService, popUpService) {
     let self = this;
+
+    self.role = '';
+
+    AuthService.userRole().then(function (userRole) {
+        self.role = userRole;
+    });
 
     $http.get('/api/lectures').then(function(res) {
         self.lectures = res.data.sort(function (a, b) {
@@ -16,7 +22,18 @@ function LecturesRowListController($http, $state, $timeout, popUpService) {
     });
 
     self.runEdit = function (lecture) {
-        $state.go('teacher.editLecture', {lecture: lecture });
+        $state.go(self.role + '.editLecture', {lecture: lecture });
+    };
+
+    self.runDelete = function (id) {
+        $http.delete('/api/lectures/' + id ).then(function() {
+
+            //remove lecture from list to re-render list
+            self.lectures = self.lectures.filter(function (lecture) {
+                return lecture._id !== id ;
+            });
+        });
+
     };
 
     self.openPopUpClick = function(id){
@@ -33,6 +50,6 @@ function LecturesRowListController($http, $state, $timeout, popUpService) {
 }
 
 
-LecturesRowListController.$inject = ['$http', '$state', '$timeout', 'popUpService'];
+LecturesRowListController.$inject = ['$http', '$state', '$timeout', 'AuthService', 'popUpService'];
 
 module.exports = LecturesRowListController;
