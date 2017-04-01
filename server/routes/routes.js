@@ -89,25 +89,24 @@ router.route('/users/all')
 
 //Students REST api
 router.route('/users')
-  .get(function(req, res, next) {
-    // res.send('respond with a resource');
-    var query = User.find({
-      'userRole': 'student'
-    });
-    query.exec(function(err, students) {
-      if (err) throw err;
-      res.json(students);
-    });
-  })
-  .post(function(req, res) {
+    .get(function(req, res, next) {
+        // res.send('respond with a resource');
+        var query = User.find({ 'userRole': 'student' });
+        query.exec ( function(err, students) {
+            if (err) throw err;
+            res.json(students);
+        });
+    })
+    .post(function(req, res) {
 
-    var user = new User();
-    user.firstName = req.body.firstName;
-    user.lastName = req.body.lastName;
-    user.email = req.body.email;
-    user.password = 'test-password';
-    user.active = 'active';
-    user.userRole = req.body.userRole;
+        var user = new User();
+        user.firstName = req.body.firstName;
+        user.lastName = req.body.lastName;
+        user.email = req.body.email;
+        user.password = 'password';
+        user.active = 'active';
+        user.username = req.body.username;
+        user.userRole = req.body.userRole;
 
     user.save(function(err) {
       if (err)

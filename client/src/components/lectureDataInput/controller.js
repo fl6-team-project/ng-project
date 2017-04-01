@@ -1,7 +1,12 @@
 require ('./style.scss');
 
-function LectureDataInputController($http, $state, $timeout) {
+function LectureDataInputController($http, $state, $timeout, AuthService) {
     self = this;
+    self.role = '';
+
+    AuthService.userRole().then(function (userRole) {
+        self.role = userRole;
+    });
 
     //wait when rendering finished and update labels
     $timeout(function () {
@@ -11,19 +16,16 @@ function LectureDataInputController($http, $state, $timeout) {
     //updating lecture in DB
     self.saveEditing = function (id, object) {
         $http.put('/api/lectures/' + id, object).then(function(res) {
-            self.lectures = res.data;
 
             //redirect to lecture list
-            //@todo automated redirection to user role
-            $state.go('teacher.lectures');
+            $state.go( self.role + '.lectures');
         });
     };
 
     self.addLecture = function (object) {
         $http.post('/api/lectures', object).then(function(res) {
             //redirect to lecture list
-            //@todo automated redirection to user role
-            $state.go('admin.lectures');
+            $state.go( self.role + '.lectures');
         });
     };
 
@@ -33,9 +35,12 @@ function LectureDataInputController($http, $state, $timeout) {
 LectureDataInputController.prototype.$onInit = function() {
     self = this;
     // preset a date to date input
-    self.lecture.lectureScheduledDate = new Date(self.lecture.lectureScheduledDate);
-    self.lecture.homeworkDeadline = new Date(self.lecture.homeworkDeadline);
+    if(self.lecture){
+        self.lecture.lectureScheduledDate = new Date(self.lecture.lectureScheduledDate);
+        self.lecture.homeworkDeadline = new Date(self.lecture.homeworkDeadline);
+    }
+
 };
 
-LectureDataInputController.$inject = ['$http', "$state", "$timeout"];
+LectureDataInputController.$inject = ['$http', "$state", "$timeout", "AuthService"];
 module.exports = LectureDataInputController;
