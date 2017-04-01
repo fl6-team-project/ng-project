@@ -1,14 +1,15 @@
 
-function formTasksController($http, $element, $scope, sharedService) {
+function formTasksController($http, AuthService, sharedService) {
   let self = this;
 
   self.addTask = function() {
-    console.log(self.text);
+
     if (self.text == '' | self.text == undefined) {
     } else {
       let data = {
         text: self.text,
-        status: 'active'
+        status: 'active',
+        studentId: AuthService.getUser()
       };
       let url = '/api/tasks';
       $http.post(url, data).then(function(res) {
@@ -24,5 +25,5 @@ function formTasksController($http, $element, $scope, sharedService) {
 
 }
 
-formTasksController.$inject = ['$http', '$element', '$scope', 'tasksSharedService'];
+formTasksController.$inject = ['$http', 'AuthService', 'tasksSharedService'];
 module.exports = formTasksController;
