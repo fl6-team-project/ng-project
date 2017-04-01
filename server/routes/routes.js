@@ -456,9 +456,10 @@ router.route('/feedback/:id')
 
 router.route('/tasks/recent/:id')
   .get(function(req, res, next) {
+
     RecentTasks.find({
       status: 'active',
-      userId: id
+      userId: req.params.id
     }, function(err, tasks) {
       if (err) throw err;
       res.json(tasks);
@@ -469,7 +470,7 @@ router.route('/tasks/closed/:id')
   .get(function(req, res, next) {
     RecentTasks.find({
       status: 'done',
-      userId: id
+      userId: req.params.id
     }, function(err, tasks) {
       if (err) throw err;
       res.json(tasks);

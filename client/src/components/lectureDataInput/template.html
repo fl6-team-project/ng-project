@@ -37,8 +37,18 @@
         <div class="row">
             <div class="input-field col s4">
                 <i class="material-icons prefix">person</i>
-                <input id="teacher" type="text" class="validate"
-                       ng-model="$ctrl.lecture.lectorName">
+                <!--<select name="teacher" id="teacher" ng-model="$ctrl.lecture.lectorName">-->
+                    <!--<option value="test">-->
+                        <!--test-->
+                    <!--</option>-->
+                    <!--<option ng-repeat="teacher in $ctrl.teachers" value="{{teacher._id}}">-->
+                        <!--{{teacher.firstName}} {{teacher.lastName}}-->
+                    <!--</option>-->
+                <!--</select>-->
+                {{$ctrl.data.availableOptions}}
+                <select name="teacher" id="teacher" ng-model="$ctrl.data.model">
+                    <option ng-repeat="option in $ctrl.data.availableOptions" value="{{option.id}}">{{option.name}}</option>
+                </select>
                 <label for="teacher">Teacher name</label>
             </div>
             <div class="input-field col s8">

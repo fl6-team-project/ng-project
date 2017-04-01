@@ -3,6 +3,7 @@ function formTasksController($http, $element, $scope, sharedService) {
   let self = this;
 
   self.addTask = function() {
+    console.log(self.text);
     if (self.text == '' | self.text == undefined) {
     } else {
       let data = {
