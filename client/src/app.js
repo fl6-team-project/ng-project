@@ -41,7 +41,7 @@ app.run(function($transitions) {
             return auth.userRole().then(function (role) {
             switch (role) {
                     case 'admin':
-                        return trans.router.stateService.target('admin');
+                        return trans.router.stateService.target('admin.home');
                         break;
                     case 'teacher':
                         return trans.router.stateService.target('teacher');
@@ -60,7 +60,7 @@ app.run(function($transitions) {
             return auth.userRole().then(function (role) {
                 switch (role) {
                     case 'admin':
-                        return trans.router.stateService.target('admin');
+                        return trans.router.stateService.target('admin.home');
                         break;
                     case 'student':
                         return trans.router.stateService.target('student');

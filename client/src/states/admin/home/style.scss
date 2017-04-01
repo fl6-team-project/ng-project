@@ -1,0 +1,24 @@
+.adminHomeCard {
+  h2 {
+    margin: 0;
+  }
+
+  .collection-item span.badge {
+    background-color: #25a4b8;
+  }
+
+  .collection {
+    .collection-item.avatar {
+      i.circle {
+        background-color: #39c2d7;
+      }
+
+      .buttonCollection.secondary-content {
+        border: none;
+        background: none;
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
+}

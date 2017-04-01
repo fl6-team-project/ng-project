@@ -1,9 +1,11 @@
 function recentTasksController($http, sharedService, $rootScope) {
   let self = this;
   let scope = $rootScope.$new();
+  let id = AuthService.getUser();
 
   let getData = function(){
-    $http.get('/api/tasks/recent').then(function(res) {
+    let url = '/api/tasks/recent/' + id;
+    $http.get(url).then(function(res) {
       self.tasks = res.data;
     });
   }

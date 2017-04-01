@@ -454,20 +454,22 @@ router.route('/feedback/:id')
 
 // Recent tasks
 
-router.route('/tasks/recent')
+router.route('/tasks/recent/:id')
   .get(function(req, res, next) {
     RecentTasks.find({
-      status: 'active'
+      status: 'active',
+      userId: id
     }, function(err, tasks) {
       if (err) throw err;
       res.json(tasks);
     });
   });
 
-router.route('/tasks/closed')
+router.route('/tasks/closed/:id')
   .get(function(req, res, next) {
     RecentTasks.find({
-      status: 'done'
+      status: 'done',
+      userId: id
     }, function(err, tasks) {
       if (err) throw err;
       res.json(tasks);
@@ -501,7 +503,7 @@ router.route('/tasks/:id')
     RecentTasks.findById(req.params.id, function(err, recenttasks) {
       if (err)
         res.send(err);
-      res.json(tasks);
+      res.json(recenttasks);
     });
   })
   .put(function(req, res) {
@@ -565,7 +567,7 @@ router.route('/course/projects')
       });
     });
 
-  });;
+  });
 
 router.route('/project/team/:id')
   .get(function(req, res) {
@@ -601,7 +603,7 @@ router.route('/project/team/:id')
   .delete(function(req, res) {
     Project.remove({
       _id: req.params.id
-    }, function(err, user) {
+    }, function(err, project) {
       if (err)
         res.send(err);
 
@@ -618,14 +620,22 @@ router.route('/courses')
         res.send(err);
       res.json(courses);
     });
-  });
+  })
+  .post(function(req, res, next) {
 
-router.route('/courses')
-  .get(function(req, res) {
-    Course.find({}, function(err, courses) {
+    var course = new Course();
+    course.name = req.body.name;
+    course.startFrom = req.body.startFrom;
+    course.studentsGroupId = 0;
+    course.lectures = [];
+
+    course.save(function(err) {
       if (err)
         res.send(err);
-      res.json(courses);
+
+      res.json({
+        message: 'Course created!'
+      });
     });
   });
 
@@ -636,20 +646,19 @@ router.route('/courses/:id')
         res.send(err);
       res.json(team);
     });
-  });
+  })
+  .delete(function(req, res) {
+    Course.remove({
+      _id: req.params.id
+    }, function(err, course) {
+      if (err)
+        res.send(err);
 
-router.route('/edit/upload')
-  .post(function(req, res) {
-    // console.log(req);
-    // console.log(res);
-    upload(req, res, function(err) {
-      if (err) {
-        return res.end("Error uploading file.");
-      }
-      res.end("File is uploaded");
+      res.json({
+        message: 'Successfully deleted'
+      });
     });
   });
-
 
 module.exports = router;
 

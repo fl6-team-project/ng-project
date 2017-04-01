@@ -9,7 +9,7 @@ function EditController($http, $element, $scope, $timeout) {
     "btn": "Ok"
   };
 
-  let id = '58da511b462e204c9caafdb8';
+  let id = AuthService.getUser();
   let url = '/api/users/' + id;
   $http.get(url).then(function(res) {
     self.user = res.data;

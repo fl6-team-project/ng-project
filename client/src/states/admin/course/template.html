@@ -19,7 +19,23 @@
             </li>
           </ul>
         </div>
-        <div id="lectures" class="col s12"></div>
+        <div id="lectures" class="col s12">
+          <div class="addLectureForm">
+            <form ng-submit="$ctrl.saveTeam()">
+              <div class="input-field col s12">
+                <select multiple class="icons selectLectures" ng-model="$ctrl.lectNewSelect.model">
+                  <option ng-repeat="lectNew in $ctrl.lectNewSelect.availableOptions" value="{{lectNew._id}}" data-icon="{{lectNew.img}}" class="circle">{{lectNew.name}}</option>
+                </select>
+                <label>Choose lectures</label>
+              </div>
+
+              <div class="center-align">
+                <button type="submit" class="waves-effect waves-light btn blueBtn">Save</button>
+              </div>
+            </form>
+          </div>
+          <lectures-row-list lectures="$ctrl.lectures"></lectures-row-list>
+        </div>
         <div id="students" class="col s12">
           <div class="tabContent">
             <person-item ng-repeat="person in $ctrl.students" person="person"></person-item>

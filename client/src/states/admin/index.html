@@ -6,7 +6,7 @@
       </div>
     </li>
     <li>
-      <a ui-sref="student.home">
+      <a ui-sref="admin.home">
         <i class="material-icons">pageview</i>Main page</a>
     </li>
     <li>
@@ -18,10 +18,6 @@
             <ul>
               <li ng-repeat="course in $ctrl.courses">
                 <a ui-sref="admin.course" ng-click="$ctrl.sendCourseInfo(course)">{{course.name}}</a>
-              </li>
-              <!-- <li><a ui-sref="admin.courses" ng-click="$ctrl.sendCourseInfo(course)">All Courses</a></li> -->
-              <li>
-                <a href="#">Add Course</a>
               </li>
             </ul>
           </div>

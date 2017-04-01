@@ -2,7 +2,11 @@ function adminProjServ($rootScope, $http) {
   let adminProjServ = {};
 
   adminProjServ.updateDataAdmCourse = function() {
-    $rootScope.$broadcast('updateDataAdmCourse');
+    $rootScope.$broadcast('updateCourseItem');
+  }
+
+  adminProjServ.updateListCourse = function() {
+    $rootScope.$broadcast('getCouses');
   }
 
   return adminProjServ;
