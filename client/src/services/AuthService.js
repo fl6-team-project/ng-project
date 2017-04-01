@@ -1,7 +1,6 @@
 module.exports = function(app) {
 
 app.service('AuthService', function AuthService($q, $http) {
-    localStorage.setItem('userAuthorized', null);
     var deferred = $q.defer();
 
     return {
