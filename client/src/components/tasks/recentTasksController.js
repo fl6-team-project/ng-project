@@ -1,4 +1,4 @@
-function recentTasksController($http, sharedService, $rootScope) {
+function recentTasksController($http, AuthService, sharedService, $rootScope) {
   let self = this;
   let scope = $rootScope.$new();
   let id = AuthService.getUser();
@@ -8,7 +8,7 @@ function recentTasksController($http, sharedService, $rootScope) {
     $http.get(url).then(function(res) {
       self.tasks = res.data;
     });
-  }
+  };
 
   scope.$on('updateData', function(event) {
       getData();
@@ -21,5 +21,5 @@ function recentTasksController($http, sharedService, $rootScope) {
   }
 }
 
-recentTasksController.$inject = ['$http', 'tasksSharedService', '$scope', '$rootScope'];
+recentTasksController.$inject = ['$http', 'AuthService', 'tasksSharedService', '$scope', '$rootScope'];
 module.exports = recentTasksController;
