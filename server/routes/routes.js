@@ -455,20 +455,22 @@ router.route('/feedback/:id')
 
 // Recent tasks
 
-router.route('/tasks/recent')
+router.route('/tasks/recent/:id')
   .get(function(req, res, next) {
     RecentTasks.find({
-      status: 'active'
+      status: 'active',
+      userId: id
     }, function(err, tasks) {
       if (err) throw err;
       res.json(tasks);
     });
   });
 
-router.route('/tasks/closed')
+router.route('/tasks/closed/:id')
   .get(function(req, res, next) {
     RecentTasks.find({
-      status: 'done'
+      status: 'done',
+      userId: id
     }, function(err, tasks) {
       if (err) throw err;
       res.json(tasks);
@@ -502,7 +504,7 @@ router.route('/tasks/:id')
     RecentTasks.findById(req.params.id, function(err, recenttasks) {
       if (err)
         res.send(err);
-      res.json(tasks);
+      res.json(recenttasks);
     });
   })
   .put(function(req, res) {
@@ -626,6 +628,7 @@ router.route('/courses')
     course.name = req.body.name;
     course.startFrom = req.body.startFrom;
     course.studentsGroupId = 0;
+    course.lectures = [];
 
     course.save(function(err) {
       if (err)
@@ -657,19 +660,6 @@ router.route('/courses/:id')
       });
     });
   });
-
-router.route('/edit/upload')
-  .post(function(req, res) {
-    // console.log(req);
-    // console.log(res);
-    upload(req, res, function(err) {
-      if (err) {
-        return res.end("Error uploading file.");
-      }
-      res.end("File is uploaded");
-    });
-  });
-
 
 module.exports = router;
 

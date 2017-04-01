@@ -34,7 +34,9 @@ function AdminController($http, $state, AuthService, $rootScope, $element, admin
   });
 
   self.sendCourseInfo = function(course) {
-    $rootScope.$broadcast('getCourseInfo', course);
+    // $rootScope.$broadcast('getCourseInfo', course);
+    adminProjServ.courseChecked = course;
+    adminProjServ.updateDataAdmCourse();
   }
 }
 AdminController.$inject = ['$http', '$state', 'AuthService', '$rootScope', '$element', 'adminProjServ'];

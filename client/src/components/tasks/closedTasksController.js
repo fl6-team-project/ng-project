@@ -1,9 +1,11 @@
 function closedTasksController($http, $rootScope, sharedService) {
   let self = this;
   let scope = $rootScope.$new();
+  let id = AuthService.getUser();
 
   let getData = function(){
-    $http.get('/api/tasks/closed').then(function(res) {
+    let url = '/api/tasks/closed/' + id;
+    $http.get(url).then(function(res) {
       self.tasks = res.data;
     });
   }
