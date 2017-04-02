@@ -44,7 +44,7 @@ app.run(function($transitions) {
                         return trans.router.stateService.target('admin.home');
                         break;
                     case 'teacher':
-                        return trans.router.stateService.target('teacher');
+                        return trans.router.stateService.target('teacher.home');
                         break;
                 };
             });
@@ -63,7 +63,7 @@ app.run(function($transitions) {
                         return trans.router.stateService.target('admin.home');
                         break;
                     case 'student':
-                        return trans.router.stateService.target('student');
+                        return trans.router.stateService.target('student.home');
                         break;
                 };
             })
@@ -78,10 +78,10 @@ app.run(function($transitions) {
             return auth.userRole().then(function (role) {
                 switch (role) {
                     case 'student':
-                        return trans.router.stateService.target('student');
+                        return trans.router.stateService.target('student.home');
                         break;
                     case 'teacher':
-                        return trans.router.stateService.target('teacher');
+                        return trans.router.stateService.target('teacher.home');
                         break;
                 }
             });
