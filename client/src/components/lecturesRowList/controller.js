@@ -33,20 +33,17 @@ function LecturesRowListController($http, $state, $timeout, AuthService, popUpSe
 
     self.openPopUpClick = function(id){
       self.serv = 'feedback';
-      let idLecture = '#fb'+id;
-      popUpService.openPopUpClick(idLecture);
+      popUpService.openPopUpClick(id);
     }
 
     self.openCheckHWPopUp = function(id){
-        self.serv = 'homework';
-        let idLecture = '#hw'+id;
-        popUpService.openPopUpClick(idLecture);
+      self.serv = 'homework';
+      popUpService.openPopUpClick(id);
     }
 
     self.openLeaveHWPopUp = function(id){
       self.serv = 'homework';
-      let idLecture = '#hw'+id;
-      popUpService.openPopUpClick(idLecture);
+      popUpService.openPopUpClick(id);
     }
 }
 

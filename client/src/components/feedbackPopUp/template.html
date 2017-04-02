@@ -3,23 +3,23 @@
 
     <div class="modal-content">
       <h4 class="center-align">Feedback to lecture:
-      </br>
-      {{feedbackPopUp.lecture.name}}</h4>
-    <div class="input-field col s12">
-      <textarea id="overalFb" class="materialize-textarea" ng-model="feedbackPopUp.overal"></textarea>
-      <label for="overalFb">Your overall opinion about lecture/lecturer/material</label>
-    </div>
-    <div class="input-field col s12">
-      <textarea id="whatWasGoodFb" class="validate materialize-textarea" ng-model="feedbackPopUp.whatWasGood"></textarea>
-      <label for="whatWasGoodFb">What was done well *</label>
-    </div>
-    <div class="input-field col s12">
-      <textarea id="whatWasBadFb" class="validate materialize-textarea" ng-model="feedbackPopUp.whatWasBad"></textarea>
-      <label for="whatWasGoodFb">What could have been done better *</label>
-    </div>
-    <div class="modal-footer">
-      <a class="modal-action modal-close waves-effect waves-effect btn-flat">Cancel</a>
-      <button type="submit" class="modal-action modal-close waves-effect waves-light btn blueBtn btn-flat">Send</button>
+        {{feedbackPopUp.lecture.name}}</h4>
+      <div class="input-field col s12">
+        <textarea id="overalFb" class="materialize-textarea" ng-model="feedbackPopUp.overal"></textarea>
+        <label for="overalFb">Your overall opinion about lecture/lecturer/material</label>
+      </div>
+      <div class="input-field col s12">
+        <textarea id="whatWasGoodFb" class="validate materialize-textarea" ng-model="feedbackPopUp.whatWasGood"></textarea>
+        <label for="whatWasGoodFb">What was done well *</label>
+      </div>
+      <div class="input-field col s12">
+        <textarea id="whatWasBadFb" class="validate materialize-textarea" ng-model="feedbackPopUp.whatWasBad"></textarea>
+        <label for="whatWasGoodFb">What could have been done better *</label>
+      </div>
+      <div class="modal-footer">
+        <a class="modal-action modal-close waves-effect waves-effect btn-flat">Cancel</a>
+        <button type="submit" class="modal-action modal-close waves-effect waves-light btn blueBtn btn-flat">Send</button>
+      </div>
     </div>
   </form>
 </div>
@@ -27,17 +27,17 @@
 <div id="hw{{feedbackPopUp.lecture._id}}" class="modal modalForm" ng-if="feedbackPopUp.serv">
   <form class="" ng-submit="feedbackPopUp.sendHWFeedback()">
 
-      <div class="modal-content">
-        <h4 class="center-align">Feedback to homework:
-          </br>
-          {{feedbackPopUp.lecture.name}}</h4>
-        <div class="input-field col s12">
-          <textarea id="homeworks" class="materialize-textarea" ng-model="feedbackPopUp.homeworks"></textarea>
-          <label for="homeworks">Please, explain here the most common mistakes that students did in their homework</label>
-        </div>
-        <div class="modal-footer">
-          <a class="modal-action modal-close waves-effect waves-effect btn-flat">Cancel</a>
-          <button type="submit" class="modal-action modal-close waves-effect waves-light btn blueBtn btn-flat">Send</button>
-        </div>
-    </form>
+    <div class="modal-content">
+      <h4 class="center-align">Feedback to homework:
+        {{feedbackPopUp.lecture.name}}</h4>
+      <div class="input-field col s12">
+        <textarea id="homeworks" class="materialize-textarea" ng-model="feedbackPopUp.homeworks"></textarea>
+        <label for="homeworks">Please, explain here the most common mistakes that students did in their homework</label>
+      </div>
+      <div class="modal-footer">
+        <a class="modal-action modal-close waves-effect waves-effect btn-flat">Cancel</a>
+        <button type="submit" class="modal-action modal-close waves-effect waves-light btn blueBtn btn-flat">Send</button>
+      </div>
+    </div>
+  </form>
 </div>

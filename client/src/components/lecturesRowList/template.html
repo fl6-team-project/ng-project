@@ -52,10 +52,10 @@
                     </div>
                     <div class="center-align">
                         <!-- popups are not working right now in this version-->
-                        <button class="waves-effect waves-light btn blueBtn" ng-click="$ctrl.openPopUpClick(lecture._id)">Leave feedback</button>
-                        <button class="waves-effect waves-light btn blueBtn" ng-click="$ctrl.openCheckHWPopUp(lecture._id)">Check HW feedback</button>
+                        <button class="waves-effect waves-light btn blueBtn" ng-click="$ctrl.openPopUpClick('fb' + lecture._id)">Leave feedback</button>
+                        <button class="waves-effect waves-light btn blueBtn" ng-click="$ctrl.openCheckHWPopUp('hw' + lecture._id)">Check HW feedback</button>
                         <button class="waves-effect waves-light btn blueBtn" ng-if="$ctrl.role === 'admin' || $ctrl.role === 'teacher'"
-                                ng-click="$ctrl.openLeaveHWPopUp(lecture._id)">Leave HW feedback</button>
+                                ng-click="$ctrl.openLeaveHWPopUp('hw' + lecture._id)">Leave HW feedback</button>
                     </div>
                 </div>
             </div>
