@@ -293,7 +293,7 @@ router.route('/lectures')
     lecture.img = req.body.img;
     lecture.lectureScheduledDate = req.body.lectureScheduledDate;
     lecture.lectureScheduledTime = req.body.lectureScheduledTime;
-    lecture.lectorName = req.body.lectorName;
+    lecture.teacherId = req.body.teacherId;
     lecture.homeworkDeadline = req.body.homeworkDeadline;
     lecture.assistants = req.body.assistants;
     lecture.contentLecture = req.body.contentLecture;
@@ -345,7 +345,7 @@ router.route('/lectures/:id')
       lecture.img = req.body.img;
       lecture.lectureScheduledDate = req.body.lectureScheduledDate;
       lecture.lectureScheduledTime = req.body.lectureScheduledTime;
-      lecture.lectorName = req.body.lectorName;
+      lecture.teacherId = req.body.teacherId;
       lecture.homeworkDeadline = req.body.homeworkDeadline;
       lecture.assistants = req.body.assistants;
       lecture.contentLecture = req.body.contentLecture;

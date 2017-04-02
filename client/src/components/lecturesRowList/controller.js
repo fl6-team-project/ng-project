@@ -5,14 +5,19 @@ function LecturesRowListController($http, $state, $timeout, AuthService, popUpSe
 
     self.role = '';
 
-    AuthService.userRole().then(function (userRole) {
-        self.role = userRole;
+    $http.get('/api/teachers').then(function(res) {
+        self.teachers = res.data;
+        self.getTeacher = function (teacherId) {
+            alert('hello');
+            return self.teachers.find(function (teacher) {
+                return teacher._id === teacherId;
+            })
+        };
     });
 
-    $timeout(function () {
-        $('.collapsible').collapsible({
-            accordion : true
-        });
+
+    AuthService.userRole().then(function (userRole) {
+        self.role = userRole;
     });
 
     self.runEdit = function (lecture, $event) {
@@ -45,6 +50,12 @@ function LecturesRowListController($http, $state, $timeout, AuthService, popUpSe
       self.serv = 'homework';
       popUpService.openPopUpClick(id);
     }
+    
+    $timeout(function () {
+        $('.collapsible').collapsible({
+            accordion : true
+        });
+    });
 }
 
 
