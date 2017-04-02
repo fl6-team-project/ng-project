@@ -8,7 +8,7 @@ function LecturesRowListController($http, $state, $timeout, AuthService, popUpSe
     $http.get('/api/teachers').then(function(res) {
         self.teachers = res.data;
         self.getTeacher = function (teacherId) {
-            alert('hello');
+
             return self.teachers.find(function (teacher) {
                 return teacher._id === teacherId;
             })

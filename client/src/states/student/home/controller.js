@@ -7,7 +7,8 @@ function lectureCardItemController($http, $element, AuthService) {
         self.role = res.data.userRole;
     });
 
-    $http.get('/api/lectures/last').then(function (res) {
+    $http.get('/api/lectures/showteacher/last').then(function (res) {
+        console.log(res.data);
         self.lectures = res.data;
     });
 
