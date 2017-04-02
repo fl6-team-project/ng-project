@@ -23,3 +23,21 @@
     </div>
   </form>
 </div>
+
+<div id="hw{{feedbackPopUp.lecture._id}}" class="modal modalForm" ng-if="feedbackPopUp.serv">
+  <form class="" ng-submit="feedbackPopUp.sendHWFeedback()">
+
+      <div class="modal-content">
+        <h4 class="center-align">Feedback to homework:
+          </br>
+          {{feedbackPopUp.lecture.name}}</h4>
+        <div class="input-field col s12">
+          <textarea id="homeworks" class="materialize-textarea" ng-model="feedbackPopUp.homeworks"></textarea>
+          <label for="homeworks">Please, explain here the most common mistakes that students did in their homework</label>
+        </div>
+        <div class="modal-footer">
+          <a class="modal-action modal-close waves-effect waves-effect btn-flat">Cancel</a>
+          <button type="submit" class="modal-action modal-close waves-effect waves-light btn blueBtn btn-flat">Send</button>
+        </div>
+    </form>
+</div>

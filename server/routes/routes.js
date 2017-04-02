@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Lecture = require("../models/Lecture").Lecture;
 var Feedback = require("../models/Feedback").Feedback;
+var HomeworkFeedback = require("../models/HomeworkFeedback").HomeworkFeedback;
 var User = require('../models/User').User;
 var RecentTasks = require("../models/RecentTasks").RecentTasks;
 var Project = require("../models/Project").Project;
@@ -451,6 +452,35 @@ router.route('/feedback/:id')
       });
     });
   });
+
+//Homework Feedback REST api
+
+router.route('/feedbacks/homework')
+    .get(function(req, res) {
+      HomeworkFeedback.find({}, function(err, feedbacks) {
+        if (err)
+          res.send(err);
+        res.json(feedbacks);
+      });
+    })
+
+    .post(function(req, res) {
+      var hwFeedback = new HomeworkFeedback();
+      hwFeedback.courseId = req.body.courseId;
+      hwFeedback.lectureId = req.body.lectureId;
+      hwFeedback.date = new Date();
+      hwFeedback.homeworks = req.body.homeworks;
+
+      hwFeedback.save(function(err) {
+        if (err)
+          res.send(err);
+
+        res.json({
+          message: 'Homework Feedback created!'
+        });
+      });
+
+    });
 
 // Recent tasks
 

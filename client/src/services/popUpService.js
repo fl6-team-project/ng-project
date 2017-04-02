@@ -5,7 +5,7 @@ function popUpService($rootScope) {
   popUpService.openPopUpClick = function(id){
     jQuery(id).modal();
     jQuery(id).modal('open');
-  }
+  };
   return popUpService;
 }
 
