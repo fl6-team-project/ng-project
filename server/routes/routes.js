@@ -311,11 +311,14 @@ router.route('/lectures')
 
 router.route('/lectures/last')
   .get(function(req, res, next) {
-    Lecture.find({}, function(err, lectures) {
-      if (err) throw err;
-      res.json(lectures);
+    let curDate = new Date();
+
+    Lecture.find({"lectureScheduledDate":{$lt: curDate}},
+      function(err, lectures) {
+        if (err) throw err;
+        res.json(lectures);
     }).sort({
-      $natural: -1
+      "lectureScheduledDate":-1
     }).limit(2);
   });
 
