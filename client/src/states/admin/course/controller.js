@@ -23,7 +23,7 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
   let getProjects = function() {
     $http.get('/api/course/projects').then(function(res) {
       self.projects = res.data;
-      // console.log(self.projects);
+      console.log(self.projects);
     });
   }
 
@@ -46,7 +46,7 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
     self.course = adminProjServ.courseChecked;
     console.log("self.course Name " + self.course.name);
     getLectures();
-    // getProjects();
+    getProjects();
     getStudents();
   });
 
