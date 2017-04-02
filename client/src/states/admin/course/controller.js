@@ -1,7 +1,6 @@
 function CourseComponentController($element, $http, $rootScope, adminProjServ) {
   let scope = $rootScope.$new(),
     self = this;
-  self.lectures = [];
   self.$element = $element;
   jQuery(self.$element[0].querySelector('ul.tabs')).tabs();
   self.create = true;
@@ -29,6 +28,7 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
   }
 
   let getLectures = function() {
+    self.lectures = [];
     let lectArr = self.course.lectures;
     for (var i = 0; i < lectArr.length; i++) {
       $http.get('/api/lectures/' + lectArr[i]).then(function(res) {
@@ -37,28 +37,16 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
     }
   }
 
-  let getNewLect = function() {
-    let url = '/api/lectures/nonecourse/' +  self.course._id;
-    $http.get(url).then(function(res) {
-      console.log(res.data);
-      self.lectNewSelect.availableOptions = res.data;
-      jQuery(document).ready(function() {
-        jQuery('select.selectLectures').material_select();
-      });
-    });
-  }
-
-  getLectures();
+  // getLectures();
   // getNewLect();
-  getProjects();
-  getStudents();
+  // getProjects();
+  // getStudents();
 
   scope.$on('updateCourseItem', function(event) {
     self.course = adminProjServ.courseChecked;
     console.log("self.course Name " + self.course.name);
     getLectures();
-    // getNewLect();
-    getProjects();
+    // getProjects();
     getStudents();
   });
 
