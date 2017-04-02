@@ -1,6 +1,6 @@
 require("./style.scss");
 
-function EditController($http, $element, $scope, $timeout) {
+function EditController($http, $element, $scope, $timeout, AuthService) {
   let self = this;
   self.$element = $element;
   self.editMess = {
@@ -26,7 +26,7 @@ function EditController($http, $element, $scope, $timeout) {
         self.student = res.data;
         self.editMess = {
           'title': 'Success',
-          'message': 'Your profile edit',
+          'message': 'Your profile was edited',
           "btn": "Cool!"
         };
         jQuery('.modal').modal();
@@ -41,5 +41,5 @@ function EditController($http, $element, $scope, $timeout) {
 
 }
 
-EditController.$inject = ['$http', '$element', '$scope', '$timeout'];
+EditController.$inject = ['$http', '$element', '$scope', '$timeout', 'AuthService'];
 module.exports = EditController;

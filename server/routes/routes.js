@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Lecture = require("../models/Lecture").Lecture;
 var Feedback = require("../models/Feedback").Feedback;
+var HomeworkFeedback = require("../models/HomeworkFeedback").HomeworkFeedback;
 var User = require('../models/User').User;
 var RecentTasks = require("../models/RecentTasks").RecentTasks;
 var Project = require("../models/Project").Project;
@@ -89,24 +90,26 @@ router.route('/users/all')
 
 //Students REST api
 router.route('/users')
-    .get(function(req, res, next) {
-        // res.send('respond with a resource');
-        var query = User.find({ 'userRole': 'student' });
-        query.exec ( function(err, students) {
-            if (err) throw err;
-            res.json(students);
-        });
-    })
-    .post(function(req, res) {
+  .get(function(req, res, next) {
+    // res.send('respond with a resource');
+    var query = User.find({
+      'userRole': 'student'
+    });
+    query.exec(function(err, students) {
+      if (err) throw err;
+      res.json(students);
+    });
+  })
+  .post(function(req, res) {
 
-        var user = new User();
-        user.firstName = req.body.firstName;
-        user.lastName = req.body.lastName;
-        user.email = req.body.email;
-        user.password = 'password';
-        user.active = 'active';
-        user.username = req.body.username;
-        user.userRole = req.body.userRole;
+    var user = new User();
+    user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
+    user.email = req.body.email;
+    user.password = 'password';
+    user.active = 'active';
+    user.username = req.body.username;
+    user.userRole = req.body.userRole;
 
     user.save(function(err) {
       if (err)
@@ -297,6 +300,7 @@ router.route('/lectures')
     lecture.contentPractice = req.body.contentPractice;
     lecture.contentHomework = req.body.contentHomework;
     lecture.active = req.body.active;
+    lecture.courseId = "";
 
     lecture.save(function(err) {
       if (err)
@@ -451,6 +455,35 @@ router.route('/feedback/:id')
       });
     });
   });
+
+//Homework Feedback REST api
+
+router.route('/feedbacks/homework')
+  .get(function(req, res) {
+    HomeworkFeedback.find({}, function(err, feedbacks) {
+      if (err)
+        res.send(err);
+      res.json(feedbacks);
+    });
+  })
+
+.post(function(req, res) {
+  var hwFeedback = new HomeworkFeedback();
+  hwFeedback.courseId = req.body.courseId;
+  hwFeedback.lectureId = req.body.lectureId;
+  hwFeedback.date = new Date();
+  hwFeedback.homeworks = req.body.homeworks;
+
+  hwFeedback.save(function(err) {
+    if (err)
+      res.send(err);
+
+    res.json({
+      message: 'Homework Feedback created!'
+    });
+  });
+
+});
 
 // Recent tasks
 

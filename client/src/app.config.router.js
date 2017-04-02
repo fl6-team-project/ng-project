@@ -97,6 +97,10 @@ module.exports = function(app) {
             url: '/teacher',
             component: 'teacherComponent'
         })
+        .state('teacher.home', {
+            url: '/',
+            component: 'homeItemComponent'
+        })
 
         .state('teacher.editLecture', {
             url: '/edit-lecture',
@@ -109,6 +113,26 @@ module.exports = function(app) {
         .state('teacher.lectures', {
             url: '/lectures',
             component: 'teacherLectureListComponent'
+        })
+
+        .state('teacher.students', {
+            url: '/students',
+            component: 'studentListComponent'
+        })
+
+        .state('teacher.teachers', {
+            url: '/teachers',
+            component: 'teacherListComponent'
+        })
+
+        .state('teacher.project', {
+            url: '/project',
+            component: 'projectComponent'
+        })
+
+        .state('teacher.edit', {
+            url: '/edit',
+            component: 'editProfileComponent'
         })
 
         /* USER ADMIN STATE */

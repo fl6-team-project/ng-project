@@ -1,6 +1,22 @@
+.card {
+  .card-image {
+    height: 300px;
+    overflow: hidden;
+  }
+
+  .card-title .dotes {
+    color: #464547;
+
+    &:hover {
+      color: #39c2d7;
+    }
+  }
+}
+
 .cardLecture {
   .card-image {
     padding: 24px 24px 0;
+    height: auto;
 
     .dateLine .col {
       padding: 0;
@@ -40,16 +56,6 @@
     .btn {
       width: 100%;
       margin: 12px 0 0;
-    }
-  }
-}
-
-.card {
-  .card-title .dotes {
-    color: #464547;
-
-    &:hover {
-      color: #39c2d7;
     }
   }
 }
