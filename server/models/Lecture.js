@@ -48,6 +48,10 @@ var LectureSchema = new mongoose.Schema({
     active: {
         type: Boolean,
         default: true
+    },
+    courseId: {
+      type: String,
+      index: true
     }
     // owner_id: {
     //     type: mongoose.Schema.Types.ObjectId,
