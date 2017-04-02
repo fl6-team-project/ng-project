@@ -45,11 +45,15 @@
           <div class="col s6">
             <h3>Set new avatar</h3>
             <div class="input-field activeLabel">
-              <input id="avatar" ng-model="$ctrl.user.avatar" type="email" class="validate">
+              <input id="avatar" ng-model="$ctrl.user.avatar" type="text">
               <label for="avatar">Avatar</label>
             </div>
             <div class="userAvatar">
               <img ng-src="{{$ctrl.user.avatar}}" alt="">
+            </div>
+            <div class="input-field activeLabel">
+              <input id="password" ng-model="$ctrl.user.password" type="password" placeholder="Please, type your password in order to accept changes">
+              <label for="password">Password</label>
             </div>
           </div>
           <div class="col s12 center-align">

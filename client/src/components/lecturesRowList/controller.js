@@ -15,7 +15,8 @@ function LecturesRowListController($http, $state, $timeout, AuthService, popUpSe
         });
     });
 
-    self.runEdit = function (lecture) {
+    self.runEdit = function (lecture, $event) {
+        $event.preventDefault();
         $state.go(self.role + '.editLecture', {lecture: lecture });
     };
 
@@ -37,6 +38,12 @@ function LecturesRowListController($http, $state, $timeout, AuthService, popUpSe
     }
 
     self.openCheckHWPopUp = function(id){
+        self.serv = 'homework';
+        let idLecture = '#hw'+id;
+        popUpService.openPopUpClick(idLecture);
+    }
+
+    self.openLeaveHWPopUp = function(id){
       self.serv = 'homework';
       let idLecture = '#hw'+id;
       popUpService.openPopUpClick(idLecture);
