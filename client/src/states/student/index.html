@@ -3,7 +3,9 @@
         <li>
             <div class="userView center-align">
                 <div class="background"></div>
-                <a ui-sref="user"><img class="userLogo" ng-src="{{$ctrl.user.avatar}}"></a>
+                <div class="userViewBox">
+                  <a ui-sref="user"><img class="userLogo" ng-src="{{$ctrl.user.avatar}}"></a>
+                </div>
                 <p class="name">{{$ctrl.user.firstName}} {{$ctrl.user.lastName}}</p>
             </div>
         </li>
