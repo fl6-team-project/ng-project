@@ -1,6 +1,7 @@
 function feedbackPopUpController($http, $element) {
   let self = this;
   self.$element = $element;
+    self.feedback = '';
   self.sendFeedback = function() {
     let data = {
       lectureId: self.lecture._id,
@@ -18,7 +19,7 @@ function feedbackPopUpController($http, $element) {
     self.overal = '';
     self.whatWasGood = '';
     self.whatWasBad = '';
-  }
+  };
 
   self.sendHWFeedback = function() {
     let data = {
@@ -33,6 +34,16 @@ function feedbackPopUpController($http, $element) {
         self.error = true;
       });
     self.homeworks = '';
+  };
+
+  self.getHWFeedback = function(id) {
+
+    $http.get('/api/feedbacks/homework/:id').then(function(res) {
+          self.feedback = res.data;
+        },
+        function(err) {
+          self.error = true;
+        });
   };
 }
 

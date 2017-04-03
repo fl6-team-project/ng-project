@@ -537,6 +537,17 @@ router.route('/feedbacks/homework')
 
 });
 
+// Get Feedback about particular lecture:
+
+router.route('/feedbacks/homework/:id')
+    .get(function(req, res) {
+        HomeworkFeedback.find({lectureId: id}, function(err, feedbacks) {
+            if (err)
+                res.send(err);
+            res.json(feedbacks);
+        });
+    });
+
 // Recent tasks
 
 router.route('/tasks/recent/:id')

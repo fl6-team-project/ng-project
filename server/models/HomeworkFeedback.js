@@ -9,6 +9,10 @@ var HWFeedbackSchema = new mongoose.Schema({
         type: String,
         index: true
     },
+    lectureId: {
+        type: String,
+        index: true
+    },
     theme: {
         type: String,
         index: true
