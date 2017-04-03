@@ -7,11 +7,13 @@ let personsItemComponent = require("./personItem/component"),
     adminProjServ = require("../services/adminProjServ"),
     adminTeamItemComponent = require("./adminTeamItem/component"),
     adminProjectFormComponent = require("./adminProjectForm/component"),
-    popUpInfoComponent = require("./popUpInfo/component");
-    lecturesRowListComponent = require("./lecturesRowList/component");
+    popUpInfoComponent = require("./popUpInfo/component"),
+    lecturesRowListComponent = require("./lecturesRowList/component"),
     groupProjectTeamComponent = require("./groupProjectTeam/component"),
     groupProjectInfoComponent = require("./groupProjectInfo/component"),
-    lectureDataInputComponent = require("./lectureDataInput/component");
+    lectureDataInputComponent = require("./lectureDataInput/component"),
+    editProfileComponent = require("./editProfile/component");
+
 
 module.exports = function(app) {
 
@@ -26,6 +28,7 @@ module.exports = function(app) {
   app.component('adminTeamItem', adminTeamItemComponent);
   app.component('popUpInfo', popUpInfoComponent);
   app.component('adminProjectForm', adminProjectFormComponent);
+  app.component('editProfile', editProfileComponent);
 
   const recentTasksController = require("./tasks/recentTasksController.js");
   app.component('recentTaskItem', {

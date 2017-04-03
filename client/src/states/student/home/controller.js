@@ -1,3 +1,4 @@
+require ('./style.scss');
 function lectureCardItemController($http, $element, AuthService) {
     let self = this;
     self.$element = $element;
@@ -8,7 +9,6 @@ function lectureCardItemController($http, $element, AuthService) {
     });
 
     $http.get('/api/lectures/showteacher/last').then(function (res) {
-        console.log(res.data);
         self.lectures = res.data;
     });
 
