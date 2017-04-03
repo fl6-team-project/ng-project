@@ -1,3 +1,4 @@
+require ('./style.scss');
 function lectureCardItemController($http, $element, AuthService) {
     let self = this;
     self.$element = $element;

@@ -1,6 +1,6 @@
 require("./style.scss");
 
-function EditController($http, $element, $scope, $timeout, AuthService) {
+function EditController($http, $element, AuthService) {
   let self = this;
   self.$element = $element;
   self.editMess = {
@@ -19,11 +19,13 @@ function EditController($http, $element, $scope, $timeout, AuthService) {
     console.log("save");
     let url = '/api/users/' + self.user._id;
     let data = self.user;
-    console.log(data);
+
     self.error = false;
 
     $http.put(url, data).then(function(res) {
         self.student = res.data;
+        self.userobj = data;
+        console.log(data);
         self.editMess = {
           'title': 'Success',
           'message': 'Your profile was edited',
@@ -41,5 +43,5 @@ function EditController($http, $element, $scope, $timeout, AuthService) {
 
 }
 
-EditController.$inject = ['$http', '$element', '$scope', '$timeout', 'AuthService'];
+EditController.$inject = ['$http', '$element', 'AuthService'];
 module.exports = EditController;
