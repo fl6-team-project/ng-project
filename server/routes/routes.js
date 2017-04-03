@@ -278,6 +278,7 @@ router.route('/teachers/:id')
     });
   });
 
+
 //Lectures REST api
 router.route('/lectures')
   .get(function(req, res, next) {
@@ -313,14 +314,65 @@ router.route('/lectures')
 
   });
 
-router.route('/lectures/last')
+// api to get lectures with teacher info object
+router.route('/lectures/showteacher')
+    .get(function(req, res, next) {
+        Promise.all([
+            Lecture.find({}).exec(),
+            User.find({}).exec()
+        ]).then(function(results) {
+            let lectures = results[0],
+                teachers = results[1];
+
+            lectures.forEach(function (lecture) {
+                teachers.forEach(function (teacher) {
+
+                    if (lecture.teacherId == teacher._id){
+                        lecture.teacherId = '';
+                        lecture.teacher = {
+                            'firstName': teacher.firstName,
+                            'lastName': teacher.lastName,
+                            'email': teacher.email
+                        };
+                    }
+                });
+            });
+            res.json(lectures);
+        }).catch(function(err) {
+            res.send(err);
+        });
+    });
+
+// api to show 2 last lectures
+router.route('/lectures/showteacher/last')
   .get(function(req, res, next) {
-    Lecture.find({}, function(err, lectures) {
-      if (err) throw err;
-      res.json(lectures);
-    }).sort({
-      $natural: -1
-    }).limit(2);
+    let curDate = new Date();
+      Promise.all([
+          Lecture.find({"lectureScheduledDate":{$lt: curDate}}).sort({
+                "lectureScheduledDate":-1}).limit(2).exec(),
+          User.find({}).exec()
+      ]).then(function(results) {
+          let lectures = results[0],
+              teachers = results[1];
+
+          // set teacher values to lecture
+          lectures.forEach(function (lecture) {
+              teachers.forEach(function (teacher) {
+
+                  if (lecture.teacherId == teacher._id){
+                      lecture.teacherId = '';
+                      lecture.teacher = {
+                          'firstName': teacher.firstName,
+                          'lastName': teacher.lastName,
+                          'email': teacher.email
+                      };
+                  }
+              });
+          });
+          res.json(lectures);
+      }).catch(function(err) {
+          res.send(err);
+      });
   });
 
 //Single lecture api

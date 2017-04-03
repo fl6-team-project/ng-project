@@ -36,9 +36,9 @@
                     <div class="lectureLine">
                         <p class="normalWeight">Teacher:</p>
                         <p>
-                            <a href="malito: {{$ctrl.getTeacher(lecture.teacherId).email}}">
-                                {{$ctrl.getTeacher(lecture.teacherId).firstName}}
-                                {{$ctrl.getTeacher(lecture.teacherId).lastName}}
+                            <a href="malito: {{lecture.teacher.email}}">
+                                {{lecture.teacher.firstName}}
+                                {{lecture.teacher.lastName}}
                             </a>
                         </p>
                     </div>
