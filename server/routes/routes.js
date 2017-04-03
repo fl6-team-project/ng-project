@@ -541,10 +541,10 @@ router.route('/feedbacks/homework')
 
 router.route('/feedbacks/homework/:id')
     .get(function(req, res) {
-        HomeworkFeedback.find({lectureId: id}, function(err, feedbacks) {
+        HomeworkFeedback.find({lectureId: req.params.id}, function(err, feedback) {
             if (err)
                 res.send(err);
-            res.json(feedbacks);
+            res.json(feedback);
         });
     });
 

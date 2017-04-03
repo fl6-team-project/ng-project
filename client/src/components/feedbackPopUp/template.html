@@ -1,4 +1,4 @@
-<div id="fb{{feedbackPopUp.lecture._id}}" class="modal modalForm" ng-if="feedbackPopUp.serv">
+<div id="fb{{feedbackPopUp.lecture._id}}" class="modal modalForm">
   <form class="" ng-submit="feedbackPopUp.sendFeedback()">
 
     <div class="modal-content">
@@ -24,7 +24,7 @@
   </form>
 </div>
 
-<div id="hw{{feedbackPopUp.lecture._id}}" class="modal modalForm" ng-if="feedbackPopUp.serv">
+<div id="hw{{feedbackPopUp.lecture._id}}" class="modal modalForm">
   <form class="" ng-submit="feedbackPopUp.sendHWFeedback()">
 
     <div class="modal-content">
@@ -40,4 +40,15 @@
       </div>
     </div>
   </form>
+</div>
+
+<div id="hw_ch{{feedbackPopUp.lecture._id}}" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4 class="center-align">Feedback about homework:
+        {{feedbackPopUp.lecture.name}}</h4>
+        <p class="materialize-textarea" ng-bind="feedbackPopUp.homeworks_view"></p>
+        <div class="modal-footer">
+          <a class="modal-action modal-close waves-effect waves-effect btn-flat">Got it!</a>
+        </div>
+    </div>
 </div>

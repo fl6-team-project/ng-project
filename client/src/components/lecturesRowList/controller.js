@@ -37,19 +37,8 @@ function LecturesRowListController($http, $state, $timeout, AuthService, popUpSe
     };
 
     self.openPopUpClick = function(id){
-      self.serv = 'feedback';
       popUpService.openPopUpClick(id);
-    }
-
-    self.openCheckHWPopUp = function(id){
-      self.serv = 'homework';
-      popUpService.openPopUpClick(id);
-    }
-
-    self.openLeaveHWPopUp = function(id){
-      self.serv = 'homework';
-      popUpService.openPopUpClick(id);
-    }
+    };
     
     $timeout(function () {
         $('.collapsible').collapsible({
