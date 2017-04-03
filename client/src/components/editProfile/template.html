@@ -52,12 +52,13 @@
               <img ng-src="{{$ctrl.user.avatar}}" alt="">
             </div>
             <div class="input-field activeLabel">
-              <input id="password" ng-model="$ctrl.user.password" type="password" placeholder="Please, type your password in order to accept changes">
+              <input required id="password" ng-model="$ctrl.user.password"
+                     type="password" placeholder="Please, type your password in order to accept changes">
               <label for="password">Password</label>
             </div>
           </div>
           <div class="col s12 center-align">
-            <button type="submit" class="btn waves-effect waves-light btn blueBtn">Save</button>
+            <button type="submit" class="btn waves-effect waves-light btn blueBtn" >Save</button>
           </div>
 
         </form>
