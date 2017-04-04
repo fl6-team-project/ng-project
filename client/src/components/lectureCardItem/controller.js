@@ -1,7 +1,12 @@
 require('./style.scss');
 
-function LectureCardItemController(popUpService) {
+function LectureCardItemController(popUpService, AuthService) {
   let self = this;
+
+  AuthService.userRole().then(function (userRole) {
+    self.role = userRole;
+  });
+
   self.openPopUpClick = function(id){
     self.serv = 'feedback';
     popUpService.openPopUpClick(id);
@@ -13,5 +18,5 @@ function LectureCardItemController(popUpService) {
   }
 }
 
-LectureCardItemController.$inject = ['popUpService'];
+LectureCardItemController.$inject = ['popUpService', 'AuthService'];
 module.exports = LectureCardItemController;

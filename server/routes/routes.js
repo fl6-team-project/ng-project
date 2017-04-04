@@ -521,27 +521,27 @@ router.route('/feedbacks')
       res.json(feedbacks);
     });
   })
+  .post(function(req, res) {
+    var feedback = new Feedback();
+    feedback.courseId = req.body.courseId;
+    feedback.studentId = req.body.studentId;
+    feedback.lectureId = req.body.lectureId;
+    feedback.date = new Date();
+    feedback.overal = req.body.overal;
+    feedback.whatWasGood = req.body.whatWasGood;
+    feedback.whatWasBad = req.body.whatWasBad;
 
-.post(function(req, res) {
-  var feedback = new Feedback();
-  feedback.courseId = req.body.courseId;
-  feedback.studentId = req.body.studentId;
-  feedback.lectureId = req.body.lectureId;
-  feedback.date = new Date();
-  feedback.overal = req.body.overal;
-  feedback.whatWasGood = req.body.whatWasGood;
-  feedback.whatWasBad = req.body.whatWasBad;
+    feedback.save(function(err) {
+      if (err)
+        res.send(err);
 
-  feedback.save(function(err) {
-    if (err)
-      res.send(err);
-
-    res.json({
-      message: 'Feedback created!'
+      res.json({
+        message: 'Feedback created!'
+      });
     });
+
   });
 
-});
 //Single feedback api
 router.route('/feedback/:id')
   .get(function(req, res) {
@@ -555,7 +555,6 @@ router.route('/feedback/:id')
     Feedback.findById(req.params.id, function(err, feedback) {
       if (err)
         res.send(err);
-
       feedback.courseId = req.body.courseId;
       feedback.studentId = req.body.studentName;
       feedback.lectureId = req.body.lecturerName;

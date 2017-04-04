@@ -9,6 +9,10 @@ var FeedbackSchema = new mongoose.Schema({
         type: String,
         index: true
     },
+    userId: {
+        type: String,
+        index: true
+    },
     studentName: {
         type: String,
         index: true
