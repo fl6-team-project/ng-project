@@ -190,15 +190,11 @@ router.route('/users/:id')
     });
   })
   .put(function(req, res) {
-    checkForId(req.params.id, next);
-
     User.findById(req.params.id, function(err, student) {
       if (err)
         res.send(err);
 
-      if (req.body.firstName) {
-        student.firstName = req.body.firstName;
-      }
+      student.firstName = req.body.firstName;
       student.firstName = req.body.firstName;
       student.lastName = req.body.lastName;
       student.email = req.body.email;
@@ -207,14 +203,10 @@ router.route('/users/:id')
       student.avatar = req.body.avatar;
       student.aboutMe = req.body.aboutMe;
       student.username = req.body.username;
-      if (req.body.password) {
-        student.password = req.body.password;
-      }
+      student.password = req.body.password;
       student.active = req.body.active;
       student.groupProjectId = req.body.groupProjectId;
-      if (req.body.userRole) {
-        student.userRole = req.body.userRole;
-      }
+      student.userRole = req.body.userRole;
 
       student.save(function(err) {
         if (err)
