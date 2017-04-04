@@ -221,11 +221,10 @@ router.route('/users/:id')
     });
   })
   .put(function(req, res) {
-    checkForId(req.params.id, next);
-
     User.findById(req.params.id, function(err, student) {
       if (err)
         res.send(err);
+
       student.firstName = req.body.firstName;
       student.firstName = req.body.firstName;
       student.lastName = req.body.lastName;
