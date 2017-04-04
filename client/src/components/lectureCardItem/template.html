@@ -62,6 +62,8 @@
       </div>
       <button class="waves-effect waves-light btn blueBtn" ng-click="$ctrl.openPopUpClick('fb'+ $ctrl.lecture._id)">Leave feedback</button>
       <button class="waves-effect waves-light btn blueBtn" ng-click="$ctrl.openCheckHWPopUp('hw' + $ctrl.lecture._id)">Check HW feedback</button>
+      <button class="waves-effect waves-light btn blueBtn" ng-if="$ctrl.role === 'admin' || $ctrl.role === 'teacher'"
+              ng-click="$ctrl.openPopUpClick('hw' + lecture._id)">Leave HW feedback</button>
     </div>
   </div>
   <feedback-pop-up lecture="$ctrl.lecture" serv="$ctrl.serv"></feedback-pop-up>

@@ -496,7 +496,7 @@ router.route('/feedbacks')
 .post(function(req, res) {
   var feedback = new Feedback();
   feedback.courseId = req.body.courseId;
-  feedback.studentId = req.body.studentId;
+  feedback.userId = req.body.userId;
   feedback.lectureId = req.body.lectureId;
   feedback.date = new Date();
   feedback.overal = req.body.overal;
@@ -528,7 +528,7 @@ router.route('/feedback/:id')
         res.send(err);
 
       feedback.courseId = req.body.courseId;
-      feedback.studentId = req.body.studentName;
+      feedback.userId = req.body.userId;
       feedback.lectureId = req.body.lecturerName;
       feedback.date = new Date();
       feedback.overal = req.body.overal;
