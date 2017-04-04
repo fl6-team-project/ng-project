@@ -69,7 +69,7 @@ var UserSchema = new mongoose.Schema({
         index: true
     },
     courseId: {
-        type: Array,
+        type: String,
         index: true
     },
     groupProjectId: {

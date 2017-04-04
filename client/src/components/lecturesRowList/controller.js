@@ -39,7 +39,7 @@ function LecturesRowListController($http, $state, $timeout, AuthService, popUpSe
     self.openPopUpClick = function(id){
       popUpService.openPopUpClick(id);
     };
-    
+
     $timeout(function () {
         $('.collapsible').collapsible({
             accordion : true

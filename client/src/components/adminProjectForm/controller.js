@@ -20,13 +20,13 @@ function adminProjectFormController($http, adminProjServ, $rootScope) {
     $http.get('/api/teachers/nonproj/').then(function(res) {
       self.leads.model = id;
       self.leadAll = res.data;
-      if (id !== null) {
-        let updProj = {
-          groupProjectId: ''
-        };
-        let url = '/api/project/users/' + id;
-        adminProjServ.updatePersons(url, updProj);
-      }
+      // if (id !== null) {
+      //   let updProj = {
+      //     groupProjectId: ''
+      //   };
+      //   let url = '/api/project/users/' + id;
+      //   adminProjServ.updatePersons(url, updProj);
+      // }
       self.leads.availableOptions = self.leadAll;
       jQuery(document).ready(function() {
         jQuery('select.selectLead').material_select();
@@ -40,15 +40,15 @@ function adminProjectFormController($http, adminProjServ, $rootScope) {
 
     $http.get(url).then(function(res) {
       self.students = res.data;
-      if (students !== null) {
-        for (let i = 0; i < students.length; i++) {
-          let updProj = {
-            groupProjectId: ''
-          };
-          let url = '/api/project/users/' + students[i];
-          adminProjServ.updatePersons(url, updProj);
-        }
-      }
+      // if (students !== null) {
+      //   for (let i = 0; i < students.length; i++) {
+      //     let updProj = {
+      //       groupProjectId: ''
+      //     };
+      //     let url = '/api/project/users/' + students[i];
+      //     adminProjServ.updatePersons(url, updProj);
+      //   }
+      // }
       self.stud.availableOptions = self.students;
       jQuery(document).ready(function() {
         jQuery('select.selectStudents').material_select();
@@ -64,52 +64,54 @@ function adminProjectFormController($http, adminProjServ, $rootScope) {
     };
 
     let studChanArr = self.stud.model;
-    if (self.create) {
-      let url = '/api/course/projects/' + self.course._id;
-      $http.post(url, data).then(function(res) {
-          self.projCur = res.data;
-          let updProj = {
-            groupProjectId: self.projCur._id
-          };
-          let url = '/api/project/users/' + self.leads.model;
+    // if (self.create) {
+    let url = '/api/course/projects/' + self.course._id;
+    $http.post(url, data).then(function(res) {
+        self.projCur = res.data;
+        console.log("self.projCur");
+        console.log(self.projCur);
+        let updProj = {
+          groupProjectId: self.projCur._id
+        };
+        let url = '/api/project/users/' + self.leads.model;
+        adminProjServ.updatePersons(url, updProj);
+        let studProjArr = self.stud.model;
+        for (let i = 0; i < studProjArr.length; i++) {
+          url = '/api/project/users/' + studProjArr[i];
           adminProjServ.updatePersons(url, updProj);
-          let studProjArr = self.stud.model;
-          for (let i = 0; i < studProjArr.length; i++) {
-            url = '/api/project/users/' + studProjArr[i];
-            adminProjServ.updatePersons(url, updProj);
-          }
-          adminProjServ.updateDataAdmCourse();
-        },
-        function(err) {
-          self.error = true;
-        });
+        }
+        adminProjServ.updateDataAdmCourse();
+      },
+      function(err) {
+        self.error = true;
+      });
 
-    } else {
-      let url = '/api/project/team/' + self.projId;
-      let data = {
-        lead: self.leads.model,
-        students: self.stud.model
-      };
-      // console.log(data)
-      $http.put(url, data).then(function(res) {
-          self.projCur = res.data;
-          let updProj = {
-            groupProjectId: self.projId
-          };
-          let url = '/api/project/users/' + self.leads.model;
-          adminProjServ.updatePersons(url, updProj);
-          let studProjArr = self.stud.model;
-          for (let i = 0; i < studProjArr.length; i++) {
-            url = '/api/project/users/' + studProjArr[i];
-            adminProjServ.updatePersons(url, updProj);
-          }
-          self.create = true;
-          adminProjServ.updateDataAdmCourse();
-        },
-        function(err) {
-          self.error = true;
-        });
-    }
+    // }
+    // else {
+    //   let url = '/api/project/team/' + self.projId;
+    //   let data = {
+    //     lead: self.leads.model,
+    //     students: self.stud.model
+    //   };
+    //   $http.put(url, data).then(function(res) {
+    //       self.projCur = res.data;
+    //       let updProj = {
+    //         groupProjectId: self.projId
+    //       };
+    //       let url = '/api/project/users/' + self.leads.model;
+    //       adminProjServ.updatePersons(url, updProj);
+    //       let studProjArr = self.stud.model;
+    //       for (let i = 0; i < studProjArr.length; i++) {
+    //         url = '/api/project/users/' + studProjArr[i];
+    //         adminProjServ.updatePersons(url, updProj);
+    //       }
+    //       self.create = true;
+    //       adminProjServ.updateDataAdmCourse();
+    //     },
+    //     function(err) {
+    //       self.error = true;
+    //     });
+    // }
   }
 
   scope.$on('updateCourseItem', function(event) {

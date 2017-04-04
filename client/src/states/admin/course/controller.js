@@ -6,7 +6,7 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
   self.create = true;
   self.course = adminProjServ.courseChecked;
 
-  self.lectNewSelect = {
+  self.studNew = {
     model: null,
     availableOptions: []
   };
@@ -17,6 +17,16 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
     $http.get(url).then(function(res) {
       self.students = res.data;
       adminProjServ.students = self.students;
+    });
+  }
+
+  let getStudentsNew = function() {
+    $http.get('/api/students/new').then(function(res) {
+      console.log(res.data);
+      self.studNew.availableOptions = res.data;
+      jQuery(document).ready(function() {
+        jQuery('select.selectStudentsNew').material_select();
+      });
     });
   }
 
@@ -37,11 +47,28 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
     }
   }
 
+  self.addStudCourse = function(){
+    let newStud = self.studNew.model;
+
+    let dataCourse = {};
+    dataCourse.courseId = self.course._id;
+    console.log(dataCourse);
+
+    for (let i = 0; i < newStud.length; i++) {
+      console.log(newStud[i]);
+
+      let url = '/api/course/users/' + newStud[i];
+      adminProjServ.updatePersons(url, dataCourse);
+      adminProjServ.updateDataAdmCourse();
+    }
+  }
+
   scope.$on('updateCourseItem', function(event) {
     self.course = adminProjServ.courseChecked;
     getLectures();
     getProjects();
     getStudents();
+    getStudentsNew();
   });
 
 

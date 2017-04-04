@@ -20,7 +20,7 @@
     </p>
   </div>
   <div class="col s12 m2">
-    <div class="fixed-action-btn horizontal editBtnAction">
+    <!-- <div class="fixed-action-btn horizontal editBtnAction">
       <a class="btn-floating btn-large blueBtn">
         <i class="large material-icons">reorder</i>
       </a>
@@ -36,6 +36,11 @@
           </button>
         </li>
       </ul>
+    </div> -->
+    <div class="fixed-action-btn horizontal editBtnAction">
+      <button class="btn-floating btn-large red" ng-click="$ctrl.deleteTeam($ctrl.project)">
+        <i class="large material-icons">delete</i>
+      </button>
     </div>
   </div>
   <div class="col s12 center-align">

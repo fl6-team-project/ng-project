@@ -45,7 +45,7 @@
             <li class="collection-item avatar" ng-repeat="course in $ctrl.courses">
               <i class="material-icons circle">folder</i>
               <span class="title">{{course.name}}</span>
-              <p><b>Start from:</b> {{course.startFrom}}</p>
+              <p><b>Start from:</b> {{course.startFrom | date: "yyyy-MM-dd"}}</p>
               <button class="secondary-content buttonCollection" ng-click="$ctrl.deleteCourse(course._id)"><i class="material-icons red-text">delete</i></button>
             </li>
           </ul>

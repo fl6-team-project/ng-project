@@ -133,6 +133,19 @@ router.route('/course/students/:course')
     });
   });
 
+router.route('/students/new')
+  .get(function(req, res, next) {
+    // res.send('respond with a resource');
+    var query = User.find({
+      'userRole': 'student',
+      'courseId': ''
+    });
+    query.exec(function(err, students) {
+      if (err) throw err;
+      res.json(students);
+    });
+  });
+
 router.route('/course/students/nonproj/:course')
   .get(function(req, res, next) {
     // res.send('respond with a resource');
@@ -178,6 +191,24 @@ router.route('/project/users/:id')
     })
   });
 
+router.route('/course/users/:id')
+  .put(function(req, res) {
+    User.update({
+      _id: req.params.id
+    }, {
+      $set: {
+        "courseId": req.body.courseId
+      }
+    }, function(err) {
+      if (err)
+        res.send(err);
+
+      res.json({
+        message: 'Successfully edit'
+      });
+    })
+  });
+
 //Single student api
 router.route('/users/:id')
   .get(function(req, res, next) {
@@ -190,15 +221,11 @@ router.route('/users/:id')
     });
   })
   .put(function(req, res) {
-    checkForId(req.params.id, next);
-
     User.findById(req.params.id, function(err, student) {
       if (err)
         res.send(err);
 
-      if (req.body.firstName) {
-        student.firstName = req.body.firstName;
-      }
+      student.firstName = req.body.firstName;
       student.firstName = req.body.firstName;
       student.lastName = req.body.lastName;
       student.email = req.body.email;
@@ -207,14 +234,10 @@ router.route('/users/:id')
       student.avatar = req.body.avatar;
       student.aboutMe = req.body.aboutMe;
       student.username = req.body.username;
-      if (req.body.password) {
-        student.password = req.body.password;
-      }
+      student.password = req.body.password;
       student.active = req.body.active;
       student.groupProjectId = req.body.groupProjectId;
-      if (req.body.userRole) {
-        student.userRole = req.body.userRole;
-      }
+      student.userRole = req.body.userRole;
 
       student.save(function(err) {
         if (err)
@@ -367,63 +390,68 @@ router.route('/lectures')
 
 // api to get lectures with teacher info object
 router.route('/lectures/showteacher')
-    .get(function(req, res, next) {
-        Promise.all([
-            Lecture.find({}).exec(),
-            User.find({}).exec()
-        ]).then(function(results) {
-            let lectures = results[0],
-                teachers = results[1];
+  .get(function(req, res, next) {
+    Promise.all([
+      Lecture.find({}).exec(),
+      User.find({}).exec()
+    ]).then(function(results) {
+      let lectures = results[0],
+        teachers = results[1];
 
-            lectures.forEach(function (lecture) {
-                teachers.forEach(function (teacher) {
+      lectures.forEach(function(lecture) {
+        teachers.forEach(function(teacher) {
 
-                    if (lecture.teacherId == teacher._id){
-                        lecture.teacherId = '';
-                        lecture.teacher = {
-                            'firstName': teacher.firstName,
-                            'lastName': teacher.lastName,
-                            'email': teacher.email
-                        };
-                    }
-                });
-            });
-            res.json(lectures);
-        }).catch(function(err) {
-            res.send(err);
+          if (lecture.teacherId == teacher._id) {
+            lecture.teacherId = '';
+            lecture.teacher = {
+              'firstName': teacher.firstName,
+              'lastName': teacher.lastName,
+              'email': teacher.email
+            };
+          }
         });
+      });
+      res.json(lectures);
+    }).catch(function(err) {
+      res.send(err);
     });
+  });
 
 // api to show 2 last lectures
 router.route('/lectures/showteacher/last')
   .get(function(req, res, next) {
     let curDate = new Date();
-      Promise.all([
-          Lecture.find({"lectureScheduledDate":{$lt: curDate}}).sort({
-                "lectureScheduledDate":-1}).limit(2).exec(),
-          User.find({}).exec()
-      ]).then(function(results) {
-          let lectures = results[0],
-              teachers = results[1];
+    Promise.all([
+      Lecture.find({
+        "lectureScheduledDate": {
+          $lt: curDate
+        }
+      }).sort({
+        "lectureScheduledDate": -1
+      }).limit(2).exec(),
+      User.find({}).exec()
+    ]).then(function(results) {
+      let lectures = results[0],
+        teachers = results[1];
 
-          // set teacher values to lecture
-          lectures.forEach(function (lecture) {
-              teachers.forEach(function (teacher) {
+      // set teacher values to lecture
+      lectures.forEach(function(lecture) {
+        teachers.forEach(function(teacher) {
 
-                  if (lecture.teacherId == teacher._id){
-                      lecture.teacherId = '';
-                      lecture.teacher = {
-                          'firstName': teacher.firstName,
-                          'lastName': teacher.lastName,
-                          'email': teacher.email
-                      };
-                  }
-              });
-          });
-          res.json(lectures);
-      }).catch(function(err) {
-          res.send(err);
+          if (lecture.teacherId == teacher._id) {
+            lecture.teacherId = '';
+            lecture.teacher = {
+              'firstName': teacher.firstName,
+              'lastName': teacher.lastName,
+              'email': teacher.email
+            };
+          }
+        });
       });
+      res.json(lectures);
+    }).catch(function(err) {
+      res.send(err);
+    });
   });
 
 //Single lecture api
@@ -591,13 +619,15 @@ router.route('/feedbacks/homework')
 // Get Feedback about particular lecture:
 
 router.route('/feedbacks/homework/:id')
-    .get(function(req, res) {
-        HomeworkFeedback.find({lectureId: req.params.id}, function(err, feedback) {
-            if (err)
-                res.send(err);
-            res.json(feedback);
-        });
+  .get(function(req, res) {
+    HomeworkFeedback.find({
+      lectureId: req.params.id
+    }, function(err, feedback) {
+      if (err)
+        res.send(err);
+      res.json(feedback);
     });
+  });
 
 // Recent tasks
 
@@ -717,22 +747,16 @@ router.route('/course/projects/:id')
 
   })
   .put(function(req, res) {
-    Project.findById(req.params.id, function(err, recenttasks) {
+    Project.findById(req.params.id, function(err, projects) {
       if (err)
         res.send(err);
 
-      projects.lead = req.body.lead;
-      projects.students = req.body.students;
-      if (projects.name) {
-        projects.name = req.body.name;
-      }
-      if (projects.description) {
-        projects.description = req.body.description;
-      }
-      if (projects.technologies) {
-        projects.technologies = req.body.technologies;
-      }
-      projects.courseId = req.body.courseId;
+      // projects.lead = req.body.lead;
+      // projects.students = req.body.students;
+      projects.name = req.body.name;
+      projects.description = req.body.description;
+      projects.technologies = req.body.technologies;
+      // projects.courseId = req.body.courseId;
 
       projects.save(function(err) {
         if (err)
