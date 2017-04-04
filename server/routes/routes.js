@@ -111,6 +111,7 @@ router.route('/users')
     user.username = req.body.username;
     user.userRole = req.body.userRole;
     user.groupProjectId = '';
+    user.courseId = '';
 
     user.save(function(err) {
       if (err)
@@ -198,7 +199,7 @@ router.route('/course/users/:id')
       _id: req.params.id
     }, {
       $set: {
-        "courseId": req.body.groupProjectId
+        "courseId": req.body.courseId
       }
     }, function(err) {
       if (err)
