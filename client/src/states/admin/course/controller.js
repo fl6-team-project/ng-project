@@ -14,16 +14,16 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
 
   let getStudents = function() {
     let url = '/api/course/students/' + self.course._id;
-
     $http.get(url).then(function(res) {
       self.students = res.data;
+      adminProjServ.students = self.students;
     });
   }
 
   let getProjects = function() {
-    $http.get('/api/course/projects').then(function(res) {
+    let url = '/api/course/projects/' + self.course._id;
+    $http.get(url).then(function(res) {
       self.projects = res.data;
-      console.log(self.projects);
     });
   }
 
@@ -37,14 +37,8 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
     }
   }
 
-  // getLectures();
-  // getNewLect();
-  // getProjects();
-  // getStudents();
-
   scope.$on('updateCourseItem', function(event) {
     self.course = adminProjServ.courseChecked;
-    console.log("self.course Name " + self.course.name);
     getLectures();
     getProjects();
     getStudents();

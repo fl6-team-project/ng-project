@@ -132,6 +132,52 @@ router.route('/course/students/:course')
       res.json(students);
     });
   });
+
+router.route('/course/students/nonproj/:course')
+  .get(function(req, res, next) {
+    // res.send('respond with a resource');
+    var query = User.find({
+      'userRole': 'student',
+      'courseId': req.params.course,
+      'groupProjectId': ''
+    });
+    query.exec(function(err, students) {
+      if (err) throw err;
+      res.json(students);
+    });
+  });
+
+router.route('/teachers/nonproj/')
+  .get(function(req, res, next) {
+    // res.send('respond with a resource');
+    var query = User.find({
+      'userRole': 'teacher',
+      'groupProjectId': ''
+    });
+    query.exec(function(err, teachers) {
+      if (err) throw err;
+      res.json(teachers);
+    });
+  });
+
+router.route('/project/users/:id')
+  .put(function(req, res) {
+    User.update({
+      _id: req.params.id
+    }, {
+      $set: {
+        "groupProjectId": req.body.groupProjectId
+      }
+    }, function(err) {
+      if (err)
+        res.send(err);
+
+      res.json({
+        message: 'Successfully edit'
+      });
+    })
+  });
+
 //Single student api
 router.route('/users/:id')
   .get(function(req, res, next) {
@@ -144,12 +190,15 @@ router.route('/users/:id')
     });
   })
   .put(function(req, res) {
-    // checkForId(req.params.id, next);
+    checkForId(req.params.id, next);
 
     User.findById(req.params.id, function(err, student) {
       if (err)
         res.send(err);
 
+      if (req.body.firstName) {
+        student.firstName = req.body.firstName;
+      }
       student.firstName = req.body.firstName;
       student.lastName = req.body.lastName;
       student.email = req.body.email;
@@ -158,19 +207,21 @@ router.route('/users/:id')
       student.avatar = req.body.avatar;
       student.aboutMe = req.body.aboutMe;
       student.username = req.body.username;
-      student.password = req.body.password;
+      if (req.body.password) {
+        student.password = req.body.password;
+      }
       student.active = req.body.active;
-      student.userRole = 'student';
+      student.groupProjectId = req.body.groupProjectId;
+      if (req.body.userRole) {
+        student.userRole = req.body.userRole;
+      }
 
       student.save(function(err) {
         if (err)
           res.send(err);
 
-        res.json({
-          message: 'Student updated!'
-        });
+        res.json(student);
       });
-
     });
   })
   .delete(function(req, res, next) {
@@ -574,9 +625,11 @@ router.route('/tasks/:id')
     });
   });
 
-router.route('/course/projects')
+router.route('/course/projects/:id')
   .get(function(req, res) {
-    Project.find({}, function(err, projects) {
+    Project.find({
+      'courseId': req.params.id
+    }, function(err, projects) {
       if (err)
         res.send(err);
       res.json(projects);
@@ -585,22 +638,49 @@ router.route('/course/projects')
   .post(function(req, res, next) {
 
     var projects = new Project();
-    project.lead = req.body.lead;
-    project.students = req.body.students;
-    project.name = req.body.name;
-    project.description = req.body.description;
-    project.technologies = req.body.technologies;
-    project.courseId = req.body.courseId;
+    projects.lead = req.body.lead;
+    projects.students = req.body.students;
+    projects.name = req.body.name;
+    projects.description = req.body.description;
+    projects.technologies = req.body.technologies;
+    projects.courseId = req.body.courseId;
 
     projects.save(function(err) {
       if (err)
         res.send(err);
 
-      res.json({
-        message: 'Project created!'
-      });
+      res.json(projects);
     });
 
+  })
+  .put(function(req, res) {
+    Project.findById(req.params.id, function(err, recenttasks) {
+      if (err)
+        res.send(err);
+
+      projects.lead = req.body.lead;
+      projects.students = req.body.students;
+      if (projects.name) {
+        projects.name = req.body.name;
+      }
+      if (projects.description) {
+        projects.description = req.body.description;
+      }
+      if (projects.technologies) {
+        projects.technologies = req.body.technologies;
+      }
+      projects.courseId = req.body.courseId;
+
+      projects.save(function(err) {
+        if (err)
+          res.send(err);
+
+        res.json({
+          message: 'recenttasks updated!'
+        });
+      });
+
+    });
   });
 
 router.route('/project/team/:id')

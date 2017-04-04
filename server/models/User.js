@@ -73,7 +73,7 @@ var UserSchema = new mongoose.Schema({
         index: true
     },
     groupProjectId: {
-        type: Array,
+        type: String,
         index: true
     }
     // owner_id: {

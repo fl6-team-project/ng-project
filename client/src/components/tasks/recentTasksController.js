@@ -6,6 +6,7 @@ function recentTasksController($http, AuthService, sharedService, $rootScope) {
   let getData = function(){
     let url = '/api/tasks/recent/' + id;
     $http.get(url).then(function(res) {
+      console.log(res.data);
       self.tasks = res.data;
     });
   };
