@@ -5,6 +5,10 @@ var FeedbackSchema = new mongoose.Schema({
         type: String,
         index: true
     },
+    lectureId: {
+        type: String,
+        index: true
+    },
     studentName: {
         type: String,
         index: true
