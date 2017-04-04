@@ -46,6 +46,10 @@ label {
       margin-right: 10px;
     }
   }
+
+  .filterLine {
+    padding: 0 12px;
+  }
 }
 
 .containerContent {
@@ -74,19 +78,19 @@ label {
   }
 }
 
-.userViewBox{
+.userViewBox {
   width: 100px;
   height: 100px;
   overflow: hidden;
   border-radius: 50%;
   display: inline-block;
+
   .userLogo {
     width: 100%;
     min-height: 100%;
     margin: 0 auto;
   }
 }
-
 
 .side-nav {
   transform: translateX(0px);
@@ -109,11 +113,12 @@ label {
     }
   }
 
-  .collapsible{
-    a{
+  .collapsible {
+    a {
       padding: 0 32px;
     }
-    .collapsible-body a{
+
+    .collapsible-body a {
       color: #464547;
     }
   }
@@ -175,9 +180,10 @@ label {
 }
 
 .tabPanel {
-  .tabContent{
+  .tabContent {
     padding: 32px 0 16px;
   }
+
   .tabs {
     .indicator {
       background-color: #39c2d7;
@@ -201,7 +207,8 @@ label {
   border-bottom: 2px solid #39c2d7;
 }
 
-[type="radio"]:checked + label:after, [type="radio"].with-gap:checked + label:after{
+[type="radio"]:checked + label:after,
+[type="radio"].with-gap:checked + label:after {
   background-color: #39c2d7;
   border-color: #39c2d7;
 }
@@ -231,7 +238,8 @@ label {
       }
     }
   }
-  &.modalForm{
+
+  &.modalForm {
     top: 0 !important;
     max-height: 100%;
     padding-bottom: 20px;
@@ -251,9 +259,10 @@ label {
   }
 }
 
-.blueBtn{
+.blueBtn {
   background: #39c2d7;
   color: #fff;
+
   &:hover {
     background-color: darken(#39c2d7, 10%);
   }
@@ -263,6 +272,6 @@ label {
   }
 }
 
-.radioLine{
+.radioLine {
   padding: 16px 0 32px;
 }

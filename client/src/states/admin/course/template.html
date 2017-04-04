@@ -24,6 +24,21 @@
         </div>
         <div id="students" class="col s12">
           <div class="tabContent">
+            <form ng-submit="$ctrl.addStudCourse()">
+              <div class="input-field col s12 s12">
+                <select multiple class="icons selectStudentsNew" ng-model="$ctrl.studNew.model">
+                  <option value="" disabled selected>Choose students</option>
+                  <option ng-repeat="option in $ctrl.studNew.availableOptions" value="{{option._id}}" data-icon="{{option.avatar}}" class="circle">{{option.firstName}}
+                    {{option.lastName}}</option>
+                </select>
+                <label>Choose students for this course</label>
+              </div>
+              <div class="center-align">
+                <button type="submit" class="waves-effect waves-light btn blueBtn">Add</button>
+              </div>
+            </form>
+          </div>
+          <div class="tabContent">
             <person-item ng-repeat="person in $ctrl.students" person="person"></person-item>
           </div>
         </div>

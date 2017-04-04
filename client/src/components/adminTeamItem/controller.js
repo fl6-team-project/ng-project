@@ -20,11 +20,10 @@ function adminTeamItemController($http, $rootScope, $scope, $element, adminProjS
     }
   };
 
-  self.editTeam = function(id){
-    self.projectitem = self.project;
-    // console.log("id = " + self.project._id);
-    self.teamForm = true;
-  }
+  // self.editTeam = function(id){
+  //   self.projectitem = self.project;
+  //   self.teamForm = true;
+  // }
 
   self.deleteTeam = function(project){
     let updProj = {

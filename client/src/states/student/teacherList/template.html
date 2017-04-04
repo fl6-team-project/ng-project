@@ -1,11 +1,14 @@
 <div class="headerTop">
-    <h1>TEACHERS LIST</h1>
+  <h1>TEACHERS LIST</h1>
 </div>
 
-<div>
-    <label> <h2>Search teachers:</h2>
-        <input type="text" ng-model="teacherFilter" placeholder="Enter teacher's name or e-mail here...">
+<div class="main">
+  <div class="filterLine">
+    <label>
+      <h2>Search teachers:</h2>
+      <input type="text" ng-model="teacherFilter" placeholder="Enter teacher's name or e-mail here...">
     </label>
-</div>
+  </div>
 
-<person-item  ng-repeat="person in $ctrl.persons | filter: {$: teacherFilter}" person="person"></person-item>
+  <person-item ng-repeat="person in $ctrl.persons | filter: {$: teacherFilter}" person="person"></person-item>
+</div>

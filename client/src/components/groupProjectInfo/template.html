@@ -1,3 +1,26 @@
-<h3 class="center-align">{{$ctrl.project.name}}</h3>
+<h3 class="center-align">Name: {{$ctrl.project.name}}</h3>
 <p><b>Description:</b> {{$ctrl.project.description}}</p>
 <p><b>Technologies:</b> {{$ctrl.project.technologies}}</p>
+
+<div class="row" ng-if="$ctrl.role === 'teacher'">
+  <h3 class="center-align">Edit description:</h3>
+  <form ng-submit="$ctrl.saveTeamDesc($ctrl.project._id)">
+    <div class="input-field activeLabel">
+      <input id="name" type="text" ng-model="$ctrl.project.name">
+      <label for="name">Name</label>
+    </div>
+    <div class="input-field activeLabel">
+      <textarea id="description" class="materialize-textarea" ng-model="$ctrl.project.description"></textarea>
+      <label for="description">Description</label>
+    </div>
+    <div class="input-field activeLabel">
+      <textarea id="technologies" class="materialize-textarea" ng-model="$ctrl.project.technologies"></textarea>
+      <label for="technologies">Technologies</label>
+    </div>
+    <div class="center-align">
+      <button type="submit" class="waves-effect waves-light btn blueBtn">Save</button>
+    </div>
+  </form>
+</div>
+
+<pop-up-info message="$ctrl.editMess"></pop-up-info>
