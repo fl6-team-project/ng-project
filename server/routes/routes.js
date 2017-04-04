@@ -110,6 +110,7 @@ router.route('/users')
     user.active = 'active';
     user.username = req.body.username;
     user.userRole = req.body.userRole;
+    user.groupProjectId = '';
 
     user.save(function(err) {
       if (err)
