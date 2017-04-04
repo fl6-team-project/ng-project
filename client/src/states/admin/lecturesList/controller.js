@@ -1,12 +1,23 @@
-require ('./style.scss');
+require('./style.scss');
 
-function LecturesListController($state) {
-    let self = this;
-    self.runAdd = function () {
-        $state.go('admin.addLecture');
-    };
+function LecturesListController($state, $http, popUpService) {
+  let self = this;
+  self.runAdd = function() {
+    $state.go('admin.addLecture');
+  };
+
+  self.openPopUpClick = function(id){
+    popUpService.openPopUpClick(id);
+  };
+
+  $http.get('/api/lectures').then(function(res) {
+    console.log(res.data);
+      self.lectures = res.data.sort(function (a, b) {
+          return new Date(a.lectureScheduledDate).getTime() - new Date(b.lectureScheduledDate).getTime();
+      });
+  });
 
 }
-LecturesListController.$inject = ['$state'];
+LecturesListController.$inject = ['$state', '$http', 'popUpService'];
 
 module.exports = LecturesListController;

@@ -2,12 +2,13 @@
   <h1>Lectures</h1>
 </div>
 <div class="main">
-  <lectures-row-list></lectures-row-list>
-
-  <div class="row center-align">
-    <button ng-click="$ctrl.runAdd()" class="btn waves-effect waves-light btn-large">
-      ADD
+  <lectures-row-list lectures="$ctrl.lectures"></lectures-row-list>
+  <!-- <div class="row center-align">
+    <button ng-click="$ctrl.runAdd()" class="btn waves-effect waves-light btn-large blueBtn">
+      Add lecture
     </button>
+  </div> -->
+  <div class="fixed-action-btn">
+    <button ng-click="$ctrl.runAdd()" class="btn-floating btn-large waves-effect waves-light circleBtn blueBtn"><i class="material-icons">add</i></button>
   </div>
 </div>
-
