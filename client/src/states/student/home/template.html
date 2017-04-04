@@ -1,18 +1,18 @@
 <div class="headerTop">
-  <h1>Home</h1>
+  <h1>HOME</h1>
 </div>
 
 <div class="main">
   <div class="row">
-    <div class="col s12 m8 white">
-      <div class="row tabPanel">
-        <h2 class="center-align">Recent tasks</h2>
+    <div class="col s12 l8 ">
+      <h2 class="center-align">Recent tasks:</h2>
+      <div class="row tabPanel white tasks-panel">
         <div class="col s12">
           <ul class="tabs">
-            <li class="tab col s3">
+            <li class="tab col s4">
               <a href="#activeTasks" class="active">Active tasks</a>
             </li>
-            <li class="tab col s3">
+            <li class="tab col s4">
               <a href="#newTasks">Closed tasks</a>
             </li>
           </ul>
@@ -26,7 +26,8 @@
         </div>
       </div>
     </div>
-    <div class="col s12 m4">
+    <div class="col s12 l4">
+      <h2 class="center-align">Last lectures:</h2>
       <lecture-card-item ng-repeat="lecture in $ctrl.lectures" lecture="lecture"></lecture-card-item>
     </div>
   </div>

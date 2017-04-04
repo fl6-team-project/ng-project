@@ -35,7 +35,12 @@
                 <div class="col s12 m6">
                     <div class="lectureLine">
                         <p class="normalWeight">Teacher:</p>
-                        <p>{{lecture.lectorName}}</p>
+                        <p>
+                            <a href="malito: {{lecture.teacher.email}}">
+                                {{lecture.teacher.firstName}}
+                                {{lecture.teacher.lastName}}
+                            </a>
+                        </p>
                     </div>
                     <div class="lectureLine">
                         <p class="normalWeight">Assistants:</p>

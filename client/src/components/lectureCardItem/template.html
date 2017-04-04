@@ -16,7 +16,12 @@
     </div>
     <div class="lectureLine">
       <p class="normalWeight">Teacher:</p>
-      <p>{{$ctrl.lecture.lectorName}}</p>
+      <p>
+        <a href="malito: {{$ctrl.lecture.teacher.email}}">
+          {{$ctrl.lecture.teacher.firstName}}
+          {{$ctrl.lecture.teacher.lastName}}
+        </a>
+      </p>
     </div>
     <div class="lectureLine">
       <p class="normalWeight">Assistants:</p>
@@ -44,9 +49,13 @@
     <div class="describeCard">
       <div class="lectureLine">
         <p class="normalWeight">Teacher:</p>
-        <p>{{$ctrl.lecture.lectorName}}</p>
+        <p>
+          <a href="malito: {{$ctrl.lecture.teacher.email}}">
+            {{$ctrl.lecture.teacher.firstName}}
+            {{$ctrl.lecture.teacher.lastName}}
+          </a>
+        </p>
       </div>
-      <a href="mailto:test@mail.test">test@mail.test</a>
       <div class="lectureLine">
         <p class="normalWeight">Deadline:</p>
         <p>{{$ctrl.lecture.homeworkDeadline | date: "yyyy-MM-dd"}}</p>

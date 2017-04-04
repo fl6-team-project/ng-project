@@ -4,9 +4,10 @@ const homeItemComponent = require('./states/student/home/component');
 const studentLecturesListComponent = require('./states/student/lecturesList/component');
 const studentComponent = require('./states/student/component');
 const projectComponent = require('./states/student/project/component');
-const editProfileComponent = require('./states/student/edit/component');
+const editStudentComponent = require('./states/student/edit/component');
 const adminComponent = require('./states/admin/component');
 const teacherComponent = require('./states/teacher/component');
+const editTeacherComponent = require('./states/teacher/edit/component');
 const editLectureComponent = require('./states/teacher/editLecture/component');
 const teacherLectureListComponent = require('./states/teacher/lecturesList/component');
 const loginComponent = require('./states/auth/login/loginComponent');
@@ -31,10 +32,11 @@ module.exports = function(app) {
   app.component('adminComponent', adminComponent);
   app.component('teacherComponent', teacherComponent);
   app.component('editLectureComponent', editLectureComponent);
+  app.component('editTeacherComponent', editTeacherComponent);
   app.component('teacherLectureListComponent', teacherLectureListComponent);
   app.component('loginComponent', loginComponent);
   app.component('registerComponent', registerComponent);
-  app.component('editProfileComponent', editProfileComponent);
+  app.component('editStudentComponent', editStudentComponent);
   app.component('adminCourseComponent', adminCourseComponent);
   app.component('addLectureComponent', addLectureComponent);
   app.component('adminEditLectureComponent', adminEditLectureComponent);
@@ -89,7 +91,7 @@ module.exports = function(app) {
 
         .state('student.edit', {
             url: '/edit',
-            component: 'editProfileComponent'
+            component: 'editStudentComponent'
         })
 
         /* USER TEACHER STATE */
@@ -132,7 +134,7 @@ module.exports = function(app) {
 
         .state('teacher.edit', {
             url: '/edit',
-            component: 'editProfileComponent'
+            component: 'editTeacherComponent'
         })
 
         /* USER ADMIN STATE */

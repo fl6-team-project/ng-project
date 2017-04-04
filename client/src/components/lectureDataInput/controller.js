@@ -4,17 +4,11 @@ function LectureDataInputController($http, $state, $timeout, AuthService) {
     self = this;
     self.role = '';
 
-    self.data = {
-        model: null,
-        availableOptions: [
-            {id: '1', name: 'Option A'},
-            {id: '2', name: 'Option B'},
-            {id: '3', name: 'Option C'}
-        ]
-    };
-
     $http.get('/api/teachers').then(function (res) {
         self.teachers = res.data;
+        jQuery(document).ready(function() {
+            jQuery('select').material_select();
+        });
     });
 
     AuthService.userRole().then(function (userRole) {
@@ -53,9 +47,6 @@ LectureDataInputController.prototype.$onInit = function() {
         self.lecture.homeworkDeadline = new Date(self.lecture.homeworkDeadline);
     }
 
-};
-LectureDataInputController.prototype.$postLink = function () {
-    $('select').material_select();
 };
 
 LectureDataInputController.$inject = ['$http', "$state", "$timeout", "AuthService"];

@@ -17,8 +17,12 @@ var LectureSchema = new mongoose.Schema({
         type: String,
         index: true
     },
-    lectorName: {
+    teacherId: {
         type: String,
+        index: true
+    },
+    teacher:{
+        type: Object,
         index: true
     },
     homeworkDeadline: {
