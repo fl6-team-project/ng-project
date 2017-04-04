@@ -21,12 +21,23 @@ function adminTeamItemController($http, $rootScope, $scope, $element, adminProjS
   };
 
   self.editTeam = function(id){
+    self.projectitem = self.project;
+    // console.log("id = " + self.project._id);
     self.teamForm = true;
   }
 
-  self.deleteTeam = function(id){
-    console.log("delete!" + id);
-    let url = '/api/project/team/' + id;
+  self.deleteTeam = function(project){
+    let updProj = {
+      groupProjectId: ''
+    };
+    let url = '/api/project/users/' + project.lead;
+    adminProjServ.updatePersons(url, updProj);
+    let studProjArr = project.students;
+    for (var i = 0; i < studProjArr.length; i++) {
+      url = '/api/project/users/' + studProjArr[i];
+      adminProjServ.updatePersons(url, updProj);
+    }
+    url = '/api/project/team/' + project._id;
     $http.delete(url).then(function(res) {
       adminProjServ.updateDataAdmCourse();
     });
