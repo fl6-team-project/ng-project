@@ -46,7 +46,7 @@
     <div class="modal-content">
       <h4 class="center-align">Feedback about homework:
         {{feedbackPopUp.lecture.name}}</h4>
-        <p class="materialize-textarea" ng-bind="feedbackPopUp.homeworks_view"></p>
+        <p class="materialize-textarea" ng-repeat="hw in feedbackPopUp.homeworks">{{hw}}</p>
         <div class="modal-footer">
           <a class="modal-action modal-close waves-effect waves-effect btn-flat">Got it!</a>
         </div>

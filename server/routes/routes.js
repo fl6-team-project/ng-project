@@ -484,7 +484,6 @@ router.route('/feedbacks')
             res.json(feedbacks);
         });
     })
-
     .post(function(req, res) {
         var feedback = new Feedback();
         feedback.courseId = req.body.courseId;
@@ -518,7 +517,6 @@ router.route('/feedback/:id')
         Feedback.findById(req.params.id, function(err, feedback) {
             if (err)
                 res.send(err);
-
             feedback.courseId = req.body.courseId;
             feedback.studentId = req.body.studentName;
             feedback.lectureId = req.body.lecturerName;
@@ -527,7 +525,7 @@ router.route('/feedback/:id')
             feedback.whatWasGood = req.body.whatWasGood;
             feedback.whatWasBad = req.body.whatWasBad;
 
-            feedback.save(function(err) {
+          feedback.save(function(err) {
                 if (err)
                     res.send(err);
 

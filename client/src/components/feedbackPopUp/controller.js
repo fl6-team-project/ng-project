@@ -1,20 +1,25 @@
-function feedbackPopUpController($http, $element) {
+function feedbackPopUpController($http, $element, AuthService) {
 
-  this.$onInit = function() {
+  let self = this;
 
+  self.$onInit = function() {
+    self.userId = AuthService.getUser();
     $http.get('/api/feedbacks/homework/' + self.lecture._id).then(function(res) {
-          self.homeworks_view = res.data[0].homeworks;
+          self.homeworks = [];
+              res.data.forEach(function (obj) {
+                self.homeworks.push(obj.homeworks);
+              });
         },
         function(err) {
           self.error = true;
         });
   };
 
-  let self = this;
   self.$element = $element;
     self.feedback = '';
   self.sendFeedback = function() {
     let data = {
+      userId: self.userId,
       lectureId: self.lecture._id,
       overal: self.overal,
       whatWasGood: self.whatWasGood,
@@ -50,5 +55,5 @@ function feedbackPopUpController($http, $element) {
 
 }
 
-feedbackPopUpController.$inject = ['$http', '$element'];
+feedbackPopUpController.$inject = ['$http', '$element', 'AuthService'];
 module.exports = feedbackPopUpController;
