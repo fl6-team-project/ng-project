@@ -1,4 +1,4 @@
-function StudentListController($http) {
+function StudentListContTeach($http) {
     let self = this;
 
     $http.get('/api/users').then(function(res) {
@@ -6,6 +6,6 @@ function StudentListController($http) {
     });
 }
 // This is an angular special property. One of the way to safely inject smth to controller function
-StudentListController.$inject = ['$http'];
+StudentListContTeach.$inject = ['$http'];
 
-module.exports = StudentListController;
+module.exports = StudentListContTeach;

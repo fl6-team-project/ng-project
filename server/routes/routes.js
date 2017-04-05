@@ -122,6 +122,7 @@ router.route('/users')
       });
     });
   });
+  
 router.route('/course/students/:course')
   .get(function(req, res, next) {
     // res.send('respond with a resource');
@@ -200,6 +201,25 @@ router.route('/course/users/:id')
     }, {
       $set: {
         "courseId": req.body.courseId
+      }
+    }, function(err) {
+      if (err)
+        res.send(err);
+
+      res.json({
+        message: 'Successfully edit'
+      });
+    })
+  });
+
+router.route('/course/users/delcourse/:id')
+  .put(function(req, res) {
+    User.update({
+      _id: req.params.id
+    }, {
+      $set: {
+        "courseId": req.body.courseId,
+        "groupProjectId": req.body.groupProjectId
       }
     }, function(err) {
       if (err)

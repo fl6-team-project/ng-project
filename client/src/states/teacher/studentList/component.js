@@ -1,6 +1,6 @@
-const StudentListController = require('./controller.js');
+const StudentListContTeach = require('./controller.js');
 
-const studentListComponent = {
+const studentListCompTeach = {
     bindings: {
         persons: '='
     },
@@ -13,7 +13,7 @@ const studentListComponent = {
 
     // Will be bundled correctly:
     template: require('./template.html'),
-    controller: StudentListController
+    controller: StudentListContTeach
 };
 
-module.exports = studentListComponent;
+module.exports = studentListCompTeach;

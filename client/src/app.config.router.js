@@ -20,6 +20,7 @@ const homeAdminComponent = require('./states/admin/home/component');
 const adminLectureListComponent = require('./states/admin/lecturesList/component');
 const adminCourseComponent = require('./states/admin/course/component');
 const homeTeacherComponent = require('./states/teacher/home/component');
+const studentListCompTeach = require('./states/teacher/studentList/component');
 
 
 module.exports = function(app) {
@@ -46,6 +47,7 @@ module.exports = function(app) {
   app.component('userListComponent', userListComponent);
   app.component('homeAdminComponent', homeAdminComponent);
   app.component('adminLectureListComponent', adminLectureListComponent);
+  app.component('studentListCompTeach', studentListCompTeach);
 
     app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
         $stateProvider
@@ -121,7 +123,7 @@ module.exports = function(app) {
 
         .state('teacher.students', {
             url: '/students',
-            component: 'studentListComponent'
+            component: 'studentListCompTeach'
         })
 
         .state('teacher.teachers', {
