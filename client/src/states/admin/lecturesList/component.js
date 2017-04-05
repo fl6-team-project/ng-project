@@ -2,7 +2,8 @@ const LectureListController = require ('./controller');
 
 const lectureListComponent = {
     bindings: {
-        lectures: '='
+        lectures: '=',
+        feedbacks: '='
     },
     controller: LectureListController,
     template: require('./template.html')

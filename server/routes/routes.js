@@ -395,7 +395,7 @@ router.route('/lectures/showteacher')
   .get(function(req, res, next) {
     Promise.all([
       Lecture.find({}).exec(),
-      User.find({}).exec()
+      User.find({'userRole': 'teacher'}).exec()
     ]).then(function(results) {
       let lectures = results[0],
         teachers = results[1];
@@ -404,7 +404,6 @@ router.route('/lectures/showteacher')
         teachers.forEach(function(teacher) {
 
           if (lecture.teacherId == teacher._id) {
-            lecture.teacherId = '';
             lecture.teacher = {
               'firstName': teacher.firstName,
               'lastName': teacher.lastName,
@@ -431,7 +430,7 @@ router.route('/lectures/showteacher/last')
       }).sort({
         "lectureScheduledDate": -1
       }).limit(2).exec(),
-      User.find({}).exec()
+      User.find({'userRole': 'teacher'}).exec()
     ]).then(function(results) {
       let lectures = results[0],
         teachers = results[1];
@@ -441,7 +440,6 @@ router.route('/lectures/showteacher/last')
         teachers.forEach(function(teacher) {
 
           if (lecture.teacherId == teacher._id) {
-            lecture.teacherId = '';
             lecture.teacher = {
               'firstName': teacher.firstName,
               'lastName': teacher.lastName,
@@ -455,7 +453,78 @@ router.route('/lectures/showteacher/last')
       res.send(err);
     });
   });
+// api to show 2 last lectures for current teacher
+router.route('/lectures/showteacher/last/:id')
+    .get(function(req, res, next) {
+        let curDate = new Date();
+        Promise.all([
+            Lecture.find({
+                "teacherId": req.params.id,
+                "lectureScheduledDate": {
+                    $lt: curDate
+                }
+            }).sort({
+                "lectureScheduledDate": -1
+            }).limit(2).exec(),
+            User.find({'userRole': 'teacher'}).exec()
+        ]).then(function(results) {
+            let lectures = results[0],
+                teachers = results[1];
 
+            // set teacher values to lecture
+            lectures.forEach(function(lecture) {
+                teachers.forEach(function(teacher) {
+
+                    if (lecture.teacherId == teacher._id) {
+                        lecture.teacher = {
+                            'firstName': teacher.firstName,
+                            'lastName': teacher.lastName,
+                            'email': teacher.email
+                        };
+                    }
+                });
+            });
+            res.json(lectures);
+        }).catch(function(err) {
+            res.send(err);
+        });
+    });
+// api to show 2 future lectures for current teacher
+router.route('/lectures/showteacher/future/:id')
+    .get(function(req, res, next) {
+        let curDate = new Date();
+        Promise.all([
+            Lecture.find({
+                "teacherId": req.params.id,
+                "lectureScheduledDate": {
+                    $gte: curDate
+                }
+            }).sort({
+                "lectureScheduledDate": -1
+            }).limit(2).exec(),
+            User.find({'userRole': 'teacher'}).exec()
+        ]).then(function(results) {
+            let lectures = results[0],
+                teachers = results[1];
+
+            // set teacher values to lecture
+            lectures.forEach(function(lecture) {
+                teachers.forEach(function(teacher) {
+
+                    if (lecture.teacherId == teacher._id) {
+                        lecture.teacher = {
+                            'firstName': teacher.firstName,
+                            'lastName': teacher.lastName,
+                            'email': teacher.email
+                        };
+                    }
+                });
+            });
+            res.json(lectures);
+        }).catch(function(err) {
+            res.send(err);
+        });
+    });
 //Single lecture api
 router.route('/lectures/:id')
   .get(function(req, res, next) {
@@ -525,12 +594,13 @@ router.route('/feedbacks')
   .post(function(req, res) {
     var feedback = new Feedback();
     feedback.courseId = req.body.courseId;
-    feedback.studentId = req.body.studentId;
+    feedback.userId = req.body.userId;
     feedback.lectureId = req.body.lectureId;
     feedback.date = new Date();
     feedback.overal = req.body.overal;
     feedback.whatWasGood = req.body.whatWasGood;
     feedback.whatWasBad = req.body.whatWasBad;
+    feedback.studentName = req.body.studentName;
 
     feedback.save(function(err) {
       if (err)
@@ -542,6 +612,19 @@ router.route('/feedbacks')
     });
 
   });
+
+// Get Feedback about particular lecture:
+
+router.route('/feedback/lecture/:id')
+    .get(function(req, res) {
+      Feedback.find({
+        lectureId: req.params.id
+      }, function(err, feedback) {
+        if (err)
+          res.send(err);
+        res.json(feedback);
+      });
+    });
 
 //Single feedback api
 router.route('/feedback/:id')

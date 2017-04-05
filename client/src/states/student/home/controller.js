@@ -1,5 +1,5 @@
 require ('./style.scss');
-function lectureCardItemController($http, $element, AuthService) {
+function HomeTeacherController($http, $element, AuthService) {
     let self = this;
     self.$element = $element;
     let id = AuthService.getUser();
@@ -16,6 +16,6 @@ function lectureCardItemController($http, $element, AuthService) {
     jQuery(self.$element[0].querySelector('ul.tabs')).tabs();
 }
 
-lectureCardItemController.$inject = ['$http', '$element', 'AuthService'];
+HomeTeacherController.$inject = ['$http', '$element', 'AuthService'];
 
-module.exports = lectureCardItemController;
+module.exports = HomeTeacherController;
