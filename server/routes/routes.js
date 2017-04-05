@@ -440,7 +440,6 @@ router.route('/lectures/showteacher/last')
         teachers.forEach(function(teacher) {
 
           if (lecture.teacherId == teacher._id) {
-            lecture.teacherId = '';
             lecture.teacher = {
               'firstName': teacher.firstName,
               'lastName': teacher.lastName,
@@ -477,7 +476,6 @@ router.route('/lectures/showteacher/last/:id')
                 teachers.forEach(function(teacher) {
 
                     if (lecture.teacherId == teacher._id) {
-                        lecture.teacherId = '';
                         lecture.teacher = {
                             'firstName': teacher.firstName,
                             'lastName': teacher.lastName,
@@ -514,7 +512,6 @@ router.route('/lectures/showteacher/future/:id')
                 teachers.forEach(function(teacher) {
 
                     if (lecture.teacherId == teacher._id) {
-                        lecture.teacherId = '';
                         lecture.teacher = {
                             'firstName': teacher.firstName,
                             'lastName': teacher.lastName,
