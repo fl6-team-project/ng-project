@@ -3,6 +3,8 @@ require("./style.scss");
 function EditController($http, $element, AuthService) {
   let self = this;
   self.$element = $element;
+  self.newPassword = '';
+
   self.editMess = {
     'title': 'Error',
     'message': "Sorry, smth wrong. Try later!",
@@ -17,10 +19,13 @@ function EditController($http, $element, AuthService) {
 
   self.editProfile = function() {
     let url = '/api/users/' + self.user._id;
+    if(self.newPassword !== ''){
+        self.user.password = self.newPassword;
+    }
+
     let data = self.user;
 
     self.error = false;
-    console.log(data);
     $http.put(url, data).then(function(res) {
         console.log(res);
         self.student = res.data;
