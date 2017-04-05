@@ -8,7 +8,6 @@ function LecturesListController($element, popUpService, $http, AuthService) {
   };
 
   $http.get('/api/lectures/showteacher').then(function(res) {
-      console.log(res.data);
       self.lectures = res.data.sort(function (a, b) {
           return new Date(a.lectureScheduledDate).getTime() - new Date(b.lectureScheduledDate).getTime();
       });
