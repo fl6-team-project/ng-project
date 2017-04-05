@@ -9,10 +9,24 @@ function feedbackPopUpController($http, $element, AuthService) {
               res.data.forEach(function (obj) {
                 self.homeworks.push(obj.homeworks);
               });
+        // console.log(self.homeworks);
         },
         function(err) {
           self.error = true;
         });
+    $http.get('/api/feedback/lecture/' + self.lecture._id).then(function(res) {
+          self.studFeedback = res.data;
+            self.studFeedback.forEach(function (feedback) {
+                $http.get('/api/users/'+feedback.userId).then(function (res) {
+                    feedback.studentName = res.data.firstName + ' ' + res.data.lastName;
+                });
+            });
+        // console.log(self.studFeedback);
+        },
+        function(err) {
+          self.error = true;
+        });
+
   };
 
   self.$element = $element;
@@ -23,7 +37,8 @@ function feedbackPopUpController($http, $element, AuthService) {
       lectureId: self.lecture._id,
       overal: self.overal,
       whatWasGood: self.whatWasGood,
-      whatWasBad: self.whatWasBad
+      whatWasBad: self.whatWasBad,
+        studentName: self.studentName
     };
 
     $http.post('/api/feedbacks', data).then(function(res) {

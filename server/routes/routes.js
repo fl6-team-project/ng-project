@@ -594,12 +594,13 @@ router.route('/feedbacks')
   .post(function(req, res) {
     var feedback = new Feedback();
     feedback.courseId = req.body.courseId;
-    feedback.studentId = req.body.studentId;
+    feedback.userId = req.body.userId;
     feedback.lectureId = req.body.lectureId;
     feedback.date = new Date();
     feedback.overal = req.body.overal;
     feedback.whatWasGood = req.body.whatWasGood;
     feedback.whatWasBad = req.body.whatWasBad;
+    feedback.studentName = req.body.studentName;
 
     feedback.save(function(err) {
       if (err)
@@ -611,6 +612,19 @@ router.route('/feedbacks')
     });
 
   });
+
+// Get Feedback about particular lecture:
+
+router.route('/feedback/lecture/:id')
+    .get(function(req, res) {
+      Feedback.find({
+        lectureId: req.params.id
+      }, function(err, feedback) {
+        if (err)
+          res.send(err);
+        res.json(feedback);
+      });
+    });
 
 //Single feedback api
 router.route('/feedback/:id')

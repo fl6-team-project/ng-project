@@ -52,3 +52,20 @@
         </div>
     </div>
 </div>
+
+<div id="lec_fb{{feedbackPopUp.lecture._id}}" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4 class="center-align">Feedback about lecture:
+      {{feedbackPopUp.lecture.name}}</h4>
+    <div class="materialize-textarea" ng-repeat="feedback in feedbackPopUp.studFeedback">
+      <p><b>Student:</b> {{feedback.studentName}}</p>
+      <p><b>Overal:</b> {{feedback.overal}}</p>
+      <p><b>What was good:</b> {{feedback.whatWasGood}}</p>
+      <p><b>What was bad:</b> {{feedback.whatWasBad}}</p>
+      <hr>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-action modal-close waves-effect waves-effect btn-flat">Got it!</a>
+    </div>
+  </div>
+</div>
