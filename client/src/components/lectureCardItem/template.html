@@ -17,7 +17,7 @@
     <div class="lectureLine">
       <p class="normalWeight">Teacher:</p>
       <p>
-        <a href="malito: {{$ctrl.lecture.teacher.email}}">
+        <a href="mailto: {{$ctrl.lecture.teacher.email}}">
           {{$ctrl.lecture.teacher.firstName}}
           {{$ctrl.lecture.teacher.lastName}}
         </a>
@@ -50,7 +50,7 @@
       <div class="lectureLine">
         <p class="normalWeight">Teacher:</p>
         <p>
-          <a href="malito: {{$ctrl.lecture.teacher.email}}">
+          <a href="mailto: {{$ctrl.lecture.teacher.email}}">
             {{$ctrl.lecture.teacher.firstName}}
             {{$ctrl.lecture.teacher.lastName}}
           </a>
@@ -68,6 +68,11 @@
               ng-click="$ctrl.openPopUpClick('lec_fb' + lecture._id)">Lecture Feedback</button>
       <button class="waves-effect waves-light btn blueBtn" ng-if="$ctrl.role === 'admin' || $ctrl.role === 'teacher'"
               ng-click="$ctrl.openPopUpClick('hw' + lecture._id)">Leave HW feedback</button>
+      <button class="waves-effect waves-light btn blueBtn edit-btn"
+              ng-if="$ctrl.role === 'teacher'"
+              ng-click="$ctrl.runEdit($ctrl.lecture, $event)">
+        <i class="material-icons prefix">mode_edit</i>
+      </button>
     </div>
   </div>
   <feedback-pop-up lecture="$ctrl.lecture" serv="$ctrl.serv"></feedback-pop-up>

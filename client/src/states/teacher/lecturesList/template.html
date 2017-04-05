@@ -2,5 +2,15 @@
   <h1>Lectures</h1>
 </div>
 <div class="main">
-  <lectures-row-list lectures="$ctrl.lectures"></lectures-row-list>
+  <div class="row" style="display: block; padding-bottom: 60px;">
+    <div class="input-field col s6">
+      <label>Show lectures:
+        <select ng-model="$ctrl.lectureShow" style="display:block">
+          <option ng-value="$ctrl.lecturesAll">all</option>
+          <option ng-value="$ctrl.lecturesPersonal">only my</option>
+        </select>
+      </label>
+    </div>
+  </div>
+  <lectures-row-list lectures="$ctrl.lectureShow"></lectures-row-list>
 </div>

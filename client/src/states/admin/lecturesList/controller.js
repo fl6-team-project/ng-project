@@ -10,7 +10,7 @@ function LecturesListController($state, $http, popUpService) {
     popUpService.openPopUpClick(id);
   };
 
-  $http.get('/api/lectures').then(function(res) {
+  $http.get('/api/lectures/showteacher').then(function(res) {
       self.lectures = res.data.sort(function (a, b) {
           return new Date(a.lectureScheduledDate).getTime() - new Date(b.lectureScheduledDate).getTime();
       });

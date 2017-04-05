@@ -25,7 +25,7 @@
             <a ui-sref="teacher.students">
                 <i class="material-icons">toc</i>Students</a>
         </li>
-        <li>
+        <li ng-if="$ctrl.user.groupProjectId">
             <a ui-sref="teacher.project">
                 <i class="material-icons">work</i>Group project</a>
         </li>

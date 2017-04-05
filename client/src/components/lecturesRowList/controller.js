@@ -4,6 +4,7 @@ function LecturesRowListController($http, $state, $timeout, AuthService, popUpSe
     let self = this;
 
     self.role = '';
+    self.userId = AuthService.getUser();
 
     $http.get('/api/teachers').then(function(res) {
         self.teachers = res.data;
