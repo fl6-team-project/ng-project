@@ -14,9 +14,9 @@
     <div class="card-reveal">
       <span class="card-title grey-text text-darken-4">About:<i class="material-icons right">close</i>
       </span>
-      <p>
-        I am {{$ctrl.person.age}}.<br/> {{$ctrl.person.aboutMe}}
-      </p>
+      <p>I am {{$ctrl.person.age}}.</p>
+      <p>Gender: {{$ctrl.person.gender}}.</p>
+      <p>{{$ctrl.person.aboutMe}}</p>
       <div class="center-align" ng-if="$ctrl.role === 'admin' && $ctrl.person.courseId !== ''"
 				 ng-click="$ctrl.delUserCourse($ctrl.person._id)">
         <button class="waves-effect waves-light btn red">Delete from course</button>
