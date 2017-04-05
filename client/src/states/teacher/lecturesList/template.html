@@ -5,12 +5,12 @@
   <div class="row" style="display: block; padding-bottom: 60px;">
     <div class="input-field col s6">
       <label>Show lectures:
-        <select ng-model="lectureShow" style="display:block">
-          <option value="">all</option>
-          <option ng-value="$ctrl.userId">only my</option>
+        <select ng-model="$ctrl.lectureShow" style="display:block">
+          <option ng-value="$ctrl.lecturesAll">all</option>
+          <option ng-value="$ctrl.lecturesPersonal">only my</option>
         </select>
       </label>
     </div>
   </div>
-  <lectures-row-list lectures="$ctrl.lectures | filter: lectureShow"></lectures-row-list>
+  <lectures-row-list lectures="$ctrl.lectureShow"></lectures-row-list>
 </div>
