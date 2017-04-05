@@ -16,7 +16,8 @@
                     <h2>{{lecture.name}}</h2>
                 </div>
                 <div class="col s12 m7 right-align lecturelinks">
-                    <i class="material-icons" ng-if="$ctrl.role === 'admin' || $ctrl.role === 'teacher'"
+                    <i class="material-icons" ng-if="$ctrl.role === 'admin' ||
+                    $ctrl.role === 'teacher' && lecture.teacherId === $ctrl.userId"
                        ng-click="$ctrl.runEdit(lecture, $event)">mode_edit</i>
 
                     <i class="material-icons" ng-if="$ctrl.role === 'admin'"
@@ -36,7 +37,7 @@
                     <div class="lectureLine">
                         <p class="normalWeight">Teacher:</p>
                         <p>
-                            <a href="malito: {{lecture.teacher.email}}">
+                            <a href="mailto: {{lecture.teacher.email}}">
                                 {{lecture.teacher.firstName}}
                                 {{lecture.teacher.lastName}}
                             </a>
