@@ -4,7 +4,7 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
   self.$element = $element;
   jQuery(self.$element[0].querySelector('ul.tabs')).tabs();
   self.create = true;
-  self.course = adminProjServ.courseChecked;
+
 
   self.studNew = {
     model: null,
@@ -13,6 +13,7 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
   // self.lectNewSelect = [];
 
   let getStudents = function() {
+    self.students = '';
     let url = '/api/course/students/' + self.course._id;
     $http.get(url).then(function(res) {
       self.students = res.data;
@@ -31,6 +32,7 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
   }
 
   let getProjects = function() {
+    self.projects = '';
     let url = '/api/course/projects/' + self.course._id;
     $http.get(url).then(function(res) {
       self.projects = res.data;
@@ -38,16 +40,14 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
   }
 
   let getLectures = function() {
-    self.lectures = [];
-    let lectArr = self.course.lectures;
-    for (var i = 0; i < lectArr.length; i++) {
-      $http.get('/api/lectures/' + lectArr[i]).then(function(res) {
-        self.lectures.push(res.data);
-      });
-    }
+    self.lectures = '';
+    let url = '/api/course/lectures/' + self.course._id;
+    $http.get(url).then(function(res) {
+      self.lectures = res.data;
+    });
   }
 
-  self.addStudCourse = function(){
+  self.addStudCourse = function() {
     let newStud = self.studNew.model;
 
     let dataCourse = {};
@@ -64,7 +64,9 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
   }
 
   scope.$on('updateCourseItem', function(event) {
+    console.log("updateCourseItem in course");
     self.course = adminProjServ.courseChecked;
+    console.log(self.course);
     getLectures();
     getProjects();
     getStudents();

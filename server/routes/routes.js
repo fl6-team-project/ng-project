@@ -862,6 +862,17 @@ router.route('/courses/:id')
     });
   });
 
+router.route('/course/lectures/:course')
+  .get(function(req, res, next) {
+    var query = Lecture.find({
+      'courseId': req.params.course
+    });
+    query.exec(function(err, lectures) {
+      if (err) throw err;
+      res.json(lectures);
+    });
+  });
+
 module.exports = router;
 
 // try-catch for ids inside requests

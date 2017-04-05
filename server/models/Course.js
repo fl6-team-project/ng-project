@@ -12,10 +12,6 @@ var CourseSchema = new mongoose.Schema({
     studentsGroupId: {
         type: String,
         index: true
-    },
-    lectures:{
-      type: Array,
-      index: true
     }
     // owner_id: {
     //     type: mongoose.Schema.Types.ObjectId,
