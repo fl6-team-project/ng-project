@@ -404,7 +404,6 @@ router.route('/lectures/showteacher')
         teachers.forEach(function(teacher) {
 
           if (lecture.teacherId == teacher._id) {
-            lecture.teacherId = '';
             lecture.teacher = {
               'firstName': teacher.firstName,
               'lastName': teacher.lastName,
