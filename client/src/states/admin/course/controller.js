@@ -67,9 +67,9 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
     getProjects();
     getStudents();
     getStudentsNew();
-    jQuery(self.$element[0].querySelector('ul.tabs')).tabs();
-  }
 
+  }
+  jQuery(self.$element[0].querySelector('ul.tabs')).tabs();
   initCourseCont();
 
   scope.$on('updateCourseItem', function(event) {
