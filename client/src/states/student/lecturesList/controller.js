@@ -1,4 +1,4 @@
-function lecturesListController($element, popUpService, $http) {
+function lecturesListController($element, popUpService, $http, AuthService) {
   let self = this;
   self.$element = $element;
 
@@ -6,11 +6,17 @@ function lecturesListController($element, popUpService, $http) {
     popUpService.openPopUpClick(id);
   };
 
-  $http.get('/api/lectures/showteacher').then(function(res) {
-      self.lectures = res.data;
+  AuthService.userCourse().then(function(userCourse) {
+    self.courseId = userCourse;
+    let url = '/api/course/lectures/showteacher/' + self.courseId;
+    $http.get(url).then(function(res) {
+        self.lectures = res.data.sort(function (a, b) {
+            return new Date(a.lectureScheduledDate).getTime() - new Date(b.lectureScheduledDate).getTime();
+        });
+    });
   });
 }
 
-lecturesListController.$inject = ['$element', 'popUpService', '$http'];
+lecturesListController.$inject = ['$element', 'popUpService', '$http', 'AuthService'];
 
 module.exports = lecturesListController;

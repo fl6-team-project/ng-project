@@ -418,6 +418,35 @@ router.route('/lectures/showteacher')
     });
   });
 
+router.route('/course/lectures/showteacher/:course')
+  .get(function(req, res, next) {
+    Promise.all([
+      Lecture.find({
+        'courseId': req.params.course
+      }).exec(),
+      User.find({'userRole': 'teacher'}).exec()
+    ]).then(function(results) {
+      let lectures = results[0],
+        teachers = results[1];
+
+      lectures.forEach(function(lecture) {
+        teachers.forEach(function(teacher) {
+
+          if (lecture.teacherId == teacher._id) {
+            lecture.teacher = {
+              'firstName': teacher.firstName,
+              'lastName': teacher.lastName,
+              'email': teacher.email
+            };
+          }
+        });
+      });
+      res.json(lectures);
+    }).catch(function(err) {
+      res.send(err);
+    });
+  });
+
 // api to show 2 last lectures
 router.route('/lectures/showteacher/last')
   .get(function(req, res, next) {

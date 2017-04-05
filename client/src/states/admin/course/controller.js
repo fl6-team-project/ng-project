@@ -39,7 +39,7 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
 
   let getLectures = function() {
     self.lectures = '';
-    let url = '/api/course/lectures/' + self.course._id;
+    let url = '/api/course/lectures/showteacher/' + self.course._id;
     $http.get(url).then(function(res) {
       self.lectures = res.data;
     });
