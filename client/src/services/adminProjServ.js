@@ -2,7 +2,6 @@ function adminProjServ($rootScope, $http) {
   let adminProjServ = {};
 
   adminProjServ.updateDataAdmCourse = function() {
-    console.log("updateCourseItem");
     $rootScope.$broadcast('updateCourseItem');
   }
 
@@ -14,7 +13,6 @@ function adminProjServ($rootScope, $http) {
     console.log("update PErs");
     console.log(data);
     $http.put(url, data).then(function(res) {
-        console.log("update");
         console.log(res.data);
       },
       function(err) {

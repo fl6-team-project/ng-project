@@ -2,7 +2,6 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
   let scope = $rootScope.$new(),
     self = this;
   self.$element = $element;
-  jQuery(self.$element[0].querySelector('ul.tabs')).tabs();
   self.create = true;
 
 
@@ -23,7 +22,6 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
 
   let getStudentsNew = function() {
     $http.get('/api/students/new').then(function(res) {
-      console.log(res.data);
       self.studNew.availableOptions = res.data;
       jQuery(document).ready(function() {
         jQuery('select.selectStudentsNew').material_select();
@@ -52,37 +50,31 @@ function CourseComponentController($element, $http, $rootScope, adminProjServ) {
 
     let dataCourse = {};
     dataCourse.courseId = self.course._id;
-    console.log(dataCourse);
 
     for (let i = 0; i < newStud.length; i++) {
-      console.log(newStud[i]);
-
       let url = '/api/course/users/' + newStud[i];
       adminProjServ.updatePersons(url, dataCourse);
       adminProjServ.updateDataAdmCourse();
     }
   }
 
-  scope.$on('updateCourseItem', function(event) {
-    console.log("updateCourseItem in course");
+  let initCourseCont = function(){
     self.course = adminProjServ.courseChecked;
+    console.log("5sdvsdrvdrv");
     console.log(self.course);
+
     getLectures();
     getProjects();
     getStudents();
     getStudentsNew();
+    jQuery(self.$element[0].querySelector('ul.tabs')).tabs();
+  }
+
+  initCourseCont();
+
+  scope.$on('updateCourseItem', function(event) {
+    initCourseCont();
   });
-
-
-  // self.course = adminProjServ.courseChecked;
-  // adminProjServ.courseId = self.courseChecked._id;
-  // scope.$on('getCourseInfo', function(event, data) {
-  //   self.course = data;
-  //   adminProjServ.courseId = self.course._id;
-  //   getStudents();
-  //   getProjects();
-  // });
-
 }
 
 CourseComponentController.$inject = ['$element', '$http', '$rootScope', 'adminProjServ'];

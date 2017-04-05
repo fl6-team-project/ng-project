@@ -20,25 +20,23 @@ function AdminController($http, $state, AuthService, $rootScope, $element, admin
     $state.go('login');
 
   };
-  let getCouses = function() {
+  let getCousesHere = function() {
     $http.get('/api/courses').then(function(res) {
       self.courses = res.data;
     });
   }
 
-  getCouses();
+  getCousesHere();
 
   scope.$on('getCouses', function(event) {
-    getCouses();
+    getCousesHere();
   });
 
-  jQuery(document).ready(function(){
-    jQuery('.collapsible').collapsible();
-  });
+  jQuery('.collapsible').collapsible();
 
   self.sendCourseInfo = function(course) {
     // $rootScope.$broadcast('getCourseInfo', course);
-    console.log("updateContrMain");
+    jQuery('.collapsible').collapsible('');
     adminProjServ.courseChecked = course;
     adminProjServ.updateDataAdmCourse();
   }
