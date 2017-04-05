@@ -8,11 +8,11 @@ function lectureCardItemController($http, $element, AuthService) {
         self.role = res.data.userRole;
     });
 
-    $http.get('/api/lectures/showteacher/last').then(function (res) {
+    $http.get('/api/lectures/showteacher/last/' + id).then(function (res) {
         self.lectures = res.data;
     });
 
-    $http.get('/api/lectures/showteacher/future').then(function (res) {
+    $http.get('/api/lectures/showteacher/future/' + id).then(function (res) {
         self.futureLectures = res.data;
     });
 

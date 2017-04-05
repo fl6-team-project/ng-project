@@ -5,7 +5,7 @@
 <div class="main">
   <div class="row">
     <div class="col s12 m4">
-      <h2 class="center-align">Recent tasks</h2>
+      <h2 class="center-align">Recent tasks:</h2>
       <div class="row tabPanel white">
         <div class="col s12">
           <ul class="tabs">
@@ -27,11 +27,11 @@
       </div>
     </div>
     <div class="col s12 m4">
-      <h2>Previous lectures:</h2>
+      <h2 class="center-align">Previous lectures:</h2>
       <lecture-card-item ng-repeat="lastLecture in $ctrl.lectures" lecture="lastLecture"></lecture-card-item>
     </div>
     <div class="col s12 m4">
-      <h2>Future lectures:</h2>
+      <h2 class="center-align">Future lectures:</h2>
       <lecture-card-item ng-repeat="futureLecture in $ctrl.futureLectures" lecture="futureLecture"></lecture-card-item>
     </div>
   </div>

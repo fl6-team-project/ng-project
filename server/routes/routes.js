@@ -454,12 +454,50 @@ router.route('/lectures/showteacher/last')
       res.send(err);
     });
   });
-// api to show 2 future lectures
-router.route('/lectures/showteacher/future')
+// api to show 2 last lectures for current teacher
+router.route('/lectures/showteacher/last/:id')
     .get(function(req, res, next) {
         let curDate = new Date();
         Promise.all([
             Lecture.find({
+                "teacherId": req.params.id,
+                "lectureScheduledDate": {
+                    $lt: curDate
+                }
+            }).sort({
+                "lectureScheduledDate": -1
+            }).limit(2).exec(),
+            User.find({'userRole': 'teacher'}).exec()
+        ]).then(function(results) {
+            let lectures = results[0],
+                teachers = results[1];
+
+            // set teacher values to lecture
+            lectures.forEach(function(lecture) {
+                teachers.forEach(function(teacher) {
+
+                    if (lecture.teacherId == teacher._id) {
+                        lecture.teacherId = '';
+                        lecture.teacher = {
+                            'firstName': teacher.firstName,
+                            'lastName': teacher.lastName,
+                            'email': teacher.email
+                        };
+                    }
+                });
+            });
+            res.json(lectures);
+        }).catch(function(err) {
+            res.send(err);
+        });
+    });
+// api to show 2 future lectures for current teacher
+router.route('/lectures/showteacher/future/:id')
+    .get(function(req, res, next) {
+        let curDate = new Date();
+        Promise.all([
+            Lecture.find({
+                "teacherId": req.params.id,
                 "lectureScheduledDate": {
                     $gte: curDate
                 }
