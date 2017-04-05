@@ -43,6 +43,18 @@ app.service('AuthService', function AuthService($q, $http) {
             } else {
                 return 'guest';
             }
+        },
+        userCourse: function () {
+            if (this.exists()) {
+                let id = JSON.parse(localStorage.getItem('userAuthorized'));
+                let user = '';
+                return $http.get('/api/users/' + id).then(function (res) {
+                    user = res.data;
+                    return user.courseId;
+                });
+            } else {
+                return 'guest';
+            }
         }
     }
 })

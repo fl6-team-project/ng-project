@@ -4,7 +4,6 @@ function AdminController($http, $state, AuthService, $rootScope, $element, admin
   let self = this;
   let scope = $rootScope.$new();
   self.$element = $element;
-  jQuery(self.$element[0].querySelector('.collapsible')).collapsible('open');
   if (AuthService.exists()) {
     let id = AuthService.getUser();
     let url = '/api/users/' + id;
@@ -21,20 +20,23 @@ function AdminController($http, $state, AuthService, $rootScope, $element, admin
     $state.go('login');
 
   };
-  let getCouses = function() {
+  let getCousesHere = function() {
     $http.get('/api/courses').then(function(res) {
       self.courses = res.data;
     });
   }
 
-  getCouses();
+  getCousesHere();
 
   scope.$on('getCouses', function(event) {
-    getCouses();
+    getCousesHere();
   });
+
+  jQuery('.collapsible').collapsible();
 
   self.sendCourseInfo = function(course) {
     // $rootScope.$broadcast('getCourseInfo', course);
+    jQuery('.collapsible').collapsible('');
     adminProjServ.courseChecked = course;
     adminProjServ.updateDataAdmCourse();
   }

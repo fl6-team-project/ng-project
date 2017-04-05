@@ -7,8 +7,15 @@ function LectureDataInputController($http, $state, $timeout, AuthService) {
     $http.get('/api/teachers').then(function (res) {
         self.teachers = res.data;
         jQuery(document).ready(function() {
-            jQuery('select').material_select();
+            jQuery('select.selectTeach').material_select();
         });
+    });
+
+    $http.get('/api/courses').then(function(res) {
+      self.courseId = res.data;
+      jQuery(document).ready(function() {
+          jQuery('select.selectCourse').material_select();
+      });
     });
 
     AuthService.userRole().then(function (userRole) {
@@ -23,7 +30,6 @@ function LectureDataInputController($http, $state, $timeout, AuthService) {
     //updating lecture in DB
     self.saveEditing = function (id, object) {
         $http.put('/api/lectures/' + id, object).then(function(res) {
-
             //redirect to lecture list
             $state.go( self.role + '.lectures');
         });

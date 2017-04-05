@@ -10,10 +10,7 @@ function adminProjServ($rootScope, $http) {
   }
 
   adminProjServ.updatePersons = function(url, data) {
-    console.log("update PErs");
-    console.log(data);
     $http.put(url, data).then(function(res) {
-        console.log("update");
         console.log(res.data);
       },
       function(err) {
