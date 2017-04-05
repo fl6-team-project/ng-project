@@ -60,8 +60,12 @@
         <p class="normalWeight">Deadline:</p>
         <p>{{$ctrl.lecture.homeworkDeadline | date: "yyyy-MM-dd"}}</p>
       </div>
-      <button class="waves-effect waves-light btn blueBtn" ng-click="$ctrl.openPopUpClick('fb'+ $ctrl.lecture._id)">Leave feedback</button>
-      <button class="waves-effect waves-light btn blueBtn" ng-click="$ctrl.openCheckHWPopUp('hw' + $ctrl.lecture._id)">Check HW feedback</button>
+      <button class="waves-effect waves-light btn blueBtn" ng-if="$ctrl.role === 'student'"
+              ng-click="$ctrl.openPopUpClick('fb' + lecture._id)">Leave feedback</button>
+      <button class="waves-effect waves-light btn blueBtn" ng-if="$ctrl.role === 'student'"
+              ng-click="$ctrl.openPopUpClick('hw_ch' + lecture._id)">Check HW feedback</button>
+      <button class="waves-effect waves-light btn blueBtn" ng-if="$ctrl.role === 'admin' || $ctrl.role === 'teacher'"
+              ng-click="$ctrl.openPopUpClick('lec_fb' + lecture._id)">Lecture Feedback</button>
       <button class="waves-effect waves-light btn blueBtn" ng-if="$ctrl.role === 'admin' || $ctrl.role === 'teacher'"
               ng-click="$ctrl.openPopUpClick('hw' + lecture._id)">Leave HW feedback</button>
     </div>
