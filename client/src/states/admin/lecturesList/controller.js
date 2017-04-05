@@ -11,12 +11,10 @@ function LecturesListController($state, $http, popUpService) {
   };
 
   $http.get('/api/lectures').then(function(res) {
-    console.log(res.data);
       self.lectures = res.data.sort(function (a, b) {
           return new Date(a.lectureScheduledDate).getTime() - new Date(b.lectureScheduledDate).getTime();
       });
   });
-
 }
 LecturesListController.$inject = ['$state', '$http', 'popUpService'];
 
