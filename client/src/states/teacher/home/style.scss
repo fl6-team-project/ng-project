@@ -1,0 +1,12 @@
+.tabPanel{
+  min-height: 100px;
+  padding:  10px;
+  
+  .tabs .tab a{
+    padding: 0 10px;
+  }
+
+  #activeTasks form{
+    padding: 0;
+  }
+}

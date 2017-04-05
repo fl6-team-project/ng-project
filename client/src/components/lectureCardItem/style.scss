@@ -18,6 +18,8 @@
 }
 
 .cardLecture {
+  min-height: 410px;
+
   .card-image {
     padding: 24px 24px 0;
     height: auto;
@@ -31,6 +33,7 @@
     margin: 0 auto;
     width: 110px;
     height: 110px;
+    margin-bottom: 10px;
   }
 
   h3 {
@@ -64,6 +67,12 @@
     .btn {
       width: 100%;
       margin: 12px 0 0;
+    }
+  }
+
+  .edit-btn{
+    .material-icons{
+      color: white;
     }
   }
 }

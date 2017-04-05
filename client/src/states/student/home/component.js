@@ -1,11 +1,11 @@
-const HomeListController = require ('./controller');
+const HomeTeacherController = require ('./controller');
 
-const homeComponent = {
+const homeTeacherComponent = {
     bindings: {
         lectures: '='
     },
-    controller: HomeListController,
+    controller: HomeTeacherController,
     template: require('./template.html')
 };
 
-module.exports = homeComponent;
+module.exports = homeTeacherComponent;

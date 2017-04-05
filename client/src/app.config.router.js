@@ -19,6 +19,7 @@ const userListComponent = require('./states/admin/userList/component');
 const homeAdminComponent = require('./states/admin/home/component');
 const adminLectureListComponent = require('./states/admin/lecturesList/component');
 const adminCourseComponent = require('./states/admin/course/component');
+const homeTeacherComponent = require('./states/teacher/home/component');
 
 
 module.exports = function(app) {
@@ -30,6 +31,7 @@ module.exports = function(app) {
   app.component('studentComponent', studentComponent);
   app.component('projectComponent', projectComponent);
   app.component('adminComponent', adminComponent);
+  app.component('homeTeacherComponent', homeTeacherComponent);
   app.component('teacherComponent', teacherComponent);
   app.component('editLectureComponent', editLectureComponent);
   app.component('editTeacherComponent', editTeacherComponent);
@@ -101,7 +103,7 @@ module.exports = function(app) {
         })
         .state('teacher.home', {
             url: '/',
-            component: 'homeItemComponent'
+            component: 'homeTeacherComponent'
         })
 
         .state('teacher.editLecture', {
