@@ -16,11 +16,6 @@ function HomeTeacherController($http, $element, AuthService) {
       self.lectures = res.data;
     });
   });
-  //
-  // $http.get('/api/lectures/showteacher/last').then(function (res) {
-  //     self.lectures = res.data;
-  // });
-
 
   jQuery(self.$element[0].querySelector('ul.tabs')).tabs();
 }
