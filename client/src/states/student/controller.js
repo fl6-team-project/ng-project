@@ -1,6 +1,8 @@
 function StudentController($http, $state, AuthService, $element) {
   let self = this;
   self.$element = $element;
+  jQuery(self.$element[0].querySelector(".button-collapse")).sideNav();
+
   if (AuthService.exists()) {
     let id = AuthService.getUser();
     let url = '/api/users/' + id;
@@ -17,8 +19,6 @@ function StudentController($http, $state, AuthService, $element) {
     $state.go('login');
 
   };
-
-  jQuery(self.$element[0].querySelector(".button-collapse")).sideNav();
 }
 
 StudentController.$inject = ['$http', '$state', 'AuthService', '$element'];
