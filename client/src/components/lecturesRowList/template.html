@@ -61,9 +61,11 @@
                                 ng-click="$ctrl.openPopUpClick('fb' + lecture._id)">Leave feedback</button>
                         <button class="waves-effect waves-light btn blueBtn" ng-if="$ctrl.role === 'student'"
                                 ng-click="$ctrl.openPopUpClick('hw_ch' + lecture._id)">Check HW feedback</button>
-                        <button class="waves-effect waves-light btn blueBtn" ng-if="$ctrl.role === 'admin' || $ctrl.role === 'teacher'"
+                        <button class="waves-effect waves-light btn blueBtn" ng-if="$ctrl.role === 'admin' ||
+                             $ctrl.role === 'teacher'"
                                 ng-click="$ctrl.openPopUpClick('lec_fb' + lecture._id)">Lecture Feedback</button>
-                        <button class="waves-effect waves-light btn blueBtn" ng-if="$ctrl.role === 'admin' || $ctrl.role === 'teacher'"
+                        <button class="waves-effect waves-light btn blueBtn" ng-if="$ctrl.role === 'admin' ||
+                             $ctrl.role === 'teacher' && lecture.teacherId === $ctrl.userId"
                                 ng-click="$ctrl.openPopUpClick('hw' + lecture._id)">Leave HW feedback</button>
                     </div>
                 </div>
