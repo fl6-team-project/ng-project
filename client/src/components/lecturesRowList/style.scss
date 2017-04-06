@@ -1,59 +1,78 @@
-.collapsible{
-  h2{
+.collapsible {
+  h2 {
     display: inline-block;
     vertical-align: middle;
     margin: 0;
   }
 
-  .lecturelinks a{
+  .lecturelinks a {
     padding: 0 10px;
   }
 
-  .row{
+  .row {
     margin: 0;
     padding: 10px 0;
   }
 
-  .describeLecture{
+  .describeLecture {
     margin-bottom: 10px;
   }
 
-  .collapsible-header{
+  .collapsible-header {
     p {
       display: inline-block;
     }
+
     i {
       float: none;
       display: inline-block;
     }
+
     .lecturelinks {
-      &> a{
+      @media screen and (max-width: 1024px) {
+        text-align: left;
+      }
+
+      &> a {
         display: inline-block;
       }
+
       .material-icons {
         margin: 0;
         vertical-align: middle;
       }
     }
+
     .lecturelinks a,
-    .lecturelinks .material-icons{
-      color: white;
+    .lecturelinks .material-icons {
+      color: #39c2d7;
+      opacity: 0;
+
+      @media screen and (max-width: 1024px) {
+        opacity: 1;
+      }
     }
 
     &:hover .lecturelinks a,
-    &:hover .lecturelinks .material-icons{
-      color: #39c2d7;
+    &:hover .lecturelinks .material-icons {
+      opacity: 1;
 
       &:hover,
-      &:hover .material-icons{
+      &:hover .material-icons {
         color: black;
         text-decoration: none;
       }
     }
   }
 
-  .collapsible-body{
+  .collapsible-body {
     background-color: #fff;
-  }
 
+    @media screen and (max-width: 400px) {
+      .blueBtn {
+        width: 100%;
+        margin-top: 10px;
+      }
+    }
+  }
 }

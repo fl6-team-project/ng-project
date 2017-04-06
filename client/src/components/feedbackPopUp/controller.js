@@ -9,7 +9,6 @@ function feedbackPopUpController($http, $element, AuthService) {
               res.data.forEach(function (obj) {
                 self.homeworks.push(obj.homeworks);
               });
-        // console.log(self.homeworks);
         },
         function(err) {
           self.error = true;
@@ -58,13 +57,13 @@ function feedbackPopUpController($http, $element, AuthService) {
       homeworks: self.homeworks
     };
 
+
     $http.post('/api/feedbacks/homework', data).then(function(res) {
         self.feedback = res.data;
       },
       function(err) {
         self.error = true;
       });
-    self.homeworks = '';
   };
 
 

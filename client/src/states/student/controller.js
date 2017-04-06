@@ -1,22 +1,25 @@
-function StudentController($http, $state, AuthService) {
-    let self = this;
-    if (AuthService.exists()) {
-        let id = AuthService.getUser();
-        let url = '/api/users/' + id;
-        $http.get(url).then(function (res) {
-            self.user = res.data;
-        });
+function StudentController($http, $state, AuthService, $element) {
+  let self = this;
+  self.$element = $element;
+  jQuery(self.$element[0].querySelector(".button-collapse")).sideNav();
 
-    } else {
-        $state.go('login');
-    }
+  if (AuthService.exists()) {
+    let id = AuthService.getUser();
+    let url = '/api/users/' + id;
+    $http.get(url).then(function(res) {
+      self.user = res.data;
+    });
 
-    self.logout = function () {
-        AuthService.logout();
-        $state.go('login');
+  } else {
+    $state.go('login');
+  }
 
-    };
+  self.logout = function() {
+    AuthService.logout();
+    $state.go('login');
+
+  };
 }
 
-StudentController.$inject = ['$http', '$state', 'AuthService'];
+StudentController.$inject = ['$http', '$state', 'AuthService', '$element'];
 module.exports = StudentController;

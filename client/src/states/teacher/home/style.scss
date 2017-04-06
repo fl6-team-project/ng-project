@@ -2,6 +2,10 @@
   min-height: 100px;
   padding:  10px;
 
+  @media screen and (max-width: 400px) {
+    padding:  0;
+  }
+
   .tabs .tab a{
     padding: 0 10px;
   }

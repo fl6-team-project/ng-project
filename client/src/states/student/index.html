@@ -1,44 +1,110 @@
 <div class="row">
-    <ul class="side-nav">
-        <li>
-            <div class="userView center-align">
-                <div class="background"></div>
-                <div class="userViewBox">
-                  <a ui-sref="user"><img class="userLogo" ng-src="{{$ctrl.user.avatar}}"></a>
-                </div>
-                <p class="name">{{$ctrl.user.firstName}} {{$ctrl.user.lastName}}</p>
-            </div>
-        </li>
-        <li>
+  <div class="navbar-fixed mobMenuBlc">
+    <nav class="mobMenu">
+      <div class="nav-wrapper">
+        <div class="userViewBox">
+          <a ui-sref="user"><img class="userLogo" ng-src="{{$ctrl.user.avatar}}"></a>
+        </div>
+        <ul class="side-nav" id="mobile-demo">
+          <li>
             <a ui-sref="student.home">
-                <i class="material-icons">pageview</i>Main page</a>
-        </li>
-        <li>
+              <i class="material-icons">pageview</i>Main page</a>
+          </li>
+          <li>
             <a ui-sref="student.lectures">
-                <i class="material-icons">today</i>Lectures</a>
-        </li>
-        <li>
+              <i class="material-icons">today</i>Lectures</a>
+          </li>
+          <li>
             <a ui-sref="student.teachers">
-                <i class="material-icons">toc</i>Teachers</a>
-        </li>
-        <li>
+              <i class="material-icons">toc</i>Teachers</a>
+          </li>
+          <li>
             <a ui-sref="student.students">
-                <i class="material-icons">toc</i>Students</a>
-        </li>
-        <li ng-if="$ctrl.user.groupProjectId != ''">
+              <i class="material-icons">toc</i>Students</a>
+          </li>
+          <li ng-if="$ctrl.user.groupProjectId != ''">
             <a ui-sref="student.project">
-                <i class="material-icons">work</i>Group project</a>
-        </li>
-        <li>
+              <i class="material-icons">work</i>Group project</a>
+          </li>
+          <li>
             <a ui-sref="student.edit">
-                <i class="material-icons">mode_edit</i>Edit profile</a>
-        </li>
-        <li>
+              <i class="material-icons">mode_edit</i>Edit profile</a>
+          </li>
+          <li>
             <a ng-click="$ctrl.logout()">
-                <i class="material-icons">power_settings_new</i>Log out</a>
-        </li>
-    </ul>
-    <div class="containerContent">
-        <ui-view userobj="$ctrl.user"></ui-view>
-    </div>
+              <i class="material-icons">power_settings_new</i>Log out</a>
+          </li>
+        </ul>
+        <a href="" data-activates="mobile-demo" class="button-collapse right"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>
+            <a ui-sref="student.home">Main page</a>
+          </li>
+          <li>
+            <a ui-sref="student.lectures">Lectures</a>
+          </li>
+          <li>
+            <a ui-sref="student.teachers">Teachers</a>
+          </li>
+          <li>
+            <a ui-sref="student.students">Students</a>
+          </li>
+          <li ng-if="$ctrl.user.groupProjectId != ''">
+            <a ui-sref="student.project">Group project</a>
+          </li>
+          <li>
+            <a ui-sref="student.edit">Edit profile</a>
+          </li>
+          <li>
+            <a ng-click="$ctrl.logout()">
+              <i class="material-icons">power_settings_new</i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <ul class="side-nav mainSideNav mobView">
+    <li>
+      <div class="userView center-align">
+        <div class="background"></div>
+        <div class="userViewBox">
+          <a ui-sref="user"><img class="userLogo" ng-src="{{$ctrl.user.avatar}}"></a>
+        </div>
+        <p class="name">{{$ctrl.user.firstName}}
+          {{$ctrl.user.lastName}}</p>
+      </div>
+    </li>
+    <li>
+      <a ui-sref="student.home">
+        <i class="material-icons">pageview</i>Main page</a>
+    </li>
+    <li>
+      <a ui-sref="student.lectures">
+        <i class="material-icons">today</i>Lectures</a>
+    </li>
+    <li>
+      <a ui-sref="student.teachers">
+        <i class="material-icons">toc</i>Teachers</a>
+    </li>
+    <li>
+      <a ui-sref="student.students">
+        <i class="material-icons">toc</i>Students</a>
+    </li>
+    <li ng-if="$ctrl.user.groupProjectId != ''">
+      <a ui-sref="student.project">
+        <i class="material-icons">work</i>Group project</a>
+    </li>
+    <li>
+      <a ui-sref="student.edit">
+        <i class="material-icons">mode_edit</i>Edit profile</a>
+    </li>
+    <li>
+      <a ng-click="$ctrl.logout()">
+        <i class="material-icons">power_settings_new</i>Log out</a>
+    </li>
+  </ul>
+  <div class="containerContent">
+    <ui-view userobj="$ctrl.user"></ui-view>
+  </div>
 </div>

@@ -77,6 +77,10 @@ label {
   .normalWeight {
     font-weight: 400;
   }
+
+  @media screen and (max-width: 1024px) {
+    margin-left: 0;
+  }
 }
 
 .userViewBox {
@@ -94,8 +98,11 @@ label {
 }
 
 .side-nav {
-  transform: translateX(0px);
   background: #464547;
+
+  &.mainSideNav {
+    transform: translateX(0px);
+  }
 
   .userView {
     padding: 20px;
@@ -139,6 +146,39 @@ label {
 
     &> i.material-icons {
       color: #fff;
+    }
+  }
+
+  &.mobView {
+    @media screen and (max-width: 1024px) {
+      display: none;
+    }
+  }
+}
+
+.mobMenuBlc {
+  display: none;
+
+  @media screen and (max-width: 1024px) {
+    display: block;
+
+    nav.mobMenu {
+      background: #464547;
+
+      .nav-wrapper {
+        padding: 0 12px;
+      }
+
+      .userViewBox {
+        max-height: 55px;
+        max-width: 55px;
+        vertical-align: middle;
+
+        @media screen and (max-width: 400px) {
+          max-height: 50px;
+          max-width: 50px;
+        }
+      }
     }
   }
 }
@@ -242,6 +282,14 @@ label {
         color: #fff;
       }
     }
+
+    @media screen and (max-width: 400px) {
+      a,
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
   }
 
   &.modalForm {
@@ -279,4 +327,10 @@ label {
 
 .radioLine {
   padding: 16px 0 32px;
+}
+
+@media screen and (max-width: 1024px) {
+  #sidenav-overlay {
+    z-index: 996;
+  }
 }
